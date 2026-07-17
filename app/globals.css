@@ -1,26 +1,47 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+	--background: #faf9f6;
+	--foreground: #2e2e2e;
+
+	/* Clinical Warmth palette */
+	--color-navy: #2f4a78;
+	--color-navy-light: #3f5f93;
+	--color-navy-dark: #131f38;
+	--color-amber: #d9a05b;
+	--color-amber-light: rgb(248, 190, 118);
+	--color-amber-dark: #c48a3d;
+	--color-offwhite: #faf9f6;
+	--color-warmgray: #8b8880;
+	--color-charcoal: #2e2e2e;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+	--color-background: var(--background);
+	--color-foreground: var(--foreground);
+	--color-navy: var(--color-navy);
+	--color-navy-light: var(--color-navy-light);
+	--color-navy-dark: var(--color-navy-dark);
+	--color-amber: var(--color-amber);
+	--color-amber-dark: var(--color-amber-dark);
+	--color-offwhite: var(--color-offwhite);
+	--color-warmgray: var(--color-warmgray);
+	--color-charcoal: var(--color-charcoal);
+	--font-sans: var(--font-geist-sans);
+	--font-mono: var(--font-geist-mono);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+	background: var(--background);
+	color: var(--foreground);
+	font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+.bg-molecule-grid {
+	background-image: radial-gradient(
+		circle at 1px 1px,
+		rgba(217, 160, 91, 0.18) 1px,
+		transparent 0
+	);
+	background-size: 28px 28px;
 }
