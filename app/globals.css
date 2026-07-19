@@ -8,7 +8,7 @@
 	--color-navy: #2f4a78;
 	--color-navy-light: #3f5f93;
 	--color-navy-dark: #131f38;
-	--color-amber: #d9a05b;
+	--color-amber: hsl(40 70% 55%);
 	--color-amber-light: rgb(248, 190, 118);
 	--color-amber-dark: #c48a3d;
 	--color-offwhite: #faf9f6;
