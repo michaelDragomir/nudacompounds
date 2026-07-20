@@ -17,6 +17,9 @@ export function Header() {
 				</a>
 
 				<nav className='hidden md:flex items-center gap-8 text-sm font-medium text-charcoal'>
+					<a href='#catalog' className='hover:text-navy transition-colors'>
+						Shop
+					</a>
 					<a href='#standards' className='hover:text-navy transition-colors'>
 						Testing Standards
 					</a>

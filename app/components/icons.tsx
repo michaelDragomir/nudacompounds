@@ -126,6 +126,41 @@ export function ClockIcon({ className = base }: IconProps) {
 	);
 }
 
+export function CartIcon({ className = base }: IconProps) {
+	return (
+		<svg
+			viewBox='0 0 24 24'
+			fill='none'
+			stroke='currentColor'
+			strokeWidth='1.75'
+			className={className}
+		>
+			<path
+				d='M3 4h2l2.4 12.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.6L21 8H6'
+				strokeLinecap='round'
+				strokeLinejoin='round'
+			/>
+			<circle cx='10' cy='21' r='1.4' />
+			<circle cx='17' cy='21' r='1.4' />
+		</svg>
+	);
+}
+
+export function LockIcon({ className = base }: IconProps) {
+	return (
+		<svg
+			viewBox='0 0 24 24'
+			fill='none'
+			stroke='currentColor'
+			strokeWidth='1.75'
+			className={className}
+		>
+			<rect x='5' y='11' width='14' height='9' rx='2' />
+			<path d='M8 11V7a4 4 0 0 1 8 0v4' strokeLinecap='round' />
+		</svg>
+	);
+}
+
 export function ArrowRightIcon({ className = 'w-4 h-4' }: IconProps) {
 	return (
 		<svg

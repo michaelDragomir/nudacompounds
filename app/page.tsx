@@ -1,6 +1,7 @@
 import { Header } from "./components/Header";
 import { Hero } from "./components/Hero";
 import { TrustStrip } from "./components/TrustStrip";
+import { Catalog } from "./components/Catalog";
 import { Standards } from "./components/Standards";
 import { Commitment } from "./components/Commitment";
 import { FeatureGrid } from "./components/FeatureGrid";
@@ -14,6 +15,7 @@ export default function Home() {
       <main className="flex-1">
         <Hero />
         <TrustStrip />
+        <Catalog />
         <Standards />
         <Commitment />
         <FeatureGrid />
