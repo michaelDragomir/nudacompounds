@@ -45,7 +45,7 @@ export function Catalog() {
 		Object.fromEntries(products.map((p) => [p.slug, MIN_QTY])),
 	);
 
-	function changeQty(slug, delta) {
+	function changeQty(slug: string, delta: number) {
 		setQuantities((prev) => ({
 			...prev,
 			[slug]: Math.min(MAX_QTY, Math.max(MIN_QTY, prev[slug] + delta)),

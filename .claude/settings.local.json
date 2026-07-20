@@ -5,7 +5,8 @@
       "Bash(mkdir -p /Users/michaeldragomir/Desktop/nudacompounds/.claude)",
       "mcp__visualize__read_me",
       "mcp__visualize__show_widget",
-      "Bash(sips -g pixelWidth -g pixelHeight public/pepimage.webp)"
+      "Bash(sips -g pixelWidth -g pixelHeight public/pepimage.webp)",
+      "Bash(npm run *)"
     ]
   }
 }
