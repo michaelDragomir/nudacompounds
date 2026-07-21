@@ -12,7 +12,7 @@ const MAX_QTY = 10;
 export function Catalog() {
 	const { addItem } = useCart();
 	const [quantities, setQuantities] = useState(() =>
-		Object.fromEntries(products.map((p) => [p.slug, MIN_QTY]))
+		Object.fromEntries(products.map((p) => [p.slug, MIN_QTY])),
 	);
 
 	function changeQty(slug: string, delta: number) {
@@ -23,19 +23,19 @@ export function Catalog() {
 	}
 
 	return (
-		<section id='catalog' className='bg-offwhite py-24'>
+		<section id='catalog' className='bg-navy-offwhite py-24'>
 			<div className='mx-auto max-w-6xl px-6'>
 				<div className='mx-auto mb-14 max-w-2xl text-center'>
 					<div className='mb-4 flex items-center justify-center gap-3'>
 						<span className='h-px w-8 bg-amber' />
-						<span className='text-xs font-bold uppercase tracking-[0.2em] text-navy'>
+						<span className='text-sm font-bold uppercase tracking-[0.2em] text-navy'>
 							Research Catalog
 						</span>
 					</div>
 					<h2 className='text-3xl font-bold leading-tight text-navy tracking-wide'>
 						Available Compounds
 					</h2>
-					<p className='mt-4 text-charcoal tracking-wide'>
+					<p className='mt-4 text-charcoal tracking-wide text-lg'>
 						Every vial ships with a published Certificate of Analysis and
 						batch-level documentation. Ordering is launching soon.
 					</p>
@@ -61,7 +61,9 @@ export function Catalog() {
 								</div>
 
 								<div className='flex flex-1 flex-col p-6'>
-									<h3 className='text-lg font-bold text-navy'>{product.name}</h3>
+									<h3 className='text-lg font-bold text-navy'>
+										{product.name}
+									</h3>
 									<p className='mt-1 flex-1 text-sm text-charcoal'>
 										{product.description}
 									</p>

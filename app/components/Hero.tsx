@@ -44,8 +44,8 @@ export function Hero() {
 				</div>
 
 				<h1 className='text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-6xl'>
-					Nuda Compounds: <span className='text-amber'>A Trusted Standard</span>{' '}
-					in Peptide Research
+					<span className='text-amber'>A Trusted Standard</span> in Peptide
+					Research
 				</h1>
 
 				<p className='mx-auto mt-6 max-w-3xl text-base leading-relaxed text-white sm:text-lg'>
@@ -82,7 +82,7 @@ export function Hero() {
 							<div className='font-mono text-2xl font-bold text-amber'>
 								{item.stat}
 							</div>
-							<div className='mt-1 text-xs text-white tracking-widest'>
+							<div className='mt-1 text-sm text-white tracking-widest'>
 								{item.label}
 							</div>
 						</div>

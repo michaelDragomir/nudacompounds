@@ -194,6 +194,118 @@ export function LockIcon({ className = base }: IconProps) {
 	);
 }
 
+export function FingerprintIcon({ className = base }: IconProps) {
+	return (
+		<svg
+			viewBox='0 0 24 24'
+			fill='none'
+			stroke='currentColor'
+			strokeWidth='1.75'
+			className={className}
+		>
+			<path
+				d='M12 4c4.4 0 8 3.6 8 8v2'
+				strokeLinecap='round'
+				strokeLinejoin='round'
+			/>
+			<path
+				d='M4 14v-2a8 8 0 0 1 3-6.2'
+				strokeLinecap='round'
+				strokeLinejoin='round'
+			/>
+			<path
+				d='M12 8a4 4 0 0 1 4 4v3'
+				strokeLinecap='round'
+				strokeLinejoin='round'
+			/>
+			<path
+				d='M8 15v-3a4 4 0 0 1 1.5-3.1'
+				strokeLinecap='round'
+				strokeLinejoin='round'
+			/>
+			<path d='M12 12v6' strokeLinecap='round' strokeLinejoin='round' />
+		</svg>
+	);
+}
+
+export function DropletIcon({ className = base }: IconProps) {
+	return (
+		<svg
+			viewBox='0 0 24 24'
+			fill='none'
+			stroke='currentColor'
+			strokeWidth='1.75'
+			className={className}
+		>
+			<path
+				d='M12 3.5s6 6.7 6 11a6 6 0 1 1-12 0c0-4.3 6-11 6-11z'
+				strokeLinecap='round'
+				strokeLinejoin='round'
+			/>
+		</svg>
+	);
+}
+
+export function MoleculeIcon({ className = base }: IconProps) {
+	return (
+		<svg
+			viewBox='0 0 24 24'
+			fill='none'
+			stroke='currentColor'
+			strokeWidth='1.75'
+			className={className}
+		>
+			<circle cx='6' cy='7' r='2.2' />
+			<circle cx='18' cy='7' r='2.2' />
+			<circle cx='12' cy='17' r='2.2' />
+			<path d='M8 8.2 10.3 15M16 8.2 13.7 15' strokeLinecap='round' />
+		</svg>
+	);
+}
+
+export function AtomIcon({ className = base }: IconProps) {
+	return (
+		<svg
+			viewBox='0 0 24 24'
+			fill='none'
+			stroke='currentColor'
+			strokeWidth='1.75'
+			className={className}
+		>
+			<circle cx='12' cy='12' r='1.6' fill='currentColor' stroke='none' />
+			<ellipse cx='12' cy='12' rx='8' ry='3.2' />
+			<ellipse
+				cx='12'
+				cy='12'
+				rx='8'
+				ry='3.2'
+				transform='rotate(60 12 12)'
+			/>
+			<ellipse
+				cx='12'
+				cy='12'
+				rx='8'
+				ry='3.2'
+				transform='rotate(120 12 12)'
+			/>
+		</svg>
+	);
+}
+
+export function CheckIcon({ className = base }: IconProps) {
+	return (
+		<svg
+			viewBox='0 0 24 24'
+			fill='none'
+			stroke='currentColor'
+			strokeWidth='2.5'
+			className={className}
+		>
+			<path d='M5 12.5l4.5 4.5L19 7' strokeLinecap='round' strokeLinejoin='round' />
+		</svg>
+	);
+}
+
 export function ArrowRightIcon({ className = 'w-4 h-4' }: IconProps) {
 	return (
 		<svg
