@@ -141,12 +141,6 @@ export function Catalog() {
 						);
 					})}
 				</div>
-
-				<div className='mt-10 flex items-center justify-center gap-2 text-xs text-warmgray'>
-					<LockIcon className='h-4 w-4' />
-					Ordering opens soon &mdash; join the list via the contact form to be
-					notified.
-				</div>
 			</div>
 		</section>
 	);

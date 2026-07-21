@@ -1,6 +1,6 @@
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
-// import { TrustStrip } from './components/TrustStrip';
+import { TrustStrip } from './components/TrustStrip';
 import { QualityStandard } from './components/QualityStandard';
 import { Catalog } from './components/Catalog';
 import { Standards } from './components/Standards';
@@ -15,7 +15,7 @@ export default function Home() {
 			<Header />
 			<main className='flex-1'>
 				<Hero />
-				{/* <TrustStrip /> */}
+				<TrustStrip />
 				<Standards />
 				<QualityStandard />
 				<Catalog />

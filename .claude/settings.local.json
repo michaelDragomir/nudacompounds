@@ -6,7 +6,8 @@
       "mcp__visualize__read_me",
       "mcp__visualize__show_widget",
       "Bash(sips -g pixelWidth -g pixelHeight public/pepimage.webp)",
-      "Bash(npm run *)"
+      "Bash(npm run *)",
+      "Bash(curl -s http://localhost:3000/_next/static/css/*.css)"
     ]
   }
 }

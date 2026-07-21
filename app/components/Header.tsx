@@ -43,7 +43,7 @@ export function Header() {
 						<a
 							key={link.href}
 							href={link.href}
-							className='hover:text-navy transition-colors text-navy'
+							className='text-navy transition-colors hover:text-amber-dark'
 						>
 							{link.label}
 						</a>
@@ -56,7 +56,7 @@ export function Header() {
 					aria-label={`Open cart, ${totalCount} ${
 						totalCount === 1 ? 'item' : 'items'
 					}`}
-					className='relative flex h-10 w-10 items-center justify-center rounded-full text-navy transition-colors hover:bg-navy/5'
+					className='relative flex h-10 w-10 items-center justify-center rounded-full text-navy transition-colors hover:bg-navy/5 hover:text-amber-dark'
 				>
 					<CartIcon className='h-6 w-6' />
 					{totalCount > 0 && (
