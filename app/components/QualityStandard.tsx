@@ -34,9 +34,9 @@ export function QualityStandard() {
 						<span className='text-sm font-bold uppercase tracking-[0.2em] text-amber'>
 							Every Order Includes
 						</span>
-						<ul className='mt-4 space-y-3'>
+						<ul className='mt-4 flex flex-col items-start gap-3'>
 							{ORDER_INCLUDES.map((label) => (
-								<li key={label} className='flex items-center justify-center gap-3'>
+								<li key={label} className='flex items-center gap-3'>
 									<span className='flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-amber text-navy-dark'>
 										<CheckIcon className='h-5 w-5' />
 									</span>
