@@ -29,6 +29,7 @@
 	--color-steel-sky: var(--color-steel-sky);
 	--color-navy-dark: var(--color-navy-dark);
 	--color-amber: var(--color-amber);
+	--color-amber-light: var(--color-amber-light);
 	--color-amber-dark: var(--color-amber-dark);
 	--color-offwhite: var(--color-offwhite);
 	--color-warmgray: var(--color-warmgray);
@@ -50,4 +51,23 @@ body {
 		transparent 0
 	);
 	background-size: 28px 28px;
+}
+
+@keyframes confetti-pop {
+	0% {
+		transform: translate(-50%, -50%) scale(0.6);
+		opacity: 1;
+	}
+	100% {
+		transform: translate(
+				calc(-50% + var(--confetti-dx)),
+				calc(-50% + var(--confetti-dy))
+			)
+			scale(1) rotate(180deg);
+		opacity: 0;
+	}
+}
+
+.confetti-particle {
+	animation: confetti-pop 0.65s ease-out forwards;
 }

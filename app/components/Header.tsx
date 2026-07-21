@@ -1,12 +1,34 @@
+'use client';
+
+import { useEffect } from 'react';
+import { useCart } from '../context/CartContext';
+import { playAddToCartSound } from '../lib/sound';
+import { CartIcon } from './icons';
+import { ConfettiBurst } from './ConfettiBurst';
+
+const NAV_LINKS = [
+	{ href: '#catalog', label: 'Catalog' },
+	{ href: '#standards', label: 'COAs' },
+	{ href: '#faq', label: 'FAQs' },
+	{ href: '#contact', label: 'Contact' },
+];
+
 export function Header() {
+	const { totalCount, celebrationTick, toggleCart } = useCart();
+
+	useEffect(() => {
+		if (celebrationTick === 0) return;
+		playAddToCartSound();
+	}, [celebrationTick]);
+
 	return (
-		<header className='sticky top-0 z-50 bg-white backdrop-blur border-b border-black/5'>
-			<div className='hidden sm:flex items-center justify-center gap-2 bg-navy-dark text-offwhite text-xs py-1.5 px-4'>
+		<header className='sticky top-0 z-50 bg-white/70 backdrop-blur-md border-b border-black/5'>
+			{/* <div className='hidden sm:flex items-center justify-center gap-2 bg-navy-dark text-offwhite text-xs py-1.5 px-4'>
 				<span className='w-1.5 h-1.5 rounded-full bg-emerald-400' />
 				<span>USA-Based Sourcing &mdash; Research Use Only</span>
-			</div>
+			</div> */}
 
-			<div className='max-w-6xl mx-auto flex items-center justify-between px-6 py-4'>
+			<div className='max-w-6xl mx-auto flex items-center justify-between px-6 py-2'>
 				<a href='#top' className='flex items-center gap-2'>
 					<span className='w-8 h-8 rounded-full bg-navy flex items-center justify-center text-amber font-bold text-sm'>
 						N
@@ -16,30 +38,34 @@ export function Header() {
 					</span>
 				</a>
 
-				<nav className='hidden md:flex items-center gap-8 text-sm font-medium text-charcoal'>
-					<a href='#catalog' className='hover:text-navy transition-colors'>
-						Shop
-					</a>
-					<a href='#standards' className='hover:text-navy transition-colors'>
-						Testing Standards
-					</a>
-					<a href='#about' className='hover:text-navy transition-colors'>
-						About
-					</a>
-					<a href='#story' className='hover:text-navy transition-colors'>
-						Our Story
-					</a>
-					<a href='#contact' className='hover:text-navy transition-colors'>
-						Contact
-					</a>
+				<nav className='hidden md:flex items-center gap-8 text-sm font-bold uppercase tracking-widest text-charcoal'>
+					{NAV_LINKS.map((link) => (
+						<a
+							key={link.href}
+							href={link.href}
+							className='hover:text-navy transition-colors text-navy'
+						>
+							{link.label}
+						</a>
+					))}
 				</nav>
 
-				<a
-					href='#contact'
-					className='inline-flex items-center gap-1.5 bg-amber hover:bg-amber-dark text-navy-dark text-sm font-bold px-4 py-2 rounded-lg transition-colors'
+				<button
+					type='button'
+					onClick={toggleCart}
+					aria-label={`Open cart, ${totalCount} ${
+						totalCount === 1 ? 'item' : 'items'
+					}`}
+					className='relative flex h-10 w-10 items-center justify-center rounded-full text-navy transition-colors hover:bg-navy/5'
 				>
-					Talk to Us
-				</a>
+					<CartIcon className='h-6 w-6' />
+					{totalCount > 0 && (
+						<span className='absolute -right-0 -top-0 flex h-5 min-w-5 items-center justify-center rounded-full bg-amber px-1 text-[11px] font-bold text-navy-dark'>
+							{totalCount}
+						</span>
+					)}
+					<ConfettiBurst trigger={celebrationTick} />
+				</button>
 			</div>
 		</header>
 	);

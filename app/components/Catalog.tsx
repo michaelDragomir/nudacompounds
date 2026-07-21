@@ -2,47 +2,17 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import { useCart } from '../context/CartContext';
+import { products } from '../data/products';
 import { CartIcon, LockIcon } from './icons';
-
-const products = [
-	{
-		slug: 'retatrutide',
-		name: 'Retatrutide',
-		description: 'Triple agonist GLP-1 / GIP / glucagon receptor',
-		purity: '≥99%',
-		size: '24mg vial',
-		price: 140,
-		image: '/retatrutide-vial.png',
-		inStock: true,
-	},
-	{
-		slug: 'tirzepatide',
-		name: 'Tirzepatide',
-		description: 'Dual GIP / GLP-1 receptor agonist',
-		purity: '≥99%',
-		size: '10mg vial',
-		price: 149,
-		image: '/tirzepatide-vial.png',
-		inStock: false,
-	},
-	{
-		slug: 'bpc-157',
-		name: 'BPC-157',
-		description: 'Body protective compound for research',
-		purity: '≥99%',
-		size: '10mg vial',
-		price: 29,
-		image: '/bpc157-vial.png',
-		inStock: true,
-	},
-];
 
 const MIN_QTY = 1;
 const MAX_QTY = 10;
 
 export function Catalog() {
+	const { addItem } = useCart();
 	const [quantities, setQuantities] = useState(() =>
-		Object.fromEntries(products.map((p) => [p.slug, MIN_QTY])),
+		Object.fromEntries(products.map((p) => [p.slug, MIN_QTY]))
 	);
 
 	function changeQty(slug: string, delta: number) {
@@ -74,7 +44,6 @@ export function Catalog() {
 				<div className='grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 drop-shadow-md'>
 					{products.map((product) => {
 						const qty = quantities[product.slug];
-						const total = product.price * qty;
 
 						return (
 							<div
@@ -92,9 +61,7 @@ export function Catalog() {
 								</div>
 
 								<div className='flex flex-1 flex-col p-6'>
-									<h3 className='text-lg font-bold text-navy'>
-										{product.name}
-									</h3>
+									<h3 className='text-lg font-bold text-navy'>{product.name}</h3>
 									<p className='mt-1 flex-1 text-sm text-charcoal'>
 										{product.description}
 									</p>
@@ -152,16 +119,12 @@ export function Catalog() {
 
 									<button
 										type='button'
-										disabled={qty >= MAX_QTY /* || !product.inStock */}
-										onClick={() => changeQty(product.slug, 1)}
-										className='mt-5 flex w-full items-center justify-center gap-2 rounded-xl bg-amber px-4 py-3 text-sm font-bold transition-colors hover:bg-amber-dark disabled:cursor-not-allowed disabled:bg-amber/50 disabled:text-navy-dark/50'
+										onClick={() => addItem(product, qty)}
+										className='mt-5 flex w-full items-center justify-center gap-2 rounded-xl bg-amber px-4 py-3 text-sm font-bold transition-colors hover:bg-amber-dark'
 									>
 										<span className='flex items-center gap-2 [text-shadow:0_1px_2px_rgba(0,0,0,0.35)] text-white tracking-wide'>
 											<CartIcon className='h-4 w-4' />
-											{/* product.inStock
-												? `Add to Cart — $${total.toFixed(2)}`
-												: 'Out of Stock' */}
-											{`Add to Cart — $${total.toFixed(2)}`}
+											Add to Cart
 										</span>
 									</button>
 									<button
