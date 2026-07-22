@@ -306,6 +306,44 @@ export function CheckIcon({ className = base }: IconProps) {
 	);
 }
 
+export function DownloadIcon({ className = base }: IconProps) {
+	return (
+		<svg
+			viewBox='0 0 24 24'
+			fill='none'
+			stroke='currentColor'
+			strokeWidth='1.75'
+			className={className}
+		>
+			<path
+				d='M12 3v12m0 0 4-4m-4 4-4-4'
+				strokeLinecap='round'
+				strokeLinejoin='round'
+			/>
+			<path d='M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2' strokeLinecap='round' />
+		</svg>
+	);
+}
+
+export function EyeIcon({ className = base }: IconProps) {
+	return (
+		<svg
+			viewBox='0 0 24 24'
+			fill='none'
+			stroke='currentColor'
+			strokeWidth='1.75'
+			className={className}
+		>
+			<path
+				d='M2.5 12s3.5-7 9.5-7 9.5 7 9.5 7-3.5 7-9.5 7-9.5-7-9.5-7z'
+				strokeLinecap='round'
+				strokeLinejoin='round'
+			/>
+			<circle cx='12' cy='12' r='3' />
+		</svg>
+	);
+}
+
 export function ArrowRightIcon({ className = 'w-4 h-4' }: IconProps) {
 	return (
 		<svg

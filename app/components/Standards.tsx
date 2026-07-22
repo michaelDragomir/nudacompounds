@@ -22,7 +22,7 @@ export function Standards() {
 	return (
 		<section
 			id='standards'
-			className='max-w-6xl mx-auto px-6 py-24 grid md:grid-cols-2 gap-12 items-center'
+			className='max-w-6xl mx-auto px-6 py-18 grid md:grid-cols-2 gap-12 items-center'
 		>
 			<div className='rounded-2xl bg-navy aspect-[4/3] relative overflow-hidden order-2 md:order-1'>
 				<Image

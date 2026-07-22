@@ -22,7 +22,7 @@ export function Header() {
 	}, [celebrationTick]);
 
 	return (
-		<header className='sticky top-0 z-50 bg-white/70 backdrop-blur-md border-b border-black/5'>
+		<header className='sticky top-0 z-50 bg-offwhite backdrop-blur-md border-b border-black/5'>
 			{/* <div className='hidden sm:flex items-center justify-center gap-2 bg-navy-dark text-offwhite text-xs py-1.5 px-4'>
 				<span className='w-1.5 h-1.5 rounded-full bg-emerald-400' />
 				<span>USA-Based Sourcing &mdash; Research Use Only</span>
