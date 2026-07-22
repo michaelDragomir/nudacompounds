@@ -5,7 +5,8 @@ import { Catalog } from './components/Catalog';
 import { Standards } from './components/Standards';
 import { Commitment } from './components/Commitment';
 import { FeatureGrid } from './components/FeatureGrid';
-import { Story } from './components/Story';
+import { FAQ } from './components/FAQ';
+// import { Story } from './components/Story';
 
 export default function Home() {
 	return (
@@ -17,7 +18,8 @@ export default function Home() {
 			<Catalog />
 			<Commitment />
 			<FeatureGrid />
-			<Story />
+			<FAQ />
+			{/* <Story /> */}
 		</>
 	);
 }

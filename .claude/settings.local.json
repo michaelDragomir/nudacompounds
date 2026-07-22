@@ -10,7 +10,8 @@
       "Bash(curl -s http://localhost:3000/_next/static/css/*.css)",
       "Bash(mkdir -p /Users/michaeldragomir/Desktop/nudacompounds/app/products/\\\\[slug\\\\])",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3000/products/3-rt)",
-      "Bash(curl -s http://localhost:3000/products/3-rt)"
+      "Bash(curl -s http://localhost:3000/products/3-rt)",
+      "Bash(node -e ' *)"
     ]
   }
 }

@@ -1,3 +1,5 @@
+import { SectionLink } from './SectionLink';
+
 export function Commitment() {
 	return (
 		<section className='relative bg-navy overflow-hidden'>
@@ -5,7 +7,7 @@ export function Commitment() {
 				className='absolute inset-0 bg-molecule-grid opacity-30'
 				aria-hidden='true'
 			/>
-			<div className='relative max-w-3xl mx-auto px-6 py-24 text-center'>
+			<div className='relative max-w-3xl mx-auto px-6 py-18 text-center'>
 				<div className='flex items-center justify-center gap-3 mb-4'>
 					<span className='w-8 h-px bg-amber' />
 					<span className='text-amber text-xs font-bold tracking-[0.2em] uppercase'>
@@ -28,12 +30,12 @@ export function Commitment() {
 					regulations in their own jurisdiction.
 				</p>
 
-				<a
-					href='#contact'
+				<SectionLink
+					href='/#contact'
 					className='mt-8 inline-flex items-center gap-2 bg-amber hover:bg-amber-dark text-navy-dark font-bold text-sm px-6 py-3 rounded-lg transition-colors'
 				>
 					Contact Our Team
-				</a>
+				</SectionLink>
 
 				<div className='mt-10 rounded-xl border border-offwhite/15 bg-offwhite/5 px-6 py-4 text-xs text-offwhite/60 leading-relaxed'>
 					All products offered are intended strictly for in-vitro research use

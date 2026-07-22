@@ -1,16 +1,18 @@
 'use client';
 
 import { useEffect } from 'react';
+import Link from 'next/link';
 import { useCart } from '../context/CartContext';
 import { playAddToCartSound } from '../lib/sound';
 import { CartIcon } from './icons';
 import { ConfettiBurst } from './ConfettiBurst';
+import { SectionLink } from './SectionLink';
 
 const NAV_LINKS = [
-	{ href: '#catalog', label: 'Catalog' },
-	{ href: '#standards', label: 'COAs' },
-	{ href: '#faq', label: 'FAQs' },
-	{ href: '#contact', label: 'Contact' },
+	{ href: '/#catalog', label: 'Catalog' },
+	{ href: '/#standards', label: 'COAs' },
+	{ href: '/#faq', label: 'FAQs' },
+	{ href: '/#contact', label: 'Contact' },
 ];
 
 export function Header() {
@@ -29,24 +31,24 @@ export function Header() {
 			</div> */}
 
 			<div className='max-w-6xl mx-auto flex items-center justify-between px-6 py-2'>
-				<a href='#top' className='flex items-center gap-2'>
+				<Link href='/' className='flex items-center gap-2'>
 					<span className='w-8 h-8 rounded-full bg-navy flex items-center justify-center text-amber font-bold text-sm'>
 						N
 					</span>
 					<span className='font-bold tracking-tight text-navy text-lg'>
 						NUDA <span className='font-normal text-warmgray'>Compounds</span>
 					</span>
-				</a>
+				</Link>
 
 				<nav className='hidden md:flex items-center gap-8 text-sm font-bold uppercase tracking-widest text-charcoal'>
 					{NAV_LINKS.map((link) => (
-						<a
+						<SectionLink
 							key={link.href}
 							href={link.href}
 							className='text-navy transition-colors hover:text-amber-dark'
 						>
 							{link.label}
-						</a>
+						</SectionLink>
 					))}
 				</nav>
 

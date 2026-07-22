@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 import { useCart } from '../context/CartContext';
 import type { Product } from '../data/products';
 import {
@@ -14,6 +13,7 @@ import {
 	ShieldIcon,
 	TruckIcon,
 } from './icons';
+import { SectionLink } from './SectionLink';
 
 const MIN_QTY = 1;
 const MAX_QTY = 10;
@@ -35,13 +35,13 @@ export function ProductDetail({ product }: { product: Product }) {
 	return (
 		<div className='bg-offwhite py-16'>
 			<div className='mx-auto max-w-6xl px-6'>
-				<Link
+				<SectionLink
 					href='/#catalog'
 					className='inline-flex items-center gap-2 text-sm font-bold text-navy hover:text-amber-dark transition-colors'
 				>
 					<ArrowRightIcon className='h-4 w-4 rotate-180' />
 					Back to Catalog
-				</Link>
+				</SectionLink>
 
 				<div className='mt-8 grid grid-cols-1 gap-12 lg:grid-cols-2'>
 					<div>

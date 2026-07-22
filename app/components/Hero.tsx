@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { CheckBadgeIcon, ShieldIcon, DocumentIcon, TruckIcon } from './icons';
+import { SectionLink } from './SectionLink';
 
 const stats = [
 	{ icon: CheckBadgeIcon, stat: '3rd-Party', label: 'Lab Verified' },
@@ -47,18 +48,18 @@ export function Hero() {
 						</p>
 
 						<div className='animate-fade-up [animation-delay:270ms] mt-10 flex flex-nowrap items-center justify-center gap-3 lg:justify-start'>
-							<a
-								href='#standards'
+							<SectionLink
+								href='/#standards'
 								className='whitespace-nowrap rounded-2xl border border-white/25 bg-navy-dark/60 px-4 py-3 text-[11px] font-bold uppercase tracking-wide text-white backdrop-blur-md transition-colors hover:border-white/50 hover:bg-navy-dark/40 sm:px-6 sm:text-sm'
 							>
 								View Our Testing Standards
-							</a>
-							<a
-								href='#catalog'
+							</SectionLink>
+							<SectionLink
+								href='/#catalog'
 								className='whitespace-nowrap rounded-2xl bg-amber px-4 py-3 text-xs font-bold uppercase tracking-widest text-navy-dark transition-colors hover:bg-amber-dark sm:px-6 sm:text-sm'
 							>
 								Shop our catalog
-							</a>
+							</SectionLink>
 						</div>
 					</div>
 

@@ -8,6 +8,7 @@ import {
 	MoleculeIcon,
 	ShieldIcon,
 } from './icons';
+import { SectionLink } from './SectionLink';
 
 const phases = [
 	{ icon: FingerprintIcon, label: 'Identity' },
@@ -22,7 +23,7 @@ export function Standards() {
 	return (
 		<section
 			id='standards'
-			className='max-w-6xl mx-auto px-6 py-14 grid md:grid-cols-2 gap-12 items-center'
+			className='max-w-6xl mx-auto px-6 py-18 grid md:grid-cols-2 gap-12 items-center'
 		>
 			<div className='rounded-2xl bg-navy aspect-4/3 relative overflow-hidden order-2 md:order-1'>
 				<Image
@@ -76,12 +77,12 @@ export function Standards() {
 					published publicly &mdash; no account or request required.
 				</p>
 
-				<a
-					href='#contact'
+				<SectionLink
+					href='/#contact'
 					className='text-lg mt-6 inline-flex items-center gap-2 text-navy font-bold text-sm hover:text-amber-dark transition-colors'
 				>
 					View Sample COA <ArrowRightIcon />
-				</a>
+				</SectionLink>
 			</div>
 		</section>
 	);

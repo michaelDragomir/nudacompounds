@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useCart } from '../context/CartContext';
 import { products } from '../data/products';
 import { CartIcon, LockIcon, TrashIcon, XIcon } from './icons';
+import { SectionLink } from './SectionLink';
 
 const TRUST_BADGES = ['Discreet Packaging', 'COA Included', 'Fast Delivery'];
 
@@ -44,7 +45,7 @@ export function CartDrawer() {
 			<div
 				onClick={closeCart}
 				aria-hidden='true'
-				className={`fixed inset-0 z-[60] bg-navy-dark/60 backdrop-blur-sm transition-opacity duration-300 ${
+				className={`fixed inset-0 z-60 bg-navy-dark/60 backdrop-blur-sm transition-opacity duration-300 ${
 					isOpen ? 'opacity-100' : 'pointer-events-none opacity-0'
 				}`}
 			/>
@@ -53,7 +54,7 @@ export function CartDrawer() {
 				role='dialog'
 				aria-modal='true'
 				aria-label='Shopping cart'
-				className={`fixed right-0 top-0 z-[70] flex h-full w-full max-w-md flex-col bg-navy-dark text-offwhite shadow-2xl transition-transform duration-300 ease-out ${
+				className={`fixed right-0 top-0 z-70 flex h-full w-full max-w-md flex-col bg-navy-dark text-offwhite shadow-2xl transition-transform duration-300 ease-out ${
 					isOpen ? 'translate-x-0' : 'translate-x-full'
 				}`}
 			>
@@ -83,13 +84,13 @@ export function CartDrawer() {
 						<div className='flex h-full flex-col items-center justify-center gap-3 text-center'>
 							<CartIcon className='h-10 w-10 text-offwhite/20' />
 							<p className='text-sm text-offwhite/60'>Your cart is empty.</p>
-							<a
-								href='#catalog'
+							<SectionLink
+								href='/#catalog'
 								onClick={closeCart}
 								className='text-sm font-bold text-amber-light hover:underline'
 							>
 								Browse the catalog
-							</a>
+							</SectionLink>
 						</div>
 					) : (
 						<ul className='space-y-5'>
