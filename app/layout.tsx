@@ -5,6 +5,7 @@ import { CartProvider } from "./context/CartContext";
 import { CartDrawer } from "./components/CartDrawer";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
+import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "./lib/site";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -22,10 +23,72 @@ const spaceGrotesk = Space_Grotesk({
   weight: ["500", "700"],
 });
 
+const defaultTitle = `${SITE_NAME} | USA-Verified Peptide Research Supply`;
+
 export const metadata: Metadata = {
-  title: "Nuda Compounds | USA-Verified Peptide Research Supply",
-  description:
-    "Nuda Compounds provides third-party verified peptides for laboratory research, backed by public batch documentation and a team you can actually reach.",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: defaultTitle,
+    template: `%s | ${SITE_NAME}`,
+  },
+  description: SITE_DESCRIPTION,
+  keywords: [
+    "peptide research supply",
+    "research peptides USA",
+    "Certificate of Analysis peptides",
+    "third-party tested peptides",
+    "cGMP peptide supplier",
+  ],
+  authors: [{ name: SITE_NAME }],
+  alternates: {
+    canonical: "/",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
+  },
+  openGraph: {
+    type: "website",
+    url: SITE_URL,
+    siteName: SITE_NAME,
+    title: defaultTitle,
+    description: SITE_DESCRIPTION,
+    locale: "en_US",
+    images: [
+      {
+        url: "/peptide-hero-bg.jpeg",
+        width: 1920,
+        height: 1080,
+        alt: "Nuda Compounds — peptide research supply",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: defaultTitle,
+    description: SITE_DESCRIPTION,
+    images: ["/peptide-hero-bg.jpeg"],
+  },
+};
+
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: SITE_NAME,
+  url: SITE_URL,
+  description: SITE_DESCRIPTION,
+  email: "hello@nudacompounds.com",
+};
+
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: SITE_NAME,
+  url: SITE_URL,
 };
 
 export default function RootLayout({
@@ -39,6 +102,14 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} ${spaceGrotesk.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-offwhite text-charcoal">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+        />
         <CartProvider>
           <Header />
           <main className="flex-1">{children}</main>
