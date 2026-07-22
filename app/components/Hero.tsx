@@ -32,7 +32,7 @@ export function Hero() {
 					<div className='text-center lg:text-left'>
 						<div className='animate-fade-up mb-7 inline-flex items-center gap-2 rounded-full border border-offwhite/30 bg-white/5 px-4 py-1.5 backdrop-blur-md'>
 							<span className='text-xs font-bold uppercase tracking-[0.2em] text-offwhite'>
-								USA Verified Research Supply
+								Verified Research Grade Peptides
 							</span>
 						</div>
 

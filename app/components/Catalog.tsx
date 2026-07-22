@@ -5,7 +5,7 @@ import { LockIcon } from './icons';
 
 export function Catalog() {
 	return (
-		<section id='catalog' className='bg-navy-offwhite py-18'>
+		<section id='catalog' className='bg-navy-offwhite py-14'>
 			<div className='mx-auto max-w-6xl px-6'>
 				<div className='mx-auto mb-14 max-w-2xl text-center'>
 					<div className='mb-4 flex items-center justify-center gap-3'>

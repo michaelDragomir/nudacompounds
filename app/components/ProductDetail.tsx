@@ -100,13 +100,13 @@ export function ProductDetail({ product }: { product: Product }) {
 								Quantity
 							</span>
 							<div className='mt-2 flex items-center gap-4'>
-								<div className='flex items-center gap-3 rounded-lg border border-black/10 px-1 text-warmgray'>
+								<div className='flex items-center gap-3 rounded-lg border border-navy/70 px-1 text-warmgray'>
 									<button
 										type='button'
 										disabled={qty <= MIN_QTY}
 										onClick={() => changeQty(-1)}
 										aria-label='Decrease quantity'
-										className='flex h-9 w-9 items-center justify-center text-lg transition-colors hover:text-navy disabled:cursor-not-allowed disabled:opacity-40'
+										className='flex h-9 w-9 items-center justify-center text-lg transition-colors hover:text-navy disabled:cursor-not-allowed disabled:opacity-40 cursor-pointer'
 									>
 										&minus;
 									</button>
@@ -118,7 +118,7 @@ export function ProductDetail({ product }: { product: Product }) {
 										disabled={qty >= MAX_QTY}
 										onClick={() => changeQty(1)}
 										aria-label='Increase quantity'
-										className='flex h-9 w-9 items-center justify-center text-lg transition-colors hover:text-navy disabled:cursor-not-allowed disabled:opacity-40'
+										className='flex h-9 w-9 items-center justify-center text-lg transition-colors hover:text-navy disabled:cursor-not-allowed disabled:opacity-40 cursor-pointer'
 									>
 										+
 									</button>
@@ -127,12 +127,20 @@ export function ProductDetail({ product }: { product: Product }) {
 								<button
 									type='button'
 									onClick={() => addItem(product, qty)}
-									className='flex flex-1 items-center justify-center gap-2 rounded-lg bg-amber px-6 py-2.25 text-sm font-bold uppercase tracking-wide text-white [text-shadow:0_1px_2px_rgba(0,0,0,0.35)] transition-colors hover:bg-amber-dark'
+									className='flex flex-1 items-center justify-center gap-2 rounded-lg bg-amber px-6 py-2.25 text-sm font-bold uppercase tracking-wide text-white [text-shadow:0_1px_2px_rgba(0,0,0,0.35)] transition-colors hover:bg-amber-dark cursor-pointer'
 								>
 									<CartIcon className='h-4 w-4' />
 									Add to Cart
 								</button>
 							</div>
+
+							<button
+								type='button'
+								onClick={() => addItem(product, MAX_QTY)}
+								className='mt-3 w-full cursor-pointer rounded-lg border border-navy/70 px-6 py-2.25 text-sm font-bold uppercase tracking-wide text-navy/70 transition-colors hover:border-navy-dark hover:bg-navy-dark hover:text-white'
+							>
+								Bulk Order 10+
+							</button>
 						</div>
 
 						<div className='mt-8 rounded-xl border border-black/5 bg-white p-5'>

@@ -5,7 +5,7 @@ import { useCart } from '../context/CartContext';
 import { products } from '../data/products';
 import { CartIcon, LockIcon, TrashIcon, XIcon } from './icons';
 
-const TRUST_BADGES = ['Discreet Packaging', 'COA Included', '5-Day Delivery'];
+const TRUST_BADGES = ['Discreet Packaging', 'COA Included', 'Fast Delivery'];
 
 export function CartDrawer() {
 	const {
@@ -220,9 +220,6 @@ export function CartDrawer() {
 						<LockIcon className='h-4 w-4' />
 						Secure Checkout
 					</button>
-					<p className='mt-3 text-center text-[11px] text-offwhite/40'>
-						Checkout is launching soon.
-					</p>
 				</div>
 			</aside>
 		</>

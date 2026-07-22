@@ -22,9 +22,9 @@ export function Standards() {
 	return (
 		<section
 			id='standards'
-			className='max-w-6xl mx-auto px-6 py-18 grid md:grid-cols-2 gap-12 items-center'
+			className='max-w-6xl mx-auto px-6 py-14 grid md:grid-cols-2 gap-12 items-center'
 		>
-			<div className='rounded-2xl bg-navy aspect-[4/3] relative overflow-hidden order-2 md:order-1'>
+			<div className='rounded-2xl bg-navy aspect-4/3 relative overflow-hidden order-2 md:order-1'>
 				<Image
 					src='/lab-test-image.png'
 					alt='Lab technician pipetting samples for testing'
@@ -33,7 +33,7 @@ export function Standards() {
 					className='object-cover'
 				/>
 				<div
-					className='absolute inset-0 bg-gradient-to-t from-navy-dark/70 via-navy-dark/10 to-transparent'
+					className='absolute inset-0 bg-linear-to-t from-navy-dark/70 via-navy-dark/10 to-transparent'
 					aria-hidden='true'
 				/>
 				<div className='absolute bottom-5 left-5 bg-navy-dark/90 text-offwhite text-xs font-semibold px-4 py-2 rounded-lg'>
