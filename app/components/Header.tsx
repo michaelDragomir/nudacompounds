@@ -44,8 +44,8 @@ export function Header() {
 				<span>USA-Based Sourcing &mdash; Research Use Only</span>
 			</div> */}
 
-			<div className='max-w-6xl mx-auto flex items-center justify-between px-6 py-2'>
-				<Link href='/' className='flex items-center gap-2'>
+			<div className='max-w-6xl mx-auto grid grid-cols-[1fr_auto_1fr] items-center px-6 py-2'>
+				<Link href='/' className='flex items-center gap-2 justify-self-start'>
 					<span className='w-8 h-8 rounded-full bg-navy flex items-center justify-center text-amber font-bold text-sm'>
 						N
 					</span>
@@ -66,7 +66,7 @@ export function Header() {
 				</Link>
 
 				<nav
-					className={`hidden md:flex items-center gap-8 text-sm font-bold uppercase tracking-widest transition-colors duration-300 ${
+					className={`hidden md:flex items-center justify-self-center gap-8 text-sm font-bold uppercase tracking-widest transition-colors duration-300 ${
 						scrolled ? 'text-charcoal' : 'text-amber'
 					}`}
 				>
@@ -91,7 +91,7 @@ export function Header() {
 					aria-label={`Open cart, ${totalCount} ${
 						totalCount === 1 ? 'item' : 'items'
 					}`}
-					className={`relative flex h-10 w-10 items-center justify-center rounded-full transition-colors duration-300 ${
+					className={`relative flex h-10 w-10 items-center justify-center justify-self-end rounded-full transition-colors duration-300 ${
 						scrolled
 							? 'text-navy hover:bg-navy/5 hover:text-amber-dark'
 							: 'text-amber hover:bg-white/10 hover:text-amber-light'
