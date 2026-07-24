@@ -1,6 +1,6 @@
-import Image from 'next/image';
 import { CheckBadgeIcon, ShieldIcon, DocumentIcon, TruckIcon } from './icons';
 import { SectionLink } from './SectionLink';
+import { BottleCarousel } from './BottleCarousel';
 
 const stats = [
 	{ icon: CheckBadgeIcon, stat: '3rd-Party', label: 'Lab Verified' },
@@ -68,20 +68,7 @@ export function Hero() {
 							className='absolute -inset-6 rounded-4xl bg-amber/10 blur-3xl'
 							aria-hidden='true'
 						/>
-						<div className='relative aspect-4/5 overflow-hidden rounded-3xl border border-offwhite/10 shadow-2xl'>
-							<Image
-								src='/peptide-hero-bg.jpeg'
-								alt='Molecular render representing peptide research'
-								fill
-								priority
-								sizes='(min-width: 1024px) 40vw, 90vw'
-								className='object-cover'
-							/>
-							<div
-								className='absolute inset-0 bg-linear-to-t from-navy-dark/40 via-transparent to-transparent'
-								aria-hidden='true'
-							/>
-						</div>
+						<BottleCarousel />
 					</div>
 				</div>
 
