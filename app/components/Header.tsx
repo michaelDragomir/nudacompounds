@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useCart } from '../context/CartContext';
 import { playAddToCartSound } from '../lib/sound';
 import { CartIcon } from './icons';
@@ -17,7 +18,10 @@ const NAV_LINKS = [
 
 export function Header() {
 	const { totalCount, celebrationTick, toggleCart } = useCart();
+	const pathname = usePathname();
+	const isProductPage = pathname.startsWith('/products/');
 	const [scrolled, setScrolled] = useState(false);
+	const isSolid = isProductPage || scrolled;
 
 	useEffect(() => {
 		if (celebrationTick === 0) return;
@@ -25,16 +29,17 @@ export function Header() {
 	}, [celebrationTick]);
 
 	useEffect(() => {
+		if (isProductPage) return;
 		const onScroll = () => setScrolled(window.scrollY > 24);
 		onScroll();
 		window.addEventListener('scroll', onScroll, { passive: true });
 		return () => window.removeEventListener('scroll', onScroll);
-	}, []);
+	}, [isProductPage]);
 
 	return (
 		<header
 			className={`fixed inset-x-0 top-0 z-50 border-b transition-colors duration-300 ${
-				scrolled
+				isSolid
 					? 'bg-white backdrop-blur-md border-black/5'
 					: 'bg-transparent border-b border-white/20'
 			}`}
@@ -51,13 +56,13 @@ export function Header() {
 					</span>
 					<span
 						className={`font-bold tracking-tight text-lg transition-colors duration-300 ${
-							scrolled ? 'text-navy' : 'text-amber'
+							isSolid ? 'text-navy' : 'text-amber'
 						}`}
 					>
 						NUDA{' '}
 						<span
 							className={`font-normal transition-colors duration-300 ${
-								scrolled ? 'text-warmgray' : 'text-amber/70'
+								isSolid ? 'text-warmgray' : 'text-amber/70'
 							}`}
 						>
 							Compounds
@@ -67,7 +72,7 @@ export function Header() {
 
 				<nav
 					className={`hidden md:flex items-center justify-self-center gap-8 text-sm font-bold uppercase tracking-widest transition-colors duration-300 ${
-						scrolled ? 'text-charcoal' : 'text-amber'
+						isSolid ? 'text-charcoal' : 'text-amber'
 					}`}
 				>
 					{NAV_LINKS.map((link) => (
@@ -75,7 +80,7 @@ export function Header() {
 							key={link.href}
 							href={link.href}
 							className={`transition-colors duration-300 ${
-								scrolled
+								isSolid
 									? 'text-navy hover:text-amber-dark'
 									: 'text-amber hover:text-amber-light'
 							}`}
@@ -92,7 +97,7 @@ export function Header() {
 						totalCount === 1 ? 'item' : 'items'
 					}`}
 					className={`relative flex h-10 w-10 items-center justify-center justify-self-end rounded-full transition-colors duration-300 ${
-						scrolled
+						isSolid
 							? 'text-navy hover:bg-navy/5 hover:text-amber-dark'
 							: 'text-amber hover:bg-white/10 hover:text-amber-light'
 					}`}
