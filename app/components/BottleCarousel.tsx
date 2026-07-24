@@ -4,38 +4,70 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { products } from '../data/products';
 
-const SLIDE_DURATION_MS = 3200;
+const SLIDE_DURATION_MS = 3500;
+
+const seenImages = new Set<string>();
+const UNIQUE_SLIDES = products.filter((product) => {
+	if (seenImages.has(product.image)) return false;
+	seenImages.add(product.image);
+	return true;
+});
+
+// Preview only: repeat the 3 unique bottles to see the coverflow with 6 in rotation.
+const CAROUSEL_SLIDES = [...UNIQUE_SLIDES, ...UNIQUE_SLIDES];
+
+const SLIDE_COUNT = CAROUSEL_SLIDES.length;
+
+const LEVEL_STYLES = [
+	{ translate: 0, scale: 1, opacity: 1, blur: 0, z: 40 },
+	{ translate: 46, scale: 0.75, opacity: 0.45, blur: 3, z: 20 },
+	{ translate: 82, scale: 0.55, opacity: 0.22, blur: 5, z: 10 },
+	{ translate: 110, scale: 0.4, opacity: 0, blur: 6, z: 0 },
+];
 
 export function BottleCarousel() {
 	const [index, setIndex] = useState(0);
 
 	useEffect(() => {
 		const timer = setInterval(() => {
-			setIndex((prev) => (prev + 1) % products.length);
+			setIndex((prev) => (prev + 1) % SLIDE_COUNT);
 		}, SLIDE_DURATION_MS);
 		return () => clearInterval(timer);
 	}, []);
 
 	return (
-		<div className='relative aspect-4/5 overflow-hidden rounded-3xl border border-offwhite/5 bg-transparent shadow-2xl'>
-			{products.map((product, i) => (
-				<div
-					key={product.slug}
-					className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-						i === index ? 'opacity-100' : 'opacity-0'
-					}`}
-					aria-hidden={i !== index}
-				>
-					<Image
-						src={product.image}
-						alt={`${product.name} vial`}
-						fill
-						priority={i === 0}
-						sizes='(min-width: 1024px) 40vw, 90vw'
-						className='object-contain p-10'
-					/>
-				</div>
-			))}
+		<div className='relative aspect-4/5 overflow-hidden rounded-3xl border border-offwhite/7 bg-transparent shadow-xl'>
+			{CAROUSEL_SLIDES.map((product, i) => {
+				const raw = (i - index + SLIDE_COUNT) % SLIDE_COUNT;
+				const offset = raw > SLIDE_COUNT / 2 ? raw - SLIDE_COUNT : raw;
+				const level =
+					LEVEL_STYLES[Math.min(Math.abs(offset), LEVEL_STYLES.length - 1)];
+				const direction = offset === 0 ? 0 : offset > 0 ? 1 : -1;
+
+				return (
+					<div
+						key={`${product.slug}-${i}`}
+						className='absolute left-1/2 top-1/2 h-[80%] w-[64%] transition-[transform,opacity,filter] duration-700 ease-in-out'
+						style={{
+							transform: `translate(-50%, -50%) translateX(${
+								level.translate * direction
+							}%) scale(${level.scale})`,
+							opacity: level.opacity,
+							filter: level.blur ? `blur(${level.blur}px)` : 'none',
+							zIndex: level.z,
+						}}
+					>
+						<Image
+							src={product.image}
+							alt={`${product.name} vial`}
+							fill
+							priority={i === 0}
+							sizes='(min-width: 1024px) 40vw, 90vw'
+							className='object-contain drop-shadow-xl'
+						/>
+					</div>
+				);
+			})}
 		</div>
 	);
 }
