@@ -35,8 +35,14 @@ export function BottleCarousel() {
 		return () => clearInterval(timer);
 	}, []);
 
+	const edgeMask =
+		'linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%)';
+
 	return (
-		<div className='relative aspect-4/5 overflow-hidden rounded-3xl border border-offwhite/7 bg-transparent shadow-xl'>
+		<div
+			className='relative aspect-4/5 overflow-hidden'
+			style={{ WebkitMaskImage: edgeMask, maskImage: edgeMask }}
+		>
 			{CAROUSEL_SLIDES.map((product, i) => {
 				const raw = (i - index + SLIDE_COUNT) % SLIDE_COUNT;
 				const offset = raw > SLIDE_COUNT / 2 ? raw - SLIDE_COUNT : raw;
