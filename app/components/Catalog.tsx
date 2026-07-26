@@ -9,7 +9,7 @@ export function Catalog() {
 				<div className='mx-auto mb-14 max-w-2xl text-center'>
 					<div className='mb-4 flex items-center justify-center gap-3'>
 						<span className='h-px w-8 bg-amber' />
-						<span className='text-sm font-bold uppercase tracking-[0.2em] text-navy'>
+						<span className='text-xs font-bold uppercase tracking-[0.2em] text-navy'>
 							Research Catalog
 						</span>
 					</div>

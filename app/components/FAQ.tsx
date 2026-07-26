@@ -40,16 +40,16 @@ export function FAQ() {
 	const [openIndex, setOpenIndex] = useState<number | null>(null);
 
 	return (
-		<section id='faq' className='bg-offwhite py-18'>
+		<section id='faq' className='bg-navy py-18'>
 			<div className='mx-auto max-w-3xl px-6'>
 				<div className='mx-auto mb-14 max-w-2xl text-center'>
 					<div className='mb-4 flex items-center justify-center gap-3'>
 						<span className='h-px w-8 bg-amber' />
-						<span className='text-sm font-bold uppercase tracking-[0.2em] text-navy'>
-							FAQs
+						<span className='text-xs font-bold uppercase tracking-[0.2em] text-amber'>
+							SUpport
 						</span>
 					</div>
-					<h2 className='text-3xl font-bold leading-tight text-navy tracking-wide'>
+					<h2 className='text-3xl font-bold leading-tight text-offwhite tracking-wide'>
 						Frequently Asked Questions
 					</h2>
 				</div>
@@ -60,15 +60,17 @@ export function FAQ() {
 						return (
 							<div
 								key={item.question}
-								className='overflow-hidden rounded-2xl border border-black/5 bg-white'
+								className='overflow-hidden rounded-2xl border border-black/5 bg-white transition-colors hover:border-amber/40'
 							>
 								<button
 									type='button'
 									onClick={() => setOpenIndex(isOpen ? null : index)}
 									aria-expanded={isOpen}
-									className='flex w-full cursor-pointer items-center justify-between gap-4 px-6 py-5 text-left'
+									className='flex w-full cursor-pointer items-center justify-between gap-4 px-6 py-5 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber focus-visible:ring-inset'
 								>
-									<span className='font-bold text-navy'>{item.question}</span>
+									<span className='font-semibold text-navy tracking-wide'>
+										{item.question}
+									</span>
 									<ChevronDownIcon
 										className={`h-5 w-5 shrink-0 text-amber-dark transition-transform duration-300 ${
 											isOpen ? 'rotate-180' : ''
@@ -83,7 +85,7 @@ export function FAQ() {
 									}`}
 								>
 									<div className='overflow-hidden'>
-										<p className='px-6 pb-5 text-sm leading-relaxed text-charcoal'>
+										<p className='px-6 pb-5 text-sm leading-relaxed text-charcoal tracking-wide'>
 											{item.answer}
 										</p>
 									</div>

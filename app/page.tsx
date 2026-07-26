@@ -6,6 +6,7 @@ import { Standards } from './components/Standards';
 import { Commitment } from './components/Commitment';
 import { FeatureGrid } from './components/FeatureGrid';
 import { FAQ } from './components/FAQ';
+import { Contact } from './components/Contact';
 // import { Story } from './components/Story';
 
 export default function Home() {
@@ -19,6 +20,7 @@ export default function Home() {
 			<Commitment />
 			<FeatureGrid />
 			<FAQ />
+			<Contact />
 			{/* <Story /> */}
 		</>
 	);

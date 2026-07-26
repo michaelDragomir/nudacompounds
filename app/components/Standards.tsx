@@ -45,7 +45,7 @@ export function Standards() {
 			<div className='order-1 md:order-2'>
 				<div className='flex items-center gap-3 mb-4'>
 					<span className='w-8 h-px bg-amber' />
-					<span className='text-navy text-sm font-bold tracking-[0.2em] uppercase'>
+					<span className='text-navy text-xs font-bold tracking-[0.2em] uppercase'>
 						Our Standards
 					</span>
 				</div>
