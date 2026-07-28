@@ -23,9 +23,9 @@ export const products: Product[] = [
 		description:
 			'A synthetic tri-receptor agonist peptide (GIP/GLP-1/glucagon) referenced in published in-vitro receptor-binding literature. Supplied lyophilized as a laboratory reference compound.',
 		purity: '≥99%',
-		size: '24mg vial',
+		size: '10mg vial',
 		price: 140,
-		image: '/retatrutide.png',
+		image: '/images/3rt.png',
 		inStock: true,
 		coa: {
 			batch: 'AUR-908157',
@@ -42,7 +42,7 @@ export const products: Product[] = [
 		purity: '≥99%',
 		size: '10mg vial',
 		price: 149,
-		image: '/tirzepatide.png',
+		image: '/images/2rt.png',
 		inStock: false,
 		coa: {
 			batch: 'AUR-914402',
@@ -59,7 +59,7 @@ export const products: Product[] = [
 		purity: '≥99%',
 		size: '10mg vial',
 		price: 29,
-		image: '/bpc157.png',
+		image: '/images/bpc.png',
 		inStock: true,
 		coa: {
 			batch: 'AUR-902210',
@@ -76,7 +76,7 @@ export const products: Product[] = [
 		purity: '≥99%',
 		size: '50mg vial',
 		price: 35,
-		image: '/retatrutide.png',
+		image: '/images/ghk.png',
 		inStock: true,
 		coa: {
 			batch: 'AUR-920071',
@@ -93,7 +93,7 @@ export const products: Product[] = [
 		purity: '≥99%',
 		size: '10mg vial',
 		price: 50,
-		image: '/tirzepatide.png',
+		image: '/images/tesamorelin.png',
 		inStock: false,
 		coa: {
 			batch: 'AUR-931588',
@@ -102,88 +102,54 @@ export const products: Product[] = [
 		},
 	},
 	{
-		slug: 'reconstitution-solution',
-		name: 'Reconstitution Solution',
+		slug: 'mots-c',
+		name: 'MOTS-c',
+		category: 'Metabolic Research',
+		description:
+			'A mitochondrial-derived peptide referenced in published metabolic and cellular-energy research literature. Supplied lyophilized as a laboratory reference compound.',
+		purity: '≥99%',
+		size: '10mg vial',
+		price: 65,
+		image: '/images/mots.png',
+		inStock: true,
+		coa: {
+			batch: 'AUR-984127',
+			form: 'Lyophilized Powder',
+			tested: '06/25/26',
+		},
+	},
+	{
+		slug: 'nad-plus',
+		name: 'NAD+',
+		category: 'Metabolic Research',
+		description:
+			'Nicotinamide adenine dinucleotide, a coenzyme studied in published cellular-energy and longevity research literature. Supplied lyophilized as a laboratory reference compound.',
+		purity: '≥99%',
+		size: '500mg vial',
+		price: 150,
+		image: '/images/nad.png',
+		inStock: true,
+		coa: {
+			batch: 'AUR-990284',
+			form: 'Lyophilized Powder',
+			tested: '06/22/26',
+		},
+	},
+	{
+		slug: 'bac-water',
+		name: 'BAC Water',
 		category: 'Lab Supplies',
 		description:
 			'Bacteriostatic water used to reconstitute lyophilized peptides for laboratory handling. Sterile-filtered and supplied in a sealed vial.',
 		purity: 'USP Grade',
 		size: '10mL vial',
 		price: 10,
-		image: '/bpc157.png',
+		image: '/images/bacWater.png',
 		inStock: true,
 		coa: {
 			batch: 'AUR-899142',
 			form: 'Sterile Liquid',
 			tested: '07/08/26',
-		},
-	},
-	{
-		slug: 'semaglutide',
-		name: 'Semaglutide',
-		category: 'Metabolic Research',
-		description:
-			'A synthetic GLP-1 receptor agonist referenced in published metabolic research literature. Supplied lyophilized as a laboratory reference compound.',
-		purity: '≥99%',
-		size: '10mg vial',
-		price: 120,
-		image: '/tirzepatide.png',
-		inStock: true,
-		coa: {
-			batch: 'AUR-945213',
-			form: 'Lyophilized Powder',
-			tested: '07/05/26',
-		},
-	},
-	{
-		slug: 'ipamorelin',
-		name: 'Ipamorelin',
-		category: 'Recovery Research',
-		description:
-			'A selective growth-hormone secretagogue peptide referenced in published endocrine research literature. Supplied lyophilized as a laboratory reference compound.',
-		purity: '≥99%',
-		size: '5mg vial',
-		price: 45,
-		image: '/bpc157.png',
-		inStock: true,
-		coa: {
-			batch: 'AUR-951087',
-			form: 'Lyophilized Powder',
-			tested: '07/03/26',
-		},
-	},
-	{
-		slug: 'cjc-1295',
-		name: 'CJC-1295',
-		category: 'Recovery Research',
-		description:
-			'A synthetic GHRH analog referenced in published endocrine research literature, often studied alongside growth-hormone secretagogues. Supplied lyophilized for laboratory use.',
-		purity: '≥99%',
-		size: '5mg vial',
-		price: 55,
-		image: '/retatrutide.png',
-		inStock: true,
-		coa: {
-			batch: 'AUR-962345',
-			form: 'Lyophilized Powder',
-			tested: '07/01/26',
-		},
-	},
-	{
-		slug: 'cagrilintide',
-		name: 'Cagrilintide',
-		category: 'Metabolic Research',
-		description:
-			'A long-acting amylin receptor agonist referenced in published metabolic research literature. Supplied lyophilized as a laboratory reference compound.',
-		purity: '≥99%',
-		size: '10mg vial',
-		price: 135,
-		image: '/tirzepatide.png',
-		inStock: false,
-		coa: {
-			batch: 'AUR-973456',
-			form: 'Lyophilized Powder',
-			tested: '06/28/26',
 		},
 	},
 ];

@@ -7,14 +7,11 @@ import { products } from '../data/products';
 const SLIDE_DURATION_MS = 3500;
 
 const seenImages = new Set<string>();
-const UNIQUE_SLIDES = products.filter((product) => {
+const CAROUSEL_SLIDES = products.filter((product) => {
 	if (seenImages.has(product.image)) return false;
 	seenImages.add(product.image);
 	return true;
 });
-
-// Preview only: repeat the 3 unique bottles to see the coverflow with 6 in rotation.
-const CAROUSEL_SLIDES = [...UNIQUE_SLIDES, ...UNIQUE_SLIDES];
 
 const SLIDE_COUNT = CAROUSEL_SLIDES.length;
 
@@ -52,7 +49,7 @@ export function BottleCarousel() {
 
 				return (
 					<div
-						key={`${product.slug}-${i}`}
+						key={product.slug}
 						className='absolute left-1/2 top-1/2 h-[80%] w-[64%] transition-[transform,opacity,filter] duration-700 ease-in-out'
 						style={{
 							transform: `translate(-50%, -50%) translateX(${
