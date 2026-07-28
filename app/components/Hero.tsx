@@ -13,7 +13,7 @@ export function Hero() {
 	return (
 		<section
 			id='top'
-			className='relative min-h-[92vh] flex items-center overflow-hidden bg-navy-dark'
+			className='relative min-h-[92vh] flex items-center overflow-hidden bg-navy'
 		>
 			<div
 				className='animate-glow-pulse absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(217,160,91,0.14),transparent_40%)]'

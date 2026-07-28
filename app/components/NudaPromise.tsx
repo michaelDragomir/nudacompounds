@@ -25,7 +25,7 @@ export function NudaPromise() {
 			<div className='mx-auto max-w-6xl px-6'>
 				<div className='mx-auto mb-14 max-w-3xl text-center'>
 					<h2 className='text-3xl font-bold text-navy sm:text-4xl'>
-						The <span className='text-amber-dark'>Nuda</span> Promise
+						The Nuda Promise
 					</h2>
 					<div className='mt-4 flex flex-wrap items-center justify-center gap-3 text-sm text-charcoal/70'>
 						<span>Research Peptides Delivered Same Day Locally</span>
