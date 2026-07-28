@@ -7,10 +7,44 @@ const CONTACT_EMAIL = 'hello@nudacompounds.com';
 
 export function Contact() {
 	const [submitted, setSubmitted] = useState(false);
+	const [submitting, setSubmitting] = useState(false);
+	const [error, setError] = useState<string | null>(null);
 
-	function handleSubmit(event: FormEvent<HTMLFormElement>) {
+	async function handleSubmit(event: FormEvent<HTMLFormElement>) {
 		event.preventDefault();
-		setSubmitted(true);
+		setError(null);
+		setSubmitting(true);
+
+		const formData = new FormData(event.currentTarget);
+		const payload = {
+			name: formData.get('name'),
+			email: formData.get('email'),
+			subject: formData.get('subject'),
+			message: formData.get('message'),
+		};
+
+		try {
+			const response = await fetch('/api/contact', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(payload),
+			});
+
+			if (!response.ok) {
+				const data = await response.json().catch(() => null);
+				throw new Error(data?.error || 'Something went wrong. Please try again.');
+			}
+
+			setSubmitted(true);
+		} catch (err) {
+			setError(
+				err instanceof Error
+					? err.message
+					: 'Something went wrong. Please try again.',
+			);
+		} finally {
+			setSubmitting(false);
+		}
 	}
 
 	return (
@@ -130,11 +164,16 @@ export function Contact() {
 									/>
 								</div>
 
+								{error && (
+									<p className='text-sm font-medium text-red-600'>{error}</p>
+								)}
+
 								<button
 									type='submit'
-									className='cursor-pointer rounded-xl bg-navy px-6 py-3 text-sm font-bold text-offwhite transition-colors hover:bg-navy-dark'
+									disabled={submitting}
+									className='cursor-pointer rounded-xl bg-navy px-6 py-3 text-sm font-bold text-offwhite transition-colors hover:bg-navy-dark disabled:cursor-not-allowed disabled:opacity-60'
 								>
-									Send message
+									{submitting ? 'Sending…' : 'Send message'}
 								</button>
 							</form>
 						)}

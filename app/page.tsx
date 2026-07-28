@@ -14,7 +14,7 @@ export default function Home() {
 	return (
 		<>
 			<Hero />
-			<TrustStrip />
+			{/* <TrustStrip /> */}
 			<Standards />
 			<QualityStandard />
 			<Catalog />

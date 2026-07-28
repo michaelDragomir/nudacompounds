@@ -1,0 +1,75 @@
+import { NextResponse } from 'next/server';
+import { Resend } from 'resend';
+
+const FROM_ADDRESS = 'Nuda Compounds <contact@nudacompounds.com>';
+const TO_ADDRESS = process.env.CONTACT_EMAIL || 'hello@nudacompounds.com';
+
+export async function POST(request: Request) {
+	const apiKey = process.env.RESEND_API_KEY;
+	if (!apiKey) {
+		console.error('RESEND_API_KEY is not set');
+		return NextResponse.json(
+			{ error: 'Email service is not configured.' },
+			{ status: 500 },
+		);
+	}
+
+	let body: { name?: string; email?: string; subject?: string; message?: string };
+	try {
+		body = await request.json();
+	} catch {
+		return NextResponse.json({ error: 'Invalid request body.' }, { status: 400 });
+	}
+
+	const { name, email, subject, message } = body;
+
+	if (!name || !email || !subject || !message) {
+		return NextResponse.json(
+			{ error: 'Name, email, subject, and message are all required.' },
+			{ status: 400 },
+		);
+	}
+
+	const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+	if (!emailPattern.test(email)) {
+		return NextResponse.json(
+			{ error: 'Please provide a valid email address.' },
+			{ status: 400 },
+		);
+	}
+
+	const resend = new Resend(apiKey);
+
+	try {
+		const { error } = await resend.emails.send({
+			from: FROM_ADDRESS,
+			to: TO_ADDRESS,
+			replyTo: email,
+			subject: `[Contact Form] ${subject}`,
+			text: `New message from the Nuda Compounds contact form.
+
+Name: ${name}
+Email: ${email}
+Subject: ${subject}
+
+Message:
+${message}`,
+		});
+
+		if (error) {
+			console.error('Resend error:', error);
+			return NextResponse.json(
+				{ error: 'Failed to send message. Please try again later.' },
+				{ status: 502 },
+			);
+		}
+
+		return NextResponse.json({ success: true });
+	} catch (err) {
+		console.error('Contact form send failed:', err);
+		return NextResponse.json(
+			{ error: 'Failed to send message. Please try again later.' },
+			{ status: 500 },
+		);
+	}
+}
