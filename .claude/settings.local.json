@@ -32,7 +32,11 @@
       "Bash(/private/tmp/claude-501/-Users-michaeldragomir-Desktop-nudacompounds/387216b0-4fdd-4a8f-a844-14ef014b45f3/scratchpad/imgenv/bin/python -c ' *)",
       "Bash(npm install *)",
       "Bash(curl -s -X POST http://localhost:3000/api/contact -H 'Content-Type: application/json' -d '{\"name\":\"Test User\",\"email\":\"test@example.com\",\"subject\":\"Testing contact form\",\"message\":\"This is a test message from curl.\"}' -w '\\\\nHTTP %{http_code}\\\\n')",
-      "Bash(curl -s -X POST http://localhost:3000/api/contact -H 'Content-Type: application/json' -d '{\"name\":\"Test User\",\"email\":\"not-an-email\"}' -w '\\\\nHTTP %{http_code}\\\\n')"
+      "Bash(curl -s -X POST http://localhost:3000/api/contact -H 'Content-Type: application/json' -d '{\"name\":\"Test User\",\"email\":\"not-an-email\"}' -w '\\\\nHTTP %{http_code}\\\\n')",
+      "Bash(curl -s http://localhost:3999/)",
+      "Bash(curl -s http://localhost:3999/products/bpc-157)",
+      "Bash(kill %1)",
+      "Bash(pkill -f \"PORT=3999\")"
     ]
   }
 }

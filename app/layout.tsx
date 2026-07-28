@@ -5,6 +5,7 @@ import { CartProvider } from "./context/CartContext";
 import { CartDrawer } from "./components/CartDrawer";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
+import { GoogleAnalytics } from "./components/GoogleAnalytics";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "./lib/site";
 
 const geistSans = Geist({
@@ -102,6 +103,7 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} ${spaceGrotesk.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-offwhite text-charcoal">
+        <GoogleAnalytics />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
