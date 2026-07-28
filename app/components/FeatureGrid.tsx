@@ -42,36 +42,38 @@ const features = [
 
 export function FeatureGrid() {
 	return (
-		<section id='about' className='max-w-6xl mx-auto px-6 py-24'>
-			<div className='max-w-2xl mx-auto text-center mb-14'>
-				<div className='flex items-center justify-center gap-3 mb-4'>
-					<span className='w-8 h-px bg-amber' />
-					<span className='text-navy text-xs font-bold tracking-[0.2em] uppercase'>
-						About Nuda
-					</span>
-				</div>
-				<h2 className='text-xl font-bold text-navy leading-normal tracking-wide'>
-					Transparency isn&apos;t just a promise-it&apos;s how we operate. Every
-					step of our process is designed to give you complete confidence in the
-					quality and purity of your research materials.
-				</h2>
-			</div>
-
-			<div className='grid sm:grid-cols-2 lg:grid-cols-3 gap-6'>
-				{features.map(({ icon: Icon, title, body }) => (
-					<div
-						key={title}
-						className='rounded-xl border bg-white/60 p-6 border-amber transition-colors shadow-xl'
-					>
-						<div className='w-10 h-10 rounded-lg flex items-center justify-center text-amber mb-4 mx-auto bg-amber/10'>
-							<Icon className='h-5 w-5' />
-						</div>
-						<h3 className='font-bold text-navy tracking-wide'>{title}</h3>
-						<p className='mt-2 text-sm text-charcoal leading-relaxed tracking-wide'>
-							{body}
-						</p>
+		<section id='about' className='bg-navy py-24'>
+			<div className='max-w-6xl mx-auto px-6'>
+				<div className='max-w-2xl mx-auto text-center mb-14'>
+					<div className='flex items-center justify-center gap-3 mb-4'>
+						<span className='w-8 h-px bg-amber' />
+						<span className='text-amber text-xs font-bold tracking-[0.2em] uppercase'>
+							About Nuda
+						</span>
 					</div>
-				))}
+					<h2 className='text-xl font-bold text-offwhite leading-normal tracking-wide'>
+						Transparency isn&apos;t just a promise-it&apos;s how we operate. Every
+						step of our process is designed to give you complete confidence in the
+						quality and purity of your research materials.
+					</h2>
+				</div>
+
+				<div className='grid sm:grid-cols-2 lg:grid-cols-3 gap-6'>
+					{features.map(({ icon: Icon, title, body }) => (
+						<div
+							key={title}
+							className='rounded-xl border bg-white p-6 border-amber/40 transition-colors shadow-xl'
+						>
+							<div className='w-10 h-10 rounded-lg flex items-center justify-center text-amber mb-4 mx-auto bg-amber/10'>
+								<Icon className='h-5 w-5' />
+							</div>
+							<h3 className='font-bold text-navy tracking-wide'>{title}</h3>
+							<p className='mt-2 text-sm text-charcoal leading-relaxed tracking-wide'>
+								{body}
+							</p>
+						</div>
+					))}
+				</div>
 			</div>
 		</section>
 	);

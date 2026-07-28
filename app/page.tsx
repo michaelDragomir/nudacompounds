@@ -12,10 +12,10 @@ export default function Home() {
 	return (
 		<>
 			<Hero />
+			<NudaPromise />
 			{/* <TrustStrip /> */}
 			{/* <Standards /> */}
 			<QualityStandard />
-			<NudaPromise />
 			<Catalog />
 			{/* <Commitment /> */}
 			<FeatureGrid />
