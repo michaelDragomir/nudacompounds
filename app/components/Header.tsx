@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useCart } from '../context/CartContext';
@@ -75,23 +76,14 @@ export function Header() {
 					href='/'
 					className='col-start-2 flex items-center gap-2 justify-self-center md:col-start-1 md:justify-self-start'
 				>
-					<span className='w-8 h-8 rounded-full bg-navy flex items-center justify-center text-amber font-bold text-sm'>
-						N
-					</span>
-					<span
-						className={`font-bold tracking-tight text-lg transition-colors duration-300 ${
-							isSolid ? 'text-navy' : 'text-amber'
-						}`}
-					>
-						NUDA{' '}
-						<span
-							className={`font-normal transition-colors duration-300 ${
-								isSolid ? 'text-warmgray' : 'text-amber/70'
-							}`}
-						>
-							Compounds
-						</span>
-					</span>
+					<Image
+						src='/images/nudaLogo.png'
+						alt='Nuda'
+						width={423}
+						height={144}
+						priority
+						className='h-10 w-auto'
+					/>
 				</Link>
 
 				<nav

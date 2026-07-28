@@ -36,7 +36,8 @@
       "Bash(curl -s http://localhost:3999/)",
       "Bash(curl -s http://localhost:3999/products/bpc-157)",
       "Bash(kill %1)",
-      "Bash(pkill -f \"PORT=3999\")"
+      "Bash(pkill -f \"PORT=3999\")",
+      "Bash(python3 -c ' *)"
     ]
   }
 }
