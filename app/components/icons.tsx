@@ -146,6 +146,20 @@ export function CartIcon({ className = base }: IconProps) {
 	);
 }
 
+export function MenuIcon({ className = base }: IconProps) {
+	return (
+		<svg
+			viewBox='0 0 24 24'
+			fill='none'
+			stroke='currentColor'
+			strokeWidth='1.75'
+			className={className}
+		>
+			<path d='M4 6h16M4 12h16M4 18h16' strokeLinecap='round' strokeLinejoin='round' />
+		</svg>
+	);
+}
+
 export function XIcon({ className = base }: IconProps) {
 	return (
 		<svg
