@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import { useCart } from '../context/CartContext';
 import { playAddToCartSound } from '../lib/sound';
 import { CartIcon, MenuIcon, XIcon } from './icons';
@@ -13,30 +12,18 @@ import { SectionLink } from './SectionLink';
 const NAV_LINKS = [
 	{ href: '/#catalog', label: 'Catalog' },
 	{ href: '/#standards', label: 'COAs' },
-	{ href: '/#faq', label: 'FAQs' },
-	{ href: '/#contact', label: 'Contact' },
+	{ href: '/faq', label: 'FAQs' },
+	{ href: '/contact', label: 'Contact' },
 ];
 
 export function Header() {
 	const { totalCount, celebrationTick, toggleCart } = useCart();
-	const pathname = usePathname();
-	const isProductPage = pathname.startsWith('/products/');
-	const [scrolled, setScrolled] = useState(false);
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-	const isSolid = isProductPage || scrolled;
 
 	useEffect(() => {
 		if (celebrationTick === 0) return;
 		playAddToCartSound();
 	}, [celebrationTick]);
-
-	useEffect(() => {
-		if (isProductPage) return;
-		const onScroll = () => setScrolled(window.scrollY > 24);
-		onScroll();
-		window.addEventListener('scroll', onScroll, { passive: true });
-		return () => window.removeEventListener('scroll', onScroll);
-	}, [isProductPage]);
 
 	useEffect(() => {
 		document.body.style.overflow = mobileMenuOpen ? 'hidden' : '';
@@ -47,11 +34,7 @@ export function Header() {
 
 	return (
 		<header
-			className={`fixed inset-x-0 top-0 z-50 border-b transition-colors duration-300 ${
-				isSolid
-					? 'bg-white backdrop-blur-md border-black/5'
-					: 'bg-transparent border-b border-white/20'
-			}`}
+			className='fixed inset-x-0 top-0 z-50 border-b border-black/5 bg-white'
 		>
 			{/* <div className='hidden sm:flex items-center justify-center gap-2 bg-navy-dark text-offwhite text-xs py-1.5 px-4'>
 				<span className='w-1.5 h-1.5 rounded-full bg-emerald-400' />
@@ -63,11 +46,7 @@ export function Header() {
 					type='button'
 					onClick={() => setMobileMenuOpen(true)}
 					aria-label='Open menu'
-					className={`col-start-1 flex h-10 w-10 items-center justify-center justify-self-start rounded-full transition-colors duration-300 md:hidden ${
-						isSolid
-							? 'text-navy hover:bg-navy/5 hover:text-amber-dark'
-							: 'text-amber hover:bg-white/10 hover:text-amber-light'
-					}`}
+					className='col-start-1 flex h-10 w-10 items-center justify-center justify-self-start rounded-full text-navy transition-colors hover:bg-navy/5 hover:text-amber-dark md:hidden'
 				>
 					<MenuIcon className='h-6 w-6' />
 				</button>
@@ -86,20 +65,12 @@ export function Header() {
 					/>
 				</Link>
 
-				<nav
-					className={`hidden items-center gap-8 text-sm font-bold uppercase tracking-widest transition-colors duration-300 md:col-start-2 md:flex md:justify-self-center ${
-						isSolid ? 'text-charcoal' : 'text-amber'
-					}`}
-				>
+				<nav className='hidden items-center gap-8 text-sm font-bold uppercase tracking-widest text-charcoal md:col-start-2 md:flex md:justify-self-center'>
 					{NAV_LINKS.map((link) => (
 						<SectionLink
 							key={link.href}
 							href={link.href}
-							className={`transition-colors duration-300 ${
-								isSolid
-									? 'text-navy hover:text-amber-dark'
-									: 'text-amber hover:text-amber-light'
-							}`}
+							className='text-navy transition-colors hover:text-amber-dark'
 						>
 							{link.label}
 						</SectionLink>
@@ -112,11 +83,7 @@ export function Header() {
 					aria-label={`Open cart, ${totalCount} ${
 						totalCount === 1 ? 'item' : 'items'
 					}`}
-					className={`relative col-start-3 flex h-10 w-10 items-center justify-center justify-self-end rounded-full transition-colors duration-300 ${
-						isSolid
-							? 'text-navy hover:bg-navy/5 hover:text-amber-dark'
-							: 'text-amber hover:bg-white/10 hover:text-amber-light'
-					}`}
+					className='relative col-start-3 flex h-10 w-10 items-center justify-center justify-self-end rounded-full text-navy transition-colors hover:bg-navy/5 hover:text-amber-dark'
 				>
 					<CartIcon className='h-6 w-6' />
 					{totalCount > 0 && (

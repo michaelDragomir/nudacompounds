@@ -31,7 +31,7 @@ export function Commitment() {
 				</p>
 
 				<SectionLink
-					href='/#contact'
+					href='/contact'
 					className='mt-8 inline-flex items-center gap-2 bg-amber hover:bg-amber-dark text-navy-dark font-bold text-sm px-6 py-3 rounded-lg transition-colors'
 				>
 					Contact Our Team

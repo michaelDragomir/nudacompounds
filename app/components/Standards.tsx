@@ -78,7 +78,7 @@ export function Standards() {
 				</p>
 
 				<SectionLink
-					href='/#contact'
+					href='/contact'
 					className='text-lg mt-6 inline-flex items-center gap-2 text-navy font-bold text-sm hover:text-amber-dark transition-colors'
 				>
 					View Sample COA <ArrowRightIcon />

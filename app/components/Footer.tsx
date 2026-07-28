@@ -1,6 +1,6 @@
 export function Footer() {
   return (
-    <footer id="contact" className="bg-navy-dark text-offwhite/70 mt-auto">
+    <footer className="bg-navy-dark text-offwhite/70 mt-auto">
       <div className="max-w-6xl mx-auto px-6 py-16 text-center">
         <div className="flex items-center justify-center gap-2 mb-6">
           <span className="w-8 h-8 rounded-full bg-navy-light flex items-center justify-center text-amber font-bold text-sm">

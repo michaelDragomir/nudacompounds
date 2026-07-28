@@ -30,7 +30,7 @@ export function Story() {
           actual person if something doesn&rsquo;t look right.
         </p>
         <a
-          href="#contact"
+          href="/contact"
           className="mt-6 inline-flex items-center gap-2 bg-navy hover:bg-navy-light text-offwhite font-bold text-sm px-6 py-3 rounded-lg transition-colors"
         >
           Get in Touch
