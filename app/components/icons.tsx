@@ -2,6 +2,44 @@ type IconProps = { className?: string };
 
 const base = 'w-5 h-5';
 
+export function TagIcon({ className = base }: IconProps) {
+	return (
+		<svg
+			viewBox='0 0 24 24'
+			fill='none'
+			stroke='currentColor'
+			strokeWidth='1.75'
+			className={className}
+		>
+			<path
+				d='M11.5 3.5H6a2.5 2.5 0 0 0-2.5 2.5v5.5a1.5 1.5 0 0 0 .44 1.06l8.5 8.5a1.5 1.5 0 0 0 2.12 0l6.5-6.5a1.5 1.5 0 0 0 0-2.12l-8.5-8.5a1.5 1.5 0 0 0-1.06-.44z'
+				strokeLinecap='round'
+				strokeLinejoin='round'
+			/>
+			<circle cx='8.5' cy='8.5' r='1.25' />
+		</svg>
+	);
+}
+
+export function BoxIcon({ className = base }: IconProps) {
+	return (
+		<svg
+			viewBox='0 0 24 24'
+			fill='none'
+			stroke='currentColor'
+			strokeWidth='1.75'
+			className={className}
+		>
+			<path
+				d='M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z'
+				strokeLinecap='round'
+				strokeLinejoin='round'
+			/>
+			<path d='M4.5 7.5L12 12l7.5-4.5M12 12v9' strokeLinecap='round' strokeLinejoin='round' />
+		</svg>
+	);
+}
+
 export function ShieldIcon({ className = base }: IconProps) {
 	return (
 		<svg
@@ -107,6 +145,39 @@ export function CheckBadgeIcon({ className = base }: IconProps) {
 		>
 			<circle cx='12' cy='12' r='9' />
 			<path d='M8 12.3l2.5 2.5L16 9' strokeLinecap='round' strokeLinejoin='round' />
+		</svg>
+	);
+}
+
+export function PhoneIcon({ className = base }: IconProps) {
+	return (
+		<svg
+			viewBox='0 0 24 24'
+			fill='none'
+			stroke='currentColor'
+			strokeWidth='1.75'
+			className={className}
+		>
+			<path
+				d='M6.5 3h3l1.5 4.5-2.3 1.7a11 11 0 0 0 5.6 5.6l1.7-2.3 4.5 1.5v3a2 2 0 0 1-2.2 2A17 17 0 0 1 4.5 5.2 2 2 0 0 1 6.5 3z'
+				strokeLinecap='round'
+				strokeLinejoin='round'
+			/>
+		</svg>
+	);
+}
+
+export function MailIcon({ className = base }: IconProps) {
+	return (
+		<svg
+			viewBox='0 0 24 24'
+			fill='none'
+			stroke='currentColor'
+			strokeWidth='1.75'
+			className={className}
+		>
+			<rect x='3' y='5' width='18' height='14' rx='2' />
+			<path d='M4 7l8 6 8-6' strokeLinecap='round' strokeLinejoin='round' />
 		</svg>
 	);
 }

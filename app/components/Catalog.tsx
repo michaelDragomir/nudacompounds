@@ -4,24 +4,8 @@ import { products } from '../data/products';
 
 export function Catalog() {
 	return (
-		<section id='catalog' className='bg-navy-offwhite py-18'>
+		<section id='catalog' className='bg-navy-offwhite py-16'>
 			<div className='mx-auto max-w-6xl px-6'>
-				<div className='mx-auto mb-14 max-w-2xl text-center'>
-					<div className='mb-4 flex items-center justify-center gap-3'>
-						<span className='h-px w-8 bg-amber' />
-						<span className='text-xs font-bold uppercase tracking-[0.2em] text-navy'>
-							Research Catalog
-						</span>
-					</div>
-					<h2 className='text-3xl font-bold leading-tight text-navy tracking-wide'>
-						Available Compounds
-					</h2>
-					<p className='mt-4 text-charcoal tracking-wide text-lg'>
-						Every vial ships with a published Certificate of Analysis and
-						batch-level documentation.
-					</p>
-				</div>
-
 				<div className='grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4'>
 					{products.map((product) => (
 						<Link
@@ -29,7 +13,7 @@ export function Catalog() {
 							href={`/products/${product.slug}`}
 							className='group relative flex flex-col overflow-hidden rounded-2xl border border-black/5 bg-white transition-all duration-300 hover:-translate-y-1 hover:border-amber/50 hover:shadow-xl'
 						>
-							<div className='relative flex aspect-square items-center justify-center overflow-hidden bg-gradient-to-b from-navy-dark/5 to-navy-dark/10'>
+							<div className='relative flex aspect-square items-center justify-center overflow-hidden bg-linear-to-b from-navy-dark/5 to-navy-dark/10'>
 								<Image
 									src={product.image}
 									alt={`${product.name} vial`}

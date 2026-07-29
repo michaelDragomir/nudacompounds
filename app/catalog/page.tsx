@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Catalog } from '../components/Catalog';
+import { CatalogHero } from '../components/CatalogHero';
 
 export const metadata: Metadata = {
 	title: 'Catalog',
@@ -11,5 +12,10 @@ export const metadata: Metadata = {
 };
 
 export default function CatalogPage() {
-	return <Catalog />;
+	return (
+		<>
+			<CatalogHero />
+			<Catalog />
+		</>
+	);
 }

@@ -2,8 +2,12 @@
 
 import { useState } from 'react';
 import type { FormEvent } from 'react';
+import { ClockIcon, MailIcon, PhoneIcon } from './icons';
 
 const CONTACT_EMAIL = 'hello@nudacompounds.com';
+// Placeholder contact details — swap in the real phone/orders inbox when available.
+const CONTACT_PHONE = '(555) 123-4567';
+const ORDERS_EMAIL = 'orders@nudacompounds.com';
 
 export function Contact() {
 	const [submitted, setSubmitted] = useState(false);
@@ -32,7 +36,9 @@ export function Contact() {
 
 			if (!response.ok) {
 				const data = await response.json().catch(() => null);
-				throw new Error(data?.error || 'Something went wrong. Please try again.');
+				throw new Error(
+					data?.error || 'Something went wrong. Please try again.',
+				);
 			}
 
 			setSubmitted(true);
@@ -51,40 +57,58 @@ export function Contact() {
 		<section id='contact' className='bg-offwhite py-24'>
 			<div className='mx-auto max-w-6xl px-6'>
 				<div className='grid grid-cols-1 gap-16 lg:grid-cols-2'>
-					<div>
-						<div className='mb-4 flex items-center gap-3'>
-							<span className='h-px w-8 bg-amber' />
-							<span className='text-xs font-bold uppercase tracking-[0.2em] text-navy'>
-								Contact
-							</span>
-						</div>
-						<h2 className='font-display text-4xl font-bold leading-tight text-navy'>
-							Get in touch
-						</h2>
-						<p className='mt-4 max-w-md leading-relaxed text-charcoal/75 tracking-wide'>
-							Questions about products, orders, or research applications? Send
-							us a note and we&apos;ll get back within one business day.
-						</p>
+					<div className='rounded-2xl bg-white p-8 border border-amber shadow-xl'>
+						<span className='text-xs font-bold uppercase tracking-[0.2em] text-navy-dark'>
+							Contact Information
+						</span>
 
-						<div className='mt-10 space-y-6'>
+						<div className='mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2'>
 							<div>
-								<div className='text-xs font-bold uppercase tracking-[0.2em] text-warmgray'>
-									Email
+								<div className='flex items-center gap-2 text-xs font-bold uppercase tracking-wide text-navy-dark/50'>
+									<PhoneIcon className='h-4 w-4 text-amber' />
+									Call or Text
+								</div>
+								<div className='mt-1 font-semibold text-navy-dark'>
+									{CONTACT_PHONE}
+								</div>
+							</div>
+
+							<div>
+								<div className='flex items-center gap-2 text-xs font-bold uppercase tracking-wide text-navy-dark/50'>
+									<ClockIcon className='h-4 w-4 text-amber' />
+									Hours
+								</div>
+								<div className='mt-1 font-semibold text-navy-dark'>
+									Mon–Sat 9:00 AM – 5:00 PM MST
+									<br />
+									Closed Sunday
+								</div>
+							</div>
+
+							<div>
+								<div className='flex items-center gap-2 text-xs font-bold uppercase tracking-wide text-navy-dark/50'>
+									<MailIcon className='h-4 w-4 text-amber' />
+									Support
 								</div>
 								<a
 									href={`mailto:${CONTACT_EMAIL}`}
-									className='mt-1 inline-block font-semibold text-navy hover:text-amber-dark transition-colors'
+									className='mt-1 inline-block break-all font-semibold text-navy-dark transition-colors hover:text-amber'
 								>
 									{CONTACT_EMAIL}
 								</a>
 							</div>
+
 							<div>
-								<div className='text-xs font-bold uppercase tracking-[0.2em] text-warmgray'>
-									Hours
+								<div className='flex items-center gap-2 text-xs font-bold uppercase tracking-wide text-navy-dark/50'>
+									<MailIcon className='h-4 w-4 text-amber' />
+									Orders
 								</div>
-								<div className='mt-1 font-semibold text-navy'>
-									Monday — Friday, 9am – 5pm PT
-								</div>
+								<a
+									href={`mailto:${ORDERS_EMAIL}`}
+									className='mt-1 inline-block break-all font-semibold text-navy-dark transition-colors hover:text-amber'
+								>
+									{ORDERS_EMAIL}
+								</a>
 							</div>
 						</div>
 					</div>
@@ -112,7 +136,7 @@ export function Contact() {
 										name='name'
 										type='text'
 										required
-										className='mt-2 w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-navy placeholder:text-warmgray focus:border-amber focus:outline-none focus:ring-2 focus:ring-amber/30'
+										className='mt-2 w-full rounded-xl border border-black/20 bg-white px-4 py-3 text-navy placeholder:text-warmgray focus:border-amber focus:outline-none focus:ring-2 focus:ring-amber/30 '
 									/>
 								</div>
 
@@ -128,7 +152,7 @@ export function Contact() {
 										name='email'
 										type='email'
 										required
-										className='mt-2 w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-navy placeholder:text-warmgray focus:border-amber focus:outline-none focus:ring-2 focus:ring-amber/30'
+										className='mt-2 w-full rounded-xl border border-black/20 bg-white px-4 py-3 text-navy placeholder:text-warmgray focus:border-amber focus:outline-none focus:ring-2 focus:ring-amber/30'
 									/>
 								</div>
 
@@ -144,7 +168,7 @@ export function Contact() {
 										name='subject'
 										type='text'
 										required
-										className='mt-2 w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-navy placeholder:text-warmgray focus:border-amber focus:outline-none focus:ring-2 focus:ring-amber/30'
+										className='mt-2 w-full rounded-xl border border-black/20 bg-white px-4 py-3 text-navy placeholder:text-warmgray focus:border-amber focus:outline-none focus:ring-2 focus:ring-amber/30'
 									/>
 								</div>
 
@@ -160,7 +184,7 @@ export function Contact() {
 										name='message'
 										rows={6}
 										required
-										className='mt-2 w-full resize-y rounded-xl border border-black/10 bg-white px-4 py-3 text-navy placeholder:text-warmgray focus:border-amber focus:outline-none focus:ring-2 focus:ring-amber/30'
+										className='mt-2 w-full resize-y rounded-xl border border-black/20 bg-white px-4 py-3 text-navy placeholder:text-warmgray focus:border-amber focus:outline-none focus:ring-2 focus:ring-amber/30'
 									/>
 								</div>
 
