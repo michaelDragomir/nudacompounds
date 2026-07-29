@@ -10,7 +10,7 @@ import { ConfettiBurst } from './ConfettiBurst';
 import { SectionLink } from './SectionLink';
 
 const NAV_LINKS = [
-	{ href: '/#catalog', label: 'Catalog' },
+	{ href: '/catalog', label: 'Catalog' },
 	{ href: '/#standards', label: 'COAs' },
 	{ href: '/faq', label: 'FAQs' },
 	{ href: '/contact', label: 'Contact' },
@@ -33,9 +33,7 @@ export function Header() {
 	}, [mobileMenuOpen]);
 
 	return (
-		<header
-			className='fixed inset-x-0 top-0 z-50 border-b border-black/5 bg-white'
-		>
+		<header className='fixed inset-x-0 top-0 z-50 border-b border-black/5 bg-offwhite'>
 			{/* <div className='hidden sm:flex items-center justify-center gap-2 bg-navy-dark text-offwhite text-xs py-1.5 px-4'>
 				<span className='w-1.5 h-1.5 rounded-full bg-emerald-400' />
 				<span>USA-Based Sourcing &mdash; Research Use Only</span>
@@ -46,7 +44,7 @@ export function Header() {
 					type='button'
 					onClick={() => setMobileMenuOpen(true)}
 					aria-label='Open menu'
-					className='col-start-1 flex h-10 w-10 items-center justify-center justify-self-start rounded-full text-navy transition-colors hover:bg-navy/5 hover:text-amber-dark md:hidden'
+					className='col-start-1 flex h-10 w-10 items-center justify-center justify-self-start rounded-full text-navy transition-colors hover:bg-navy/5 hover:text-amber md:hidden'
 				>
 					<MenuIcon className='h-6 w-6' />
 				</button>
@@ -70,7 +68,7 @@ export function Header() {
 						<SectionLink
 							key={link.href}
 							href={link.href}
-							className='text-navy transition-colors hover:text-amber-dark'
+							className="relative text-navy-dark transition-colors after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-full after:origin-left after:scale-x-0 after:bg-amber \after:transition-transform after:duration-300 after:content-[''] hover:text-amber hover:after:scale-x-100"
 						>
 							{link.label}
 						</SectionLink>
@@ -83,7 +81,7 @@ export function Header() {
 					aria-label={`Open cart, ${totalCount} ${
 						totalCount === 1 ? 'item' : 'items'
 					}`}
-					className='relative col-start-3 flex h-10 w-10 items-center justify-center justify-self-end rounded-full text-navy transition-colors hover:bg-navy/5 hover:text-amber-dark'
+					className='relative col-start-3 flex h-10 w-10 items-center justify-center justify-self-end rounded-full text-navy transition-colors hover:bg-navy/5 hover:text-amber'
 				>
 					<CartIcon className='h-6 w-6' />
 					{totalCount > 0 && (

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Space_Grotesk } from "next/font/google";
+import { Geist, Geist_Mono, Space_Grotesk, Sora } from "next/font/google";
 import "./globals.css";
 import { CartProvider } from "./context/CartContext";
 import { CartDrawer } from "./components/CartDrawer";
@@ -22,6 +22,12 @@ const spaceGrotesk = Space_Grotesk({
   variable: "--font-display",
   subsets: ["latin"],
   weight: ["500", "700"],
+});
+
+const sora = Sora({
+  variable: "--font-sora",
+  subsets: ["latin"],
+  weight: ["700", "800"],
 });
 
 const defaultTitle = `${SITE_NAME} | USA-Verified Peptide Research Supply`;
@@ -100,7 +106,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${spaceGrotesk.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${spaceGrotesk.variable} ${sora.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-offwhite text-charcoal">
         <GoogleAnalytics />

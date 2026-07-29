@@ -1,78 +1,100 @@
-import {
-	ShieldIcon,
-	DocumentIcon,
-	TruckIcon,
-	ClockIcon,
-	PeopleIcon,
-	CheckBadgeIcon,
-} from './icons';
+import Image from 'next/image';
+import Link from 'next/link';
+import { DocumentIcon, TruckIcon, ClockIcon, PeopleIcon } from './icons';
 
 const features = [
 	{
-		icon: ShieldIcon,
-		title: 'USA-Sourced Materials',
-		body: 'Every compound is sourced from domestic facilities. No overseas shortcuts, no unverified middlemen.',
-	},
-	{
 		icon: DocumentIcon,
 		title: 'Full Batch Transparency',
-		body: 'A public COA database with lot numbers and batch-level documentation, available for every product.',
+		body: 'COA database and batch-level documentation, available with every order.',
 	},
 	{
 		icon: TruckIcon,
-		title: 'Fast, Discreet Shipping',
-		body: 'Orders placed before cutoff ship the same day, packaged discreetly with tracking every step of the way.',
+		title: 'Same-Day Shipping',
+		body: 'Same-day shipping on every order placed before 3 PM MST.',
 	},
 	{
 		icon: ClockIcon,
-		title: 'A Partner You Can Reach',
-		body: 'Questions get answered by someone who actually understands the research, not a support queue.',
+		title: 'Honest Pricing',
+		body: 'What you see is what you get — fair pricing, every time.',
 	},
 	{
 		icon: PeopleIcon,
-		title: 'Independently Owned',
-		body: 'A small, accountable team — not a faceless marketplace. When you reach out, a real person responds.',
-	},
-	{
-		icon: CheckBadgeIcon,
-		title: 'Responsible Sourcing',
-		body: 'Internal review protocols built to support structured, repeatable research environments.',
+		title: 'Third-Party Tested',
+		body: 'endotoxin testing on every compound. No conflicts of interest.',
 	},
 ];
 
 export function FeatureGrid() {
 	return (
-		<section id='about' className='bg-navy py-24'>
-			<div className='max-w-6xl mx-auto px-6'>
-				<div className='max-w-2xl mx-auto text-center mb-14'>
-					<div className='flex items-center justify-center gap-3 mb-4'>
-						<span className='w-8 h-px bg-amber' />
-						<span className='text-amber text-xs font-bold tracking-[0.2em] uppercase'>
-							About Nuda
+		<section id='about' className='bg-offwhite py-24'>
+			<div className='mx-auto grid max-w-6xl items-center gap-16 px-6 lg:grid-cols-2'>
+				<div className='relative flex flex-col items-center overflow-hidden rounded-3xl bg-navy-dark p-10 text-center shadow-2xl sm:p-14'>
+					<div
+						className='animate-glow-pulse absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(217,160,91,0.35),transparent_60%)]'
+						aria-hidden='true'
+					/>
+					<div
+						className='absolute inset-0 bg-molecule-grid opacity-40'
+						aria-hidden='true'
+					/>
+
+					<span className='relative inline-flex items-center gap-2 rounded-full border border-amber/40 bg-white/5 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-amber backdrop-blur-md'>
+						<span className='relative flex h-1.5 w-1.5'>
+							<span className='absolute inline-flex h-full w-full animate-ping rounded-full bg-amber opacity-75' />
+							<span className='relative inline-flex h-1.5 w-1.5 rounded-full bg-amber' />
 						</span>
+						Limited Time Offer
+					</span>
+
+					<div className='relative mt-8 h-64 w-44 sm:h-72 sm:w-48'>
+						<Image
+							src='/images/3rt.png'
+							alt='Nuda Compounds research vial'
+							fill
+							className='object-contain drop-shadow-2xl'
+						/>
 					</div>
-					<h2 className='text-xl font-bold text-offwhite leading-normal tracking-wide'>
-						Transparency isn&apos;t just a promise-it&apos;s how we operate. Every
-						step of our process is designed to give you complete confidence in the
-						quality and purity of your research materials.
-					</h2>
+
+					<h3 className='relative mt-8 font-sora text-3xl font-extrabold leading-tight text-white sm:text-4xl'>
+						Buy 2 <span className='text-amber'>Get 1 Free</span>
+					</h3>
+					<p className='relative mt-3 max-w-xs text-white/70'>
+						On all peptides of the same compound
+					</p>
+
+					<Link
+						href='/catalog'
+						className='relative mt-8 rounded-full bg-amber px-10 py-4 text-md font-bold uppercase tracking-widest text-offwhite shadow-xl transition-colors hover:bg-amber-dark'
+					>
+						Shop the Deal
+					</Link>
 				</div>
 
-				<div className='grid sm:grid-cols-2 lg:grid-cols-3 gap-6'>
-					{features.map(({ icon: Icon, title, body }) => (
-						<div
-							key={title}
-							className='rounded-xl border bg-white p-6 border-amber/40 transition-colors shadow-xl'
-						>
-							<div className='w-10 h-10 rounded-lg flex items-center justify-center text-amber mb-4 mx-auto bg-amber/10'>
-								<Icon className='h-5 w-5' />
+				<div>
+					<span className='text-md font-bold uppercase tracking-[0.2em] text-amber-dark'>
+						The Nuda Mission
+					</span>
+					<h2 className='mt-3 font-sora text-4xl font-extrabold leading-tight text-navy'>
+						Why Choose Us
+					</h2>
+
+					<div className='mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2'>
+						{features.map(({ icon: Icon, title, body }) => (
+							<div
+								key={title}
+								className='rounded-2xl bg-navy/5 p-6 border border-amber/40 shadow-xl'
+							>
+								<div className='flex h-11 w-11 items-center justify-center rounded-xl bg-amber/10 text-amber'>
+									<Icon className='h-5 w-5' />
+								</div>
+								<h3 className='mt-4 font-bold text-navy'>{title}</h3>
+								<p className='mt-1 text-md leading-relaxed text-charcoal/70'>
+									{body}
+								</p>
 							</div>
-							<h3 className='font-bold text-navy tracking-wide'>{title}</h3>
-							<p className='mt-2 text-sm text-charcoal leading-relaxed tracking-wide'>
-								{body}
-							</p>
-						</div>
-					))}
+						))}
+					</div>
 				</div>
 			</div>
 		</section>

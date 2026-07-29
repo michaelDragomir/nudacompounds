@@ -36,7 +36,7 @@ export function ProductDetail({ product }: { product: Product }) {
 		<div className='bg-offwhite py-16'>
 			<div className='mx-auto max-w-6xl px-6'>
 				<SectionLink
-					href='/#catalog'
+					href='/catalog'
 					className='inline-flex items-center gap-2 text-sm font-bold text-navy hover:text-amber-dark transition-colors'
 				>
 					<ArrowRightIcon className='h-4 w-4 rotate-180' />

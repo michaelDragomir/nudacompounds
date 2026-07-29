@@ -1,8 +1,9 @@
 import { Hero } from './components/Hero';
 // import { TrustStrip } from './components/TrustStrip';
 import { QualityStandard } from './components/QualityStandard';
-import { Catalog } from './components/Catalog';
-import { NudaPromise } from './components/NudaPromise';
+import { BestSellers } from './components/BestSellers';
+// import { ViewCatalogStrip } from './components/ViewCatalogStrip';
+// import { NudaPromise } from './components/NudaPromise';
 // import { Standards } from './components/Standards';
 // import { Commitment } from './components/Commitment';
 import { FeatureGrid } from './components/FeatureGrid';
@@ -12,11 +13,12 @@ export default function Home() {
 	return (
 		<>
 			<Hero />
-			<NudaPromise />
+			{/* <NudaPromise /> */}
 			{/* <TrustStrip /> */}
 			{/* <Standards /> */}
 			<QualityStandard />
-			<Catalog />
+			<BestSellers />
+			{/* <ViewCatalogStrip /> */}
 			{/* <Commitment /> */}
 			<FeatureGrid />
 			{/* <Story /> */}

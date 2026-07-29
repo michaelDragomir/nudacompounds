@@ -85,7 +85,7 @@ export function CartDrawer() {
 							<CartIcon className='h-10 w-10 text-offwhite/20' />
 							<p className='text-sm text-offwhite/60'>Your cart is empty.</p>
 							<SectionLink
-								href='/#catalog'
+								href='/catalog'
 								onClick={closeCart}
 								className='text-sm font-bold text-amber-light hover:underline'
 							>

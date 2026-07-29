@@ -20,6 +20,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
 			priority: 1,
 		},
 		{
+			url: `${SITE_URL}/catalog`,
+			lastModified: now,
+			changeFrequency: 'weekly',
+			priority: 0.9,
+		},
+		{
 			url: `${SITE_URL}/faq`,
 			lastModified: now,
 			changeFrequency: 'monthly',

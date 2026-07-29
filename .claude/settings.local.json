@@ -41,7 +41,10 @@
       "Bash(curl -s http://localhost:3999/faq)",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3999/faq)",
       "Bash(curl -s http://localhost:3999/contact)",
-      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3999/contact)"
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3999/contact)",
+      "Bash(curl -s http://localhost:3999/_next/static/css/*.css)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3999/catalog)",
+      "Bash(curl -s http://localhost:3999/catalog)"
     ]
   }
 }
