@@ -1,38 +1,165 @@
+import Image from 'next/image';
+import Link from 'next/link';
+import { SectionLink } from './SectionLink';
+
+const NAVIGATE_LINKS = [
+	{ href: '/', label: 'Home' },
+	{ href: '/catalog', label: 'Catalog' },
+	{ href: '/#standards', label: 'COAs' },
+	{ href: '/faq', label: 'FAQs' },
+	{ href: '/contact', label: 'Contact' },
+];
+
+const LEGAL_LINKS = [
+	{ href: '/terms-of-service', label: 'Terms of Service' },
+	{ href: '/privacy-policy', label: 'Privacy Policy' },
+	{ href: '/refund-policy', label: 'Refund Policy' },
+	{ href: '/accessibility', label: 'Accessibility' },
+];
+
+const CONTACT_EMAIL = 'hello@nudacompounds.com';
+const CONTACT_PHONE = '(555) 123-4567';
+
+const FDA_NOTICE_PARAGRAPHS = [
+	'The statements on this website have not been evaluated by the U.S. Food and Drug Administration.',
+	'All products sold by Nuda Compounds are intended for laboratory research and identification purposes only. They are not intended for human or animal consumption, dosing, injection, or ingestion.',
+	'These products are not intended to diagnose, treat, cure, or prevent any disease and are not approved for clinical or therapeutic applications.',
+	'Nuda Compounds operates as a chemical supplier and is not a compounding pharmacy or outsourcing facility as defined under Sections 503A or 503B of the Federal Food, Drug, and Cosmetic Act.',
+	'By purchasing from Nuda Compounds, the buyer agrees that these products will be used exclusively for in-vitro research and will not be used for any other purpose, including but not limited to food, drug, cosmetic, or medical device use. Purchasers are responsible for ensuring compliance with all applicable laws and regulations governing research materials.',
+	'By accessing this website and placing an order, you confirm that you are at least 21 years of age and legally permitted to purchase research chemicals in your jurisdiction.',
+	'Products may not be available in all regions. It is the sole responsibility of the purchaser to determine whether the acquisition, possession, and use of any product complies with the laws and regulations of their local, state, or national jurisdiction. Nuda Compounds assumes no liability for purchases made in jurisdictions where such products are restricted or prohibited.',
+];
+
+const NUDA_DISCLAIMER = [
+	<>
+		The 5-business-day delivery guarantee applies from the time tracking
+		confirms the package has been accepted by the carrier. The replacement
+		guarantee does not apply to delays caused by circumstances outside of Nuda
+		Compounds&apos; reasonable control, including but not limited to: carrier
+		delays, lost or misrouted packages, incorrect or incomplete shipping
+		addresses, failed delivery attempts, package theft after delivery, weather
+		events, natural disasters, holidays, acts of God, strikes, labor disputes,
+		government actions, or any other event beyond Nuda Compounds&apos;
+		reasonable control. Shipments to PO Boxes, APO/FPO addresses, Alaska,
+		Hawaii, and U.S. territories are excluded. Nuda Compounds reserves the right
+		to determine, in its sole discretion, whether a delay falls within the scope
+		of this guarantee. See{' '}
+		<Link
+			href='/terms-of-service'
+			className='transition-colors text-amber hover:text-amber-dark'
+		>
+			Terms of Service
+		</Link>{' '}
+		for full details.
+	</>,
+	'*Business days are Monday through Friday and exclude weekends and federal holidays. The 5-business-day delivery guarantee begins once tracking confirms the package has been accepted by the carrier, not when the order is placed. If a package is accepted by the carrier on a weekend, holiday, or after normal carrier processing hours, the business-day count may begin on the next business day.',
+];
+
 export function Footer() {
 	return (
-		<footer className='bg-offwhite text-offwhite/70 mt-auto border-t border-navy'>
-			<div className='max-w-6xl mx-auto px-6 py-16 text-center'>
-				{/* <div className='flex items-center justify-center gap-2 mb-6'>
-					<span className='w-8 h-8 rounded-full bg-navy-light flex items-center justify-center text-amber font-bold text-sm'>
-						N
-					</span>
-					<span className='font-bold tracking-tight text-black text-lg'>
-						NUDA <span className='font-normal text-offwhite/60'>Compounds</span>
-					</span>
-				</div> */}
+		<footer className='mt-auto bg-offwhite border-t border-navy'>
+			<div className='mx-auto max-w-6xl px-6 py-16'>
+				<div className='grid grid-cols-2 gap-10 sm:grid-cols-4'>
+					<div className='col-span-2 sm:col-span-1'>
+						<Image
+							src='/images/nudaLogo.png'
+							alt='Nuda Compounds'
+							width={423}
+							height={144}
+							className='h-9 w-auto'
+						/>
+						<p className='mt-4 text-sm leading-relaxed text-navy-dark/60'>
+							Research peptides for laboratory use only. Third-party tested.
+							Certificate of analysis included with every compound.
+						</p>
+					</div>
 
-				<p className='text-sm'>
-					Questions about an order or a batch?{' '}
-					<a
-						href='mailto:hello@nudacompounds.com'
-						className='text-black hover:underline'
-					>
-						hello@nudacompounds.com
-					</a>
-				</p>
+					<div>
+						<h3 className='text-xs font-bold uppercase tracking-[0.2em] text-navy-dark'>
+							Navigate
+						</h3>
+						<ul className='mt-4 space-y-3'>
+							{NAVIGATE_LINKS.map((link) => (
+								<li key={link.href}>
+									<SectionLink
+										href={link.href}
+										className='text-sm text-navy-dark/60 transition-colors hover:text-amber'
+									>
+										{link.label}
+									</SectionLink>
+								</li>
+							))}
+						</ul>
+					</div>
 
-				<p className='max-w-2xl mx-auto text-xs leading-relaxed mt-8 text-black'>
-					All products offered by Nuda Compounds are intended strictly for
-					in-vitro research use within controlled laboratory settings. Not
-					intended for human consumption, veterinary use, or therapeutic
-					application. Customers are solely responsible for ensuring compliance
-					with applicable local, state, and federal regulations.
-				</p>
+					<div>
+						<h3 className='text-xs font-bold uppercase tracking-[0.2em] text-navy-dark'>
+							Legal
+						</h3>
+						<ul className='mt-4 space-y-3'>
+							{LEGAL_LINKS.map((link) => (
+								<li key={link.href}>
+									<Link
+										href={link.href}
+										className='text-sm text-navy-dark/60 transition-colors hover:text-amber'
+									>
+										{link.label}
+									</Link>
+								</li>
+							))}
+						</ul>
+					</div>
 
-				<p className='text-xs text-black mt-6'>
-					&copy; 2026 Nuda Compounds. All rights reserved.
-				</p>
+					<div>
+						<h3 className='text-xs font-bold uppercase tracking-[0.2em] text-navy-dark'>
+							Contact
+						</h3>
+						<ul className='mt-4 space-y-3 text-sm text-navy-dark/60'>
+							<li>
+								<a
+									href={`mailto:${CONTACT_EMAIL}`}
+									className='transition-colors hover:text-amber'
+								>
+									{CONTACT_EMAIL}
+								</a>
+							</li>
+							<li>{CONTACT_PHONE}</li>
+							<li>
+								Mon–Sat 9:00 AM – 5:00 PM MST
+								<br />
+								Closed Sunday
+							</li>
+						</ul>
+					</div>
+				</div>
 			</div>
+			<>
+				<div className='mx-auto max-w-6xl px-6 py-10 border-t border-navy-dark/60'>
+					<h3 className='text-xs font-bold uppercase tracking-[0.2em] text-navy-dark'>
+						Nuda Disclaimer
+					</h3>
+					<div className='mt-4 space-y-4 text-sm leading-relaxed text-navy-dark/60'>
+						{NUDA_DISCLAIMER.map((paragraph, index) => (
+							<p key={index}>{paragraph}</p>
+						))}
+					</div>
+				</div>
+			</>
+			<>
+				<div className='mx-auto max-w-6xl px-6 py-10 border-t border-navy-dark/60'>
+					<h3 className='text-xs font-bold uppercase tracking-[0.2em] text-navy-dark'>
+						FDA &amp; Regulatory Notice
+					</h3>
+					<div className='mt-4 space-y-4 text-sm leading-relaxed text-navy-dark/60'>
+						{FDA_NOTICE_PARAGRAPHS.map((paragraph) => (
+							<p key={paragraph}>{paragraph}</p>
+						))}
+					</div>
+					<p className='mt-8 text-xs text-navy-dark/40'>
+						&copy; 2026 Nuda Compounds. All rights reserved.
+					</p>
+				</div>
+			</>
 		</footer>
 	);
 }
