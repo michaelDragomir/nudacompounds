@@ -71,9 +71,9 @@ export function Hero() {
 							</SectionLink> */}
 							<SectionLink
 								href='/catalog'
-								className='whitespace-nowrap rounded-full bg-amber px-10 py-3 text-xs font-bold uppercase tracking-widest text-white transition-colors hover:bg-amber-dark sm:px-14 sm:text-sm shadow-xl'
+								className='whitespace-nowrap rounded-2xl bg-amber px-10 py-3 text-xs font-bold uppercase tracking-widest text-white transition-colors hover:bg-amber-dark sm:px-14 sm:text-sm shadow-xl'
 							>
-								Shop our catalog
+								View research compounds
 							</SectionLink>
 						</div>
 					</div>

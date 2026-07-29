@@ -76,7 +76,7 @@ export function BestSellers() {
 				<div className='mt-10 flex justify-center'>
 					<Link
 						href='/catalog'
-						className='rounded-full bg-amber px-10 py-4 text-md font-bold uppercase tracking-widest text-white shadow-xl transition-colors hover:bg-amber-dark'
+						className='rounded-2xl bg-amber px-10 py-4 text-md font-bold uppercase tracking-widest text-white shadow-xl transition-colors hover:bg-amber-dark'
 					>
 						View all compounds
 					</Link>

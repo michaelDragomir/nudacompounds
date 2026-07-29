@@ -83,7 +83,7 @@ export function FeatureGrid() {
 
 						<Link
 							href='/catalog'
-							className='relative mt-8 rounded-full bg-amber px-10 py-4 text-sm font-bold uppercase tracking-widest text-offwhite shadow-xl transition-colors hover:bg-amber-dark'
+							className='relative mt-8 rounded-2xl bg-amber px-10 py-4 text-sm font-bold uppercase tracking-widest text-offwhite shadow-xl transition-colors hover:bg-amber-dark'
 						>
 							Shop the Deal
 						</Link>
