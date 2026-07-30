@@ -49,9 +49,9 @@ const PROMO_EDGE_MASK =
 
 export function PromoStrip() {
 	return (
-		<section className='bg-offwhite py-16'>
+		<section className='bg-offwhite pt-6 pb-12'>
 			<div className='mx-auto max-w-6xl px-6'>
-				<div className='relative overflow-hidden rounded-3xl border-2 border-dashed border-amber bg-linear-to-b from-navy to-navy-dark shadow-xl'>
+				<div className='relative overflow-hidden rounded-3xl border-2 border-dashed border-amber bg-linear-to-b from-navy to-navy-dark shadow-2xl'>
 					<div
 						className='absolute -top-16 -left-16 h-56 w-56 rounded-full bg-amber/15 blur-3xl'
 						aria-hidden='true'

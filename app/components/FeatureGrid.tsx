@@ -30,8 +30,8 @@ const features = [
 	},
 	{
 		icon: TruckIcon,
-		title: 'Same-Day Shipping',
-		body: 'Same-day shipping on every order placed before 4 PM MST.',
+		title: 'Free Same-Day Shipping',
+		body: 'On every order placed before 4 PM MST.',
 	},
 	{
 		icon: BoxIcon,

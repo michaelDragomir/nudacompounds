@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { useCart } from '../context/CartContext';
 import type { Product } from '../data/products';
+import { FreeShippingTimer } from './FreeShippingTimer';
 import {
 	ArrowRightIcon,
 	CartIcon,
@@ -45,7 +46,7 @@ export function ProductDetail({ product }: { product: Product }) {
 
 				<div className='mt-8 grid grid-cols-1 gap-12 lg:grid-cols-2'>
 					<div>
-						<div className='relative aspect-square overflow-hidden rounded-2xl border border-black/5 bg-linear-to-b from-navy-dark/5 to-navy-dark/10'>
+						<div className='relative aspect-square overflow-hidden rounded-2xl border border-amber/50 bg-linear-to-b from-navy-dark/5 to-navy-dark/10 shadow-2xl'>
 							<Image
 								src={product.image}
 								alt={`${product.name} vial`}
@@ -84,6 +85,8 @@ export function ProductDetail({ product }: { product: Product }) {
 							<span className='text-sm text-warmgray'>per vial</span>
 						</div>
 
+						<FreeShippingTimer />
+
 						<dl className='mt-4 grid max-w-xs grid-cols-2 gap-y-1.5 text-sm'>
 							<dt className='text-warmgray'>Purity</dt>
 							<dd className='text-right font-semibold text-charcoal'>
@@ -100,7 +103,7 @@ export function ProductDetail({ product }: { product: Product }) {
 								Quantity
 							</span>
 							<div className='mt-2 flex items-center gap-4'>
-								<div className='flex items-center gap-3 rounded-lg border border-navy/70 px-1 text-warmgray'>
+								<div className='flex items-center gap-3 rounded-2xl shadow-md border border-navy/70 px-1 text-warmgray'>
 									<button
 										type='button'
 										disabled={qty <= MIN_QTY}
@@ -127,7 +130,7 @@ export function ProductDetail({ product }: { product: Product }) {
 								<button
 									type='button'
 									onClick={() => addItem(product, qty)}
-									className='flex flex-1 items-center justify-center gap-2 rounded-lg bg-amber px-6 py-2.25 text-sm font-bold uppercase tracking-wide text-white [text-shadow:0_1px_2px_rgba(0,0,0,0.35)] transition-colors hover:bg-amber-dark cursor-pointer'
+									className='flex flex-1 items-center justify-center gap-2 rounded-2xl bg-amber px-6 py-2.25 text-sm font-bold uppercase tracking-wide text-white [text-shadow:0_1px_2px_rgba(0,0,0,0.35)] transition-colors hover:bg-amber-dark cursor-pointer shadow-md'
 								>
 									<CartIcon className='h-4 w-4' />
 									Add to Cart
@@ -137,13 +140,13 @@ export function ProductDetail({ product }: { product: Product }) {
 							<button
 								type='button'
 								onClick={() => addItem(product, MAX_QTY)}
-								className='mt-3 w-full cursor-pointer rounded-lg border border-navy/70 px-6 py-2.25 text-sm font-bold uppercase tracking-wide text-navy/70 transition-colors hover:border-navy-dark hover:bg-navy-dark hover:text-white'
+								className='mt-3 w-full cursor-pointer rounded-2xl border border-navy/70 px-6 py-2.25 text-sm font-bold uppercase tracking-wide text-navy/70 transition-colors hover:border-navy-dark hover:bg-navy-dark hover:text-white shadow-lg'
 							>
 								Bulk Order 10+
 							</button>
 						</div>
 
-						<div className='mt-8 rounded-xl border border-black/5 bg-white p-5'>
+						<div className='mt-8 rounded-2xl border border-black/5 bg-white p-5 shadow-md'>
 							<p className='text-xs font-bold uppercase tracking-widest text-navy'>
 								Research Overview
 							</p>
@@ -157,7 +160,7 @@ export function ProductDetail({ product }: { product: Product }) {
 						</div>
 
 						<div className='mt-8'>
-							<div className='rounded-2xl border border-black/5 bg-white p-6'>
+							<div className='rounded-2xl border border-black/5 bg-white p-6 shadow-md'>
 								<p className='mb-4 text-xs font-bold uppercase tracking-widest text-navy'>
 									Certificate of Analysis
 								</p>
@@ -185,6 +188,12 @@ export function ProductDetail({ product }: { product: Product }) {
 										<dt className='text-warmgray'>Form</dt>
 										<dd className='font-semibold text-charcoal'>
 											{product.coa.form}
+										</dd>
+									</div>
+									<div className='flex justify-between'>
+										<dt className='text-warmgray'>Endotoxins</dt>
+										<dd className='font-semibold text-charcoal'>
+											{product.coa.endotoxins}
 										</dd>
 									</div>
 									<div className='flex justify-between'>

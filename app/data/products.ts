@@ -11,6 +11,7 @@ export type Product = {
 	coa: {
 		batch: string;
 		form: string;
+		endotoxins: string;
 		tested: string;
 	};
 };
@@ -30,6 +31,7 @@ export const products: Product[] = [
 		coa: {
 			batch: 'AUR-908157',
 			form: 'Lyophilized Powder',
+			endotoxins: 'PASS',
 			tested: '07/20/26',
 		},
 	},
@@ -47,6 +49,7 @@ export const products: Product[] = [
 		coa: {
 			batch: 'AUR-914402',
 			form: 'Lyophilized Powder',
+			endotoxins: 'PASS',
 			tested: '07/18/26',
 		},
 	},
@@ -64,6 +67,7 @@ export const products: Product[] = [
 		coa: {
 			batch: 'AUR-902210',
 			form: 'Lyophilized Powder',
+			endotoxins: 'PASS',
 			tested: '07/15/26',
 		},
 	},
@@ -81,6 +85,7 @@ export const products: Product[] = [
 		coa: {
 			batch: 'AUR-920071',
 			form: 'Lyophilized Powder',
+			endotoxins: 'PASS',
 			tested: '07/12/26',
 		},
 	},
@@ -98,6 +103,7 @@ export const products: Product[] = [
 		coa: {
 			batch: 'AUR-931588',
 			form: 'Lyophilized Powder',
+			endotoxins: 'PASS',
 			tested: '07/10/26',
 		},
 	},
@@ -115,6 +121,7 @@ export const products: Product[] = [
 		coa: {
 			batch: 'AUR-984127',
 			form: 'Lyophilized Powder',
+			endotoxins: 'PASS',
 			tested: '06/25/26',
 		},
 	},
@@ -132,6 +139,7 @@ export const products: Product[] = [
 		coa: {
 			batch: 'AUR-990284',
 			form: 'Lyophilized Powder',
+			endotoxins: 'PASS',
 			tested: '06/22/26',
 		},
 	},
@@ -149,6 +157,7 @@ export const products: Product[] = [
 		coa: {
 			batch: 'AUR-899142',
 			form: 'Sterile Liquid',
+			endotoxins: 'PASS',
 			tested: '07/08/26',
 		},
 	},
