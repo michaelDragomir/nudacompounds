@@ -84,6 +84,8 @@ export function PromoStrip() {
 										src={bottle.src}
 										alt='Nuda Compounds research vial'
 										fill
+										priority={bottle.z === 30}
+										sizes='320px'
 										className='object-contain drop-shadow-xl'
 									/>
 								</div>

@@ -101,6 +101,7 @@ export function CartDrawer() {
 											src={product.image}
 											alt={product.name}
 											fill
+											sizes='64px'
 											className='object-contain p-1.5'
 										/>
 									</div>
@@ -169,6 +170,7 @@ export function CartDrawer() {
 										src={suggestion.image}
 										alt={suggestion.name}
 										fill
+										sizes='48px'
 										className='object-contain p-1'
 									/>
 								</div>

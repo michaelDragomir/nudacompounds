@@ -9,7 +9,7 @@ const ORDER_INCLUDES = [
 
 export function QualityStandard() {
 	return (
-		<section className='bg-offwhite py-14'>
+		<section id='standards' className='bg-offwhite py-14'>
 			<div className='mx-auto max-w-6xl px-6'>
 				<div className='grid gap-12 text-center md:grid-cols-2 md:items-center'>
 					<div className='flex flex-col items-center'>

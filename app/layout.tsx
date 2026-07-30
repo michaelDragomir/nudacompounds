@@ -6,6 +6,7 @@ import { CartDrawer } from "./components/CartDrawer";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import { GoogleAnalytics } from "./components/GoogleAnalytics";
+import { AgeGate } from "./components/AgeGate";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "./lib/site";
 
 const geistSans = Geist({
@@ -118,6 +119,7 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
         />
+        <AgeGate />
         <CartProvider>
           <Header />
           <main className="flex-1">{children}</main>
