@@ -116,3 +116,22 @@ body {
 		animation: none;
 	}
 }
+
+@keyframes marquee-ltr {
+	from {
+		transform: translateX(-50%);
+	}
+	to {
+		transform: translateX(0%);
+	}
+}
+
+.animate-marquee-ltr {
+	animation: marquee-ltr 45s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.animate-marquee-ltr {
+		animation: none;
+	}
+}

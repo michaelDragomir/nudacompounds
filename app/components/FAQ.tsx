@@ -40,7 +40,10 @@ export function FAQ() {
 	const [openIndex, setOpenIndex] = useState<number | null>(null);
 
 	return (
-		<section id='faq' className='relative overflow-hidden bg-navy pb-16 pt-28'>
+		<section
+			id='faq'
+			className='relative overflow-hidden bg-navy pb-16 pt-28 bg-linear-to-b from-navy to-navy-dark'
+		>
 			<div
 				className='pointer-events-none absolute inset-0 animate-glow-pulse bg-[radial-gradient(circle_at_87%_0%,rgba(217,160,91,0.25),transparent_35%)]'
 				aria-hidden='true'

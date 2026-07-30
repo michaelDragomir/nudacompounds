@@ -1,5 +1,9 @@
+'use client';
+
+import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { ChevronDownIcon } from './icons';
 import { SectionLink } from './SectionLink';
 
 const NAVIGATE_LINKS = [
@@ -56,6 +60,8 @@ const NUDA_DISCLAIMER = [
 ];
 
 export function Footer() {
+	const [disclaimerOpen, setDisclaimerOpen] = useState(false);
+
 	return (
 		<footer className='mt-auto bg-offwhite border-t border-navy'>
 			<div className='mx-auto max-w-6xl px-6 py-16'>
@@ -133,20 +139,42 @@ export function Footer() {
 					</div>
 				</div>
 			</div>
-			<>
-				<div className='mx-auto max-w-6xl px-6 py-10 border-t border-navy-dark/60'>
-					<h3 className='text-xs font-bold uppercase tracking-[0.2em] text-navy-dark'>
-						Nuda Disclaimer
-					</h3>
-					<div className='mt-4 space-y-4 text-sm leading-relaxed text-navy-dark/60'>
-						{NUDA_DISCLAIMER.map((paragraph, index) => (
-							<p key={index}>{paragraph}</p>
-						))}
+			<div className='border-t border-navy-dark/60'>
+				<div className='mx-auto max-w-6xl px-6 py-10'>
+					<button
+						type='button'
+						onClick={() => setDisclaimerOpen((open) => !open)}
+						aria-expanded={disclaimerOpen}
+						className='flex w-full cursor-pointer items-center justify-between gap-4 text-left'
+					>
+						<h3 className='text-xs font-bold uppercase tracking-[0.2em] text-navy-dark'>
+							Nuda Disclaimer
+						</h3>
+						<ChevronDownIcon
+							className={`h-5 w-5 shrink-0 text-navy-dark transition-transform duration-300 ${
+								disclaimerOpen ? 'rotate-180' : ''
+							}`}
+						/>
+					</button>
+					<div
+						className={`grid transition-all duration-300 ease-out ${
+							disclaimerOpen
+								? 'grid-rows-[1fr] opacity-100'
+								: 'grid-rows-[0fr] opacity-0'
+						}`}
+					>
+						<div className='overflow-hidden'>
+							<div className='mt-4 space-y-4 text-sm leading-relaxed text-navy-dark/60'>
+								{NUDA_DISCLAIMER.map((paragraph, index) => (
+									<p key={index}>{paragraph}</p>
+								))}
+							</div>
+						</div>
 					</div>
 				</div>
-			</>
-			<>
-				<div className='mx-auto max-w-6xl px-6 py-10 border-t border-navy-dark/60'>
+			</div>
+			<div className='border-t border-navy-dark/60'>
+				<div className='mx-auto max-w-6xl px-6 py-10'>
 					<h3 className='text-xs font-bold uppercase tracking-[0.2em] text-navy-dark'>
 						FDA &amp; Regulatory Notice
 					</h3>
@@ -159,7 +187,7 @@ export function Footer() {
 						&copy; 2026 Nuda Compounds. All rights reserved.
 					</p>
 				</div>
-			</>
+			</div>
 		</footer>
 	);
 }

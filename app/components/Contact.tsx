@@ -57,8 +57,8 @@ export function Contact() {
 		<section id='contact' className='bg-offwhite py-24'>
 			<div className='mx-auto max-w-6xl px-6'>
 				<div className='grid grid-cols-1 gap-16 lg:grid-cols-2'>
-					<div className='rounded-2xl bg-white p-8 border border-amber shadow-xl'>
-						<span className='text-xs font-bold uppercase tracking-[0.2em] text-navy-dark'>
+					<div className='rounded-2xl bg-white p-4 border border-amber shadow-xl'>
+						<span className='text-sm font-bold uppercase tracking-[0.2em] text-navy-dark'>
 							Contact Information
 						</span>
 

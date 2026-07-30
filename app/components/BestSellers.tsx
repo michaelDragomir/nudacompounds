@@ -17,13 +17,13 @@ export function BestSellers() {
 	const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
 	return (
-		<section className='bg-navy py-8'>
+		<section className='py-8 bg-linear-to-b from-navy to-navy-dark'>
 			<div className='mx-auto max-w-7xl px-6'>
-				<div className='mx-auto mb-8 max-w-2xl text-center'>
+				<div className='mx-auto mb-8 max-w-3xl text-center'>
 					<h2 className='text-4xl font-bold font-sora leading-tight text-offwhite tracking-wide'>
 						Our Best Selling Compounds
 					</h2>
-					<p className='mt-4 text-sm text-white/70'>
+					<p className='mt-4 text-md text-white/70'>
 						All compounds are third-party tested and include a Certificate of
 						Analysis. For research use only.
 					</p>

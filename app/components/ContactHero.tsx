@@ -1,6 +1,6 @@
 export function ContactHero() {
 	return (
-		<section className='relative overflow-hidden bg-navy pb-16 pt-28 text-center'>
+		<section className='relative overflow-hidden bg-navy pb-16 pt-28 text-center bg-linear-to-b from-navy to-navy-dark'>
 			<div
 				className='pointer-events-none absolute inset-0 animate-glow-pulse bg-[radial-gradient(circle_at_50%_0%,rgba(217,160,91,0.25),transparent_55%)]'
 				aria-hidden='true'
@@ -20,8 +20,8 @@ export function ContactHero() {
 				</h1>
 
 				<p className='mx-auto mt-4 max-w-xl text-white/60'>
-					Questions about products, orders, or research applications? Send us
-					a note and we&apos;ll get back within one business day.
+					Questions about products, orders, or research applications? Send us a
+					note and we&apos;ll get back within one business day.
 				</p>
 			</div>
 		</section>
