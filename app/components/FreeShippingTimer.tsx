@@ -18,7 +18,8 @@ function getSecondsUntilCutoff() {
 		Number(parts.find((part) => part.type === type)?.value ?? 0);
 
 	const nowSeconds = get('hour') * 3600 + get('minute') * 60 + get('second');
-	return CUTOFF_HOUR_MT * 3600 - nowSeconds;
+	const secondsInDay = 24 * 3600;
+	return ((CUTOFF_HOUR_MT * 3600 - nowSeconds) % secondsInDay + secondsInDay) % secondsInDay;
 }
 
 function formatCountdown(totalSeconds: number) {
@@ -39,7 +40,7 @@ export function FreeShippingTimer() {
 		return () => clearInterval(id);
 	}, []);
 
-	if (remaining === null || remaining <= 0) return null;
+	if (remaining === null) return null;
 
 	return (
 		<div className='mt-2 flex items-center gap-2 text-sm'>
