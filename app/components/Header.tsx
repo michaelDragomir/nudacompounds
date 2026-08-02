@@ -68,7 +68,7 @@ export function Header() {
 						<SectionLink
 							key={link.href}
 							href={link.href}
-							className="relative text-navy-dark transition-colors after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-full after:origin-left after:scale-x-0 after:bg-amber \after:transition-transform after:duration-300 after:content-[''] hover:text-amber hover:after:scale-x-100"
+							className='relative text-navy-dark transition-colors hover:text-amber'
 						>
 							{link.label}
 						</SectionLink>

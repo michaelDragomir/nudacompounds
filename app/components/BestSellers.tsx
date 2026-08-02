@@ -33,7 +33,7 @@ export function BestSellers() {
 					{bestSellers.map((product) => (
 						<div
 							key={product.slug}
-							className='group relative flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl shadow-xl'
+							className='group relative flex flex-col overflow-hidden rounded-2xl border border-amber bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl shadow-xl'
 						>
 							<button
 								type='button'
