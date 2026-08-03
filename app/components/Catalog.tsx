@@ -1,14 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { products } from '../data/products';
-import { BoxIcon, ClockIcon, FlaskIcon, ShieldIcon } from './icons';
-
-const CATALOG_PERKS = [
-	{ icon: BoxIcon, label: 'Free shipping' },
-	{ icon: FlaskIcon, label: 'Free BAC water' },
-	{ icon: ShieldIcon, label: 'Refund or replacement' },
-	{ icon: ClockIcon, label: '5-day delivery' },
-];
 
 export function Catalog() {
 	return (
@@ -51,18 +43,6 @@ export function Catalog() {
 								</div>
 							</div>
 						</Link>
-					))}
-				</div>
-
-				<div className='mt-10 grid grid-cols-2 gap-4 sm:grid-cols-4'>
-					{CATALOG_PERKS.map(({ icon: Icon, label }) => (
-						<div
-							key={label}
-							className='flex flex-col items-center px-4 py-6 text-center border border-amber rounded-2xl shadow-md'
-						>
-							<Icon className='h-6 w-6 text-amber-dark' />
-							<span className='mt-3 text-sm text-charcoal/70'>{label}</span>
-						</div>
 					))}
 				</div>
 			</div>
