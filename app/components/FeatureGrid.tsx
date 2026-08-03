@@ -53,11 +53,11 @@ export function FeatureGrid() {
 				</p>
 			</div>
 
-			<div className='mx-auto mt-14 grid max-w-6xl grid-cols-1 gap-6 px-6 sm:grid-cols-2 lg:grid-cols-3'>
+			<div className='mx-auto mt-10 grid max-w-6xl grid-cols-1 gap-6 px-6 sm:grid-cols-2 lg:grid-cols-3'>
 				{features.map(({ icon: Icon, title, body }) => (
 					<div
 						key={title}
-						className='rounded-2xl border border-amber/40 bg-white p-8 text-center shadow-2xl transition-colors hover:border-amber/60'
+						className='rounded-2xl border border-amber/40 bg-white p-8 text-center shadow-xl transition-colors hover:border-amber/60'
 					>
 						<div className='mx-auto flex h-14 w-14 items-center justify-center rounded-xl border border-amber/30 bg-amber/0 text-amber'>
 							<Icon className='h-6 w-6' />
