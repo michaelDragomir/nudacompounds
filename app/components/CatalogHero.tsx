@@ -12,7 +12,7 @@ export function CatalogHero() {
 				aria-hidden='true'
 			/>
 
-			<div className='relative mx-auto max-w-3xl px-6'>
+			<div className='relative mx-auto max-w-5xl px-6'>
 				<div className='mb-4 flex items-center justify-center gap-3'>
 					<span className='h-px w-8 bg-amber' />
 					<span className='text-xs font-bold uppercase tracking-[0.3em] text-amber'>
@@ -25,12 +25,12 @@ export function CatalogHero() {
 					Research Compounds
 				</h1>
 
-				<p className='mx-auto mt-4 max-w-xl text-white/60'>
+				<p className='mx-auto mt-4 max-2w-xl text-white/60'>
 					All compounds are third-party tested and include a Certificate of
 					Analysis. For research use only.
 				</p>
 
-				<div className='mt-8 flex flex-wrap items-center justify-center gap-4'>
+				<div className='mt-8 flex items-center justify-center gap-4'>
 					{PROMISE_PILLS.map(({ label, detail }) => (
 						<div
 							key={label}

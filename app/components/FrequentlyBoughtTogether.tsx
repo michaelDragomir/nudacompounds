@@ -5,20 +5,8 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { useCart } from '../context/CartContext';
 import { products, type Product } from '../data/products';
+import { FREQUENTLY_BOUGHT_SLUGS } from '../data/frequentlyBoughtTogether';
 import { ArrowRightIcon, CartIcon } from './icons';
-
-// Add a slug here for any compound that should appear in the "Frequently
-// Bought Together" carousel. The carousel automatically shows 3 at a time
-// and paddles cycle through the rest, however many are listed.
-const FREQUENTLY_BOUGHT_SLUGS = [
-	'3-rt',
-	'2-rt',
-	'bpc-157',
-	'ghk-cu',
-	'tesamorelin',
-	'mots-c',
-	'nad-plus',
-];
 
 const VISIBLE_COUNT = 3;
 

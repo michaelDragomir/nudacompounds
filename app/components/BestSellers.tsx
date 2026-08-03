@@ -39,7 +39,7 @@ export function BestSellers() {
 								type='button'
 								onClick={() => setSelectedProduct(product)}
 								aria-label={`Quick view ${product.name}`}
-								className='group/quickview absolute right-3 top-3 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-navy shadow-sm transition-colors hover:bg-amber hover:text-navy-dark'
+								className='group/quickview absolute right-3 top-3 z-10 flex h-9 w-9 items-center justify-center rounded-2xl bg-white/90 text-navy shadow-sm transition-colors hover:bg-amber hover:text-navy-dark border border-amber/20'
 							>
 								<span className='pointer-events-none absolute right-full top-1/2 mr-2 -translate-y-1/2 whitespace-nowrap rounded-md bg-navy-dark px-2.5 py-1 text-xs font-bold text-white opacity-0 transition-opacity duration-200 group-hover/quickview:opacity-100'>
 									Quick View
