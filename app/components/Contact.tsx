@@ -55,65 +55,64 @@ export function Contact() {
 
 	return (
 		<section id='contact' className='bg-offwhite py-24'>
-			<div className='mx-auto max-w-6xl px-6'>
-				<div className='grid grid-cols-1 gap-16 lg:grid-cols-2'>
-					<div className='rounded-2xl bg-white p-4 border border-amber shadow-xl'>
-						<span className='text-sm font-bold uppercase tracking-[0.2em] text-navy-dark'>
-							Contact Information
-						</span>
+			<div className='mx-auto max-w-3xl px-6'>
+				<div className='rounded-2xl border border-amber bg-white p-8 shadow-xl'>
+					<span className='block text-center text-sm font-bold uppercase tracking-[0.2em] text-navy-dark'>
+						Contact Information
+					</span>
 
-						<div className='mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2'>
-							<div>
-								<div className='flex items-center gap-2 text-xs font-bold uppercase tracking-wide text-navy-dark/50'>
-									<PhoneIcon className='h-4 w-4 text-amber' />
-									Call or Text
-								</div>
-								<div className='mt-1 font-semibold text-navy-dark'>
-									{CONTACT_PHONE}
-								</div>
+					<div className='mt-6 grid grid-cols-2 gap-8 sm:grid-cols-4'>
+						<div className='flex flex-col items-center text-center'>
+							<PhoneIcon className='h-5 w-5 text-amber' />
+							<div className='mt-2 text-xs font-bold uppercase tracking-wide text-navy-dark/50'>
+								Call or Text
 							</div>
-
-							<div>
-								<div className='flex items-center gap-2 text-xs font-bold uppercase tracking-wide text-navy-dark/50'>
-									<ClockIcon className='h-4 w-4 text-amber' />
-									Hours
-								</div>
-								<div className='mt-1 font-semibold text-navy-dark'>
-									Mon–Sat 9:00 AM – 5:00 PM MST
-									<br />
-									Closed Sunday
-								</div>
-							</div>
-
-							<div>
-								<div className='flex items-center gap-2 text-xs font-bold uppercase tracking-wide text-navy-dark/50'>
-									<MailIcon className='h-4 w-4 text-amber' />
-									Support
-								</div>
-								<a
-									href={`mailto:${CONTACT_EMAIL}`}
-									className='mt-1 inline-block break-all font-semibold text-navy-dark transition-colors hover:text-amber'
-								>
-									{CONTACT_EMAIL}
-								</a>
-							</div>
-
-							<div>
-								<div className='flex items-center gap-2 text-xs font-bold uppercase tracking-wide text-navy-dark/50'>
-									<MailIcon className='h-4 w-4 text-amber' />
-									Orders
-								</div>
-								<a
-									href={`mailto:${ORDERS_EMAIL}`}
-									className='mt-1 inline-block break-all font-semibold text-navy-dark transition-colors hover:text-amber'
-								>
-									{ORDERS_EMAIL}
-								</a>
+							<div className='mt-1 font-semibold text-navy-dark'>
+								{CONTACT_PHONE}
 							</div>
 						</div>
-					</div>
 
-					<div>
+						<div className='flex flex-col items-center text-center'>
+							<ClockIcon className='h-5 w-5 text-amber' />
+							<div className='mt-2 text-xs font-bold uppercase tracking-wide text-navy-dark/50'>
+								Hours
+							</div>
+							<div className='mt-1 font-semibold text-navy-dark'>
+								Mon–Sat 9:00 AM – 5:00 PM MST
+								<br />
+								Closed Sunday
+							</div>
+						</div>
+
+						<div className='flex flex-col items-center text-center'>
+							<MailIcon className='h-5 w-5 text-amber' />
+							<div className='mt-2 text-xs font-bold uppercase tracking-wide text-navy-dark/50'>
+								Support
+							</div>
+							<a
+								href={`mailto:${CONTACT_EMAIL}`}
+								className='mt-1 inline-block break-all font-semibold text-navy-dark transition-colors hover:text-amber'
+							>
+								{CONTACT_EMAIL}
+							</a>
+						</div>
+
+						<div className='flex flex-col items-center text-center'>
+							<MailIcon className='h-5 w-5 text-amber' />
+							<div className='mt-2 text-xs font-bold uppercase tracking-wide text-navy-dark/50'>
+								Orders
+							</div>
+							<a
+								href={`mailto:${ORDERS_EMAIL}`}
+								className='mt-1 inline-block break-all font-semibold text-navy-dark transition-colors hover:text-amber'
+							>
+								{ORDERS_EMAIL}
+							</a>
+						</div>
+					</div>
+				</div>
+
+				<div className='mt-12'>
 						{submitted ? (
 							<div className='flex h-full flex-col items-center justify-center rounded-2xl border border-black/5 bg-white px-8 py-16 text-center'>
 								<h3 className='text-xl font-bold text-navy'>Message sent</h3>
@@ -201,7 +200,6 @@ export function Contact() {
 								</button>
 							</form>
 						)}
-					</div>
 				</div>
 			</div>
 		</section>

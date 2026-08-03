@@ -16,8 +16,8 @@ export function FAQ() {
 				className='pointer-events-none absolute inset-0 animate-glow-pulse bg-[radial-gradient(circle_at_87%_0%,rgba(217,160,91,0.25),transparent_35%)]'
 				aria-hidden='true'
 			/>
-			<div className='mx-auto max-w-3xl px-6'>
-				<div className='mx-auto mb-14 max-w-2xl text-center'>
+			<div className='mx-auto max-w-4xl px-6'>
+				<div className='mx-auto mb-14 max-w-3xl text-center'>
 					<div className='mb-4 flex items-center justify-center gap-3'>
 						<span className='h-px w-8 bg-amber' />
 						<span className='text-xs font-bold uppercase tracking-[0.3em] text-amber'>
@@ -25,7 +25,7 @@ export function FAQ() {
 						</span>
 						<span className='h-px w-8 bg-amber' />
 					</div>
-					<h1 className='text-3xl font-bold leading-tight text-offwhite tracking-wide'>
+					<h1 className='font-sora text-4xl font-extrabold leading-tight text-offwhite sm:text-5xl'>
 						Frequently Asked Questions
 					</h1>
 				</div>
