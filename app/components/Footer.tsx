@@ -18,7 +18,8 @@ const LEGAL_LINKS = [
 	{ href: '/terms-of-service', label: 'Terms of Service' },
 	{ href: '/privacy-policy', label: 'Privacy Policy' },
 	{ href: '/refund-policy', label: 'Refund Policy' },
-	{ href: '/accessibility', label: 'Accessibility' },
+	{ href: '/disclaimer', label: 'Disclaimer' },
+	{ href: '/research-use-only', label: 'Research Use Only' },
 ];
 
 const CONTACT_EMAIL = 'hello@nudacompounds.com';
