@@ -57,7 +57,7 @@ export function FrequentlyBoughtTogether({
 	return (
 		<section className='bg-offwhite pb-14'>
 			<div className='mx-auto max-w-6xl px-14 sm:px-18'>
-				<div className='flex items-center justify-between gap-4'>
+				<div className='flex items-end justify-between gap-4'>
 					<div>
 						<h2 className='font-sora text-2xl font-extrabold leading-tight text-navy sm:text-3xl'>
 							Frequently Bought Together
@@ -91,21 +91,22 @@ export function FrequentlyBoughtTogether({
 					)}
 				</div>
 
-				<div className='mt-6 grid grid-cols-1 gap-4 sm:grid-cols-3'>
+				<div className='mt-6 grid grid-cols-1 gap-2 sm:grid-cols-3'>
 					{visibleItems.map((product) => (
 						<div
 							key={product.slug}
-							className='flex flex-col items-center rounded-xl border border-amber/50 bg-linear-to-b from-navy-dark/5 to-navy-dark/10 p-3 transition-colors hover:border-amber shadow-xl'
+							style={{ maxWidth: 'calc(100% - 85px)' }}
+							className='mx-auto flex w-full flex-col items-center rounded-xl border border-amber/50 bg-linear-to-b from-navy-dark/5 to-navy-dark/10 p-3 transition-colors hover:border-amber shadow-xl'
 						>
 							<Link
 								href={`/products/${product.slug}`}
-								className='relative flex h-72 w-72 shrink-0 items-center justify-center overflow-hidden rounded-lg'
+								className='relative flex h-[248px] w-[248px] shrink-0 items-center justify-center overflow-hidden rounded-lg'
 							>
 								<Image
 									src={product.image}
 									alt={product.name}
 									fill
-									sizes='288px'
+									sizes='248px'
 									className='object-contain p-4 drop-shadow-sm'
 								/>
 							</Link>
@@ -132,6 +133,16 @@ export function FrequentlyBoughtTogether({
 							</button>
 						</div>
 					))}
+				</div>
+
+				<div className='mt-10 border-t border-navy/10 pt-6 text-center'>
+					<p className='mx-auto max-w-5xl text-sm text-warmgray'>
+						<span className='font-bold text-amber-dark'>
+							For Research Use Only.
+						</span>{' '}
+						This product is intended solely for in-vitro laboratory research. It
+						is not a drug, food, or cosmetic and should not be used as such.
+					</p>
 				</div>
 			</div>
 		</section>
