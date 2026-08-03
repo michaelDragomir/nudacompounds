@@ -57,7 +57,7 @@ export function FeatureGrid() {
 				{features.map(({ icon: Icon, title, body }) => (
 					<div
 						key={title}
-						className='rounded-2xl border border-amber/40 bg-white p-8 text-center shadow-xl transition-colors hover:border-amber/60'
+						className='rounded-2xl border-2 border-amber/60 bg-white p-8 text-center shadow-xl transition-colors hover:border-amber/60'
 					>
 						<div className='mx-auto flex h-14 w-14 items-center justify-center rounded-xl border border-amber/30 bg-amber/0 text-amber'>
 							<Icon className='h-6 w-6' />
