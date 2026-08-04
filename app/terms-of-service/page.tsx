@@ -1,12 +1,13 @@
 import type { Metadata } from 'next';
-import { ComingSoonPage } from '../components/ComingSoonPage';
+import { TermsOfServiceContent } from '../components/TermsOfServiceContent';
 
 export const metadata: Metadata = {
 	title: 'Terms of Service',
+	description:
+		'Terms governing use of the Nuda Compounds website and purchase of research peptides.',
 	alternates: { canonical: '/terms-of-service' },
-	robots: { index: false, follow: true },
 };
 
 export default function TermsOfServicePage() {
-	return <ComingSoonPage title='Terms of Service' />;
+	return <TermsOfServiceContent />;
 }

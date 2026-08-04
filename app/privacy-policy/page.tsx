@@ -1,12 +1,13 @@
 import type { Metadata } from 'next';
-import { ComingSoonPage } from '../components/ComingSoonPage';
+import { PrivacyPolicyContent } from '../components/PrivacyPolicyContent';
 
 export const metadata: Metadata = {
 	title: 'Privacy Policy',
+	description:
+		'How Nuda Compounds collects, uses, and protects your personal information.',
 	alternates: { canonical: '/privacy-policy' },
-	robots: { index: false, follow: true },
 };
 
 export default function PrivacyPolicyPage() {
-	return <ComingSoonPage title='Privacy Policy' />;
+	return <PrivacyPolicyContent />;
 }

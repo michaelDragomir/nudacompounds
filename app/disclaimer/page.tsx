@@ -1,12 +1,13 @@
 import type { Metadata } from 'next';
-import { ComingSoonPage } from '../components/ComingSoonPage';
+import { DisclaimerContent } from '../components/DisclaimerContent';
 
 export const metadata: Metadata = {
 	title: 'Disclaimer',
+	description:
+		'Research use, product use, liability, and buyer responsibility disclaimer for Nuda Compounds research peptides.',
 	alternates: { canonical: '/disclaimer' },
-	robots: { index: false, follow: true },
 };
 
 export default function DisclaimerPage() {
-	return <ComingSoonPage title='Disclaimer' />;
+	return <DisclaimerContent />;
 }

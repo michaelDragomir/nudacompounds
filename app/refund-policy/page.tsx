@@ -1,12 +1,13 @@
 import type { Metadata } from 'next';
-import { ComingSoonPage } from '../components/ComingSoonPage';
+import { RefundPolicyContent } from '../components/RefundPolicyContent';
 
 export const metadata: Metadata = {
-	title: 'Refund Policy',
+	title: 'Refund & Returns Policy',
+	description:
+		'How Nuda Compounds handles order cancellations, delivery delays, damaged or incorrect shipments, and purity disputes.',
 	alternates: { canonical: '/refund-policy' },
-	robots: { index: false, follow: true },
 };
 
 export default function RefundPolicyPage() {
-	return <ComingSoonPage title='Refund Policy' />;
+	return <RefundPolicyContent />;
 }

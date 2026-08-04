@@ -1,12 +1,13 @@
 import type { Metadata } from 'next';
-import { ComingSoonPage } from '../components/ComingSoonPage';
+import { ResearchUseOnlyContent } from '../components/ResearchUseOnlyContent';
 
 export const metadata: Metadata = {
 	title: 'Research Use Only',
+	description:
+		'How Nuda Compounds research peptides may be used, handled, and documented, and what researchers agree to when placing an order.',
 	alternates: { canonical: '/research-use-only' },
-	robots: { index: false, follow: true },
 };
 
 export default function ResearchUseOnlyPage() {
-	return <ComingSoonPage title='Research Use Only' />;
+	return <ResearchUseOnlyContent />;
 }
