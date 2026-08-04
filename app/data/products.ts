@@ -6,6 +6,7 @@ export type Product = {
 	purity: string;
 	size: string;
 	price: number;
+	bulkPrice10: number;
 	image: string;
 	inStock: boolean;
 	coa: {
@@ -19,13 +20,14 @@ export type Product = {
 export const products: Product[] = [
 	{
 		slug: '3-rt',
-		name: '3-RT',
+		name: 'GLP-3 RT',
 		category: 'Metabolic Research',
 		description:
 			'A synthetic tri-receptor agonist peptide (GIP/GLP-1/glucagon) referenced in published in-vitro receptor-binding literature. Supplied lyophilized as a laboratory reference compound.',
 		purity: '≥99%',
 		size: '10mg vial',
-		price: 140,
+		price: 40,
+		bulkPrice10: 190,
 		image: '/images/3rt.png',
 		inStock: true,
 		coa: {
@@ -36,14 +38,15 @@ export const products: Product[] = [
 		},
 	},
 	{
-		slug: '2-rt',
-		name: '2-RT',
+		slug: '2-tr',
+		name: 'GLP-2 TR',
 		category: 'Metabolic Research',
 		description:
 			'A synthetic dual-receptor agonist peptide (GIP/GLP-1) referenced in published in-vitro receptor-binding literature. Supplied lyophilized as a laboratory reference compound.',
 		purity: '≥99%',
 		size: '10mg vial',
-		price: 149,
+		price: 30,
+		bulkPrice10: 150,
 		image: '/images/2rt.png',
 		inStock: false,
 		coa: {
@@ -62,6 +65,7 @@ export const products: Product[] = [
 		purity: '≥99%',
 		size: '10mg vial',
 		price: 29,
+		bulkPrice10: 230,
 		image: '/images/bpc.png',
 		inStock: true,
 		coa: {
@@ -80,6 +84,7 @@ export const products: Product[] = [
 		purity: '≥99%',
 		size: '50mg vial',
 		price: 35,
+		bulkPrice10: 280,
 		image: '/images/ghk.png',
 		inStock: true,
 		coa: {
@@ -98,6 +103,7 @@ export const products: Product[] = [
 		purity: '≥99%',
 		size: '10mg vial',
 		price: 50,
+		bulkPrice10: 400,
 		image: '/images/tesamorelin.png',
 		inStock: false,
 		coa: {
@@ -116,6 +122,7 @@ export const products: Product[] = [
 		purity: '≥99%',
 		size: '10mg vial',
 		price: 65,
+		bulkPrice10: 520,
 		image: '/images/mots.png',
 		inStock: true,
 		coa: {
@@ -134,6 +141,7 @@ export const products: Product[] = [
 		purity: '≥99%',
 		size: '500mg vial',
 		price: 150,
+		bulkPrice10: 1200,
 		image: '/images/nad.png',
 		inStock: true,
 		coa: {
@@ -152,6 +160,7 @@ export const products: Product[] = [
 		purity: 'USP Grade',
 		size: '10mL vial',
 		price: 10,
+		bulkPrice10: 85,
 		image: '/images/bacWater.png',
 		inStock: true,
 		coa: {

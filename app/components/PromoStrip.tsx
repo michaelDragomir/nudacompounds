@@ -93,7 +93,7 @@ export function PromoStrip() {
 						</div>
 
 						<div className='flex flex-col items-center text-center lg:items-start lg:text-left'>
-							<span className='-rotate-2 inline-flex items-center gap-2 rounded-full border border-amber/70 bg-amber/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-amber'>
+							<span className='-rotate-3 inline-flex items-center gap-2 rounded-full border border-amber/70 bg-amber/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-amber'>
 								<span className='relative flex h-1.5 w-1.5'>
 									<span className='absolute inline-flex h-full w-full animate-ping rounded-full bg-amber opacity-75' />
 									<span className='relative inline-flex h-1.5 w-1.5 rounded-full bg-amber' />
@@ -105,13 +105,14 @@ export function PromoStrip() {
 								Buy 2 <span className='text-amber'>Get 1 Free</span>
 							</h2>
 							<p className='mt-2 max-w-sm text-offwhite/90'>
-								On all peptides of the same compound &mdash; stock up and save.
+								On peptides of equal or lesser value, excluding kits. Stock up
+								and save!
 							</p>
 						</div>
 
 						<Link
 							href='/catalog'
-							className='shrink-0 rounded-2xl bg-amber px-10 py-4 text-sm font-bold uppercase tracking-widest text-offwhite shadow-2xl transition-transform hover:-translate-y-0.5 hover:bg-amber-dark'
+							className='shrink-0 rounded-2xl bg-amber px-10 py-4 text-sm font-bold uppercase tracking-widest text-offwhite shadow-2xl transition-transform hover:-translate-y-0.5 hover:bg-amber-dark border border-amber'
 						>
 							Shop the Deal
 						</Link>

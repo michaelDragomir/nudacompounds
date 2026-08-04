@@ -32,7 +32,11 @@ export function CartDrawer() {
 		);
 
 	const subtotal = lines.reduce(
-		(sum, line) => sum + line.product.price * line.qty,
+		(sum, line) =>
+			sum +
+			(line.isBulk
+				? line.product.bulkPrice10 * line.qty
+				: line.product.price * line.qty),
 		0,
 	);
 
@@ -94,8 +98,11 @@ export function CartDrawer() {
 						</div>
 					) : (
 						<ul className='space-y-5'>
-							{lines.map(({ product, qty }) => (
-								<li key={product.slug} className='flex gap-4'>
+							{lines.map(({ product, qty, isBulk }) => (
+								<li
+									key={`${product.slug}-${isBulk}`}
+									className='flex gap-4'
+								>
 									<div className='relative h-16 w-16 shrink-0 overflow-hidden rounded-lg bg-offwhite/5'>
 										<Image
 											src={product.image}
@@ -112,16 +119,21 @@ export function CartDrawer() {
 													{product.category}
 												</p>
 												<p className='font-bold text-white'>{product.name}</p>
+												{isBulk && (
+													<p className='text-[11px] font-bold uppercase tracking-wide text-amber'>
+														Kit of 10
+													</p>
+												)}
 											</div>
 											<span className='text-sm text-white/50'>
-												{product.size}
+												{isBulk ? `${qty * 10} vials` : product.size}
 											</span>
 										</div>
 										<div className='mt-2 flex items-center justify-between'>
 											<div className='flex items-center gap-2 rounded-lg border border-offwhite/15 px-1'>
 												<button
 													type='button'
-													onClick={() => updateQty(product.slug, -1)}
+													onClick={() => updateQty(product.slug, -1, isBulk)}
 													aria-label={`Decrease ${product.name} quantity`}
 													className='flex h-6 w-6 items-center justify-center text-offwhite/70 transition-colors hover:text-amber'
 												>
@@ -132,7 +144,7 @@ export function CartDrawer() {
 												</span>
 												<button
 													type='button'
-													onClick={() => updateQty(product.slug, 1)}
+													onClick={() => updateQty(product.slug, 1, isBulk)}
 													aria-label={`Increase ${product.name} quantity`}
 													className='flex h-6 w-6 items-center justify-center text-offwhite/70 transition-colors hover:text-amber'
 												>
@@ -141,11 +153,15 @@ export function CartDrawer() {
 											</div>
 											<div className='flex items-center gap-3'>
 												<span className='font-bold text-amber-light'>
-													${(product.price * qty).toFixed(2)}
+													$
+													{(
+														(isBulk ? product.bulkPrice10 : product.price) *
+														qty
+													).toFixed(2)}
 												</span>
 												<button
 													type='button'
-													onClick={() => removeItem(product.slug)}
+													onClick={() => removeItem(product.slug, isBulk)}
 													aria-label={`Remove ${product.name}`}
 													className='text-offwhite/40 transition-colors hover:text-offwhite'
 												>

@@ -34,6 +34,10 @@ export function ProductDetail({ product }: { product: Product }) {
 		setQty((prev) => Math.min(MAX_QTY, Math.max(MIN_QTY, prev + delta)));
 	}
 
+	const bulkSavingsPercent = Math.round(
+		(1 - product.bulkPrice10 / (product.price * MAX_QTY)) * 100,
+	);
+
 	return (
 		<>
 			<div className='bg-offwhite pt-16'>
@@ -132,7 +136,7 @@ export function ProductDetail({ product }: { product: Product }) {
 									<button
 										type='button'
 										onClick={() => addItem(product, qty)}
-										className='flex flex-1 items-center justify-center gap-2 rounded-2xl bg-amber px-6 py-2.25 text-sm font-bold uppercase tracking-wide text-white [text-shadow:0_1px_2px_rgba(0,0,0,0.35)] transition-colors hover:bg-amber-dark cursor-pointer shadow-md'
+										className='flex flex-1 items-center justify-center gap-2 rounded-2xl bg-amber px-6 py-2.25 text-sm font-bold uppercase tracking-wide text-white [text-shadow:0_1px_2px_rgba(0,0,0,0.35)] transition-colors hover:bg-amber-dark cursor-pointer shadow-md border border-amber'
 									>
 										<CartIcon className='h-4 w-4' />
 										Add to Cart
@@ -141,10 +145,15 @@ export function ProductDetail({ product }: { product: Product }) {
 
 								<button
 									type='button'
-									onClick={() => addItem(product, MAX_QTY)}
-									className='mt-3 w-full cursor-pointer rounded-2xl border border-navy/70 px-6 py-2.25 text-sm font-bold uppercase tracking-wide text-navy/70 transition-colors hover:border-navy-dark hover:bg-navy-dark hover:text-white shadow-lg'
+									onClick={() => addItem(product, 1, true)}
+									className='group mt-3 flex w-full cursor-pointer overflow-hidden rounded-2xl border border-navy/70 shadow-lg transition-colors hover:border-navy-dark'
 								>
-									Bulk Order 10+
+									<span className='flex-1 py-2.25 text-center text-sm font-bold uppercase tracking-wide text-navy/70 transition-colors group-hover:bg-navy-dark group-hover:text-white'>
+										Buy Kit of 10
+									</span>
+									<span className='flex items-center justify-center border-l border-navy/70 bg-navy-dark px-5 text-sm font-bold uppercase tracking-wide text-white transition-colors group-hover:border-navy-dark'>
+										Save {bulkSavingsPercent}%
+									</span>
 								</button>
 							</div>
 
@@ -192,12 +201,12 @@ export function ProductDetail({ product }: { product: Product }) {
 												{product.coa.form}
 											</dd>
 										</div>
-										<div className='flex justify-between'>
+										{/* <div className='flex justify-between'>
 											<dt className='text-warmgray'>Endotoxins</dt>
 											<dd className='font-semibold text-charcoal'>
 												{product.coa.endotoxins}
 											</dd>
-										</div>
+										</div> */}
 										<div className='flex justify-between'>
 											<dt className='text-warmgray'>Tested</dt>
 											<dd className='font-semibold text-charcoal'>

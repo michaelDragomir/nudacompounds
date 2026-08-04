@@ -11,17 +11,18 @@ import {
 import type { Product } from '../data/products';
 
 const MAX_QTY = 10;
+const MAX_KITS = 10;
 
-type CartLine = { slug: string; qty: number };
+type CartLine = { slug: string; qty: number; isBulk: boolean };
 
 type CartContextValue = {
 	items: CartLine[];
 	isOpen: boolean;
 	totalCount: number;
 	celebrationTick: number;
-	addItem: (product: Product, qty?: number) => void;
-	updateQty: (slug: string, delta: number) => void;
-	removeItem: (slug: string) => void;
+	addItem: (product: Product, qty?: number, isBulk?: boolean) => void;
+	updateQty: (slug: string, delta: number, isBulk?: boolean) => void;
+	removeItem: (slug: string, isBulk?: boolean) => void;
 	openCart: () => void;
 	closeCart: () => void;
 	toggleCart: () => void;
@@ -34,39 +35,58 @@ export function CartProvider({ children }: { children: ReactNode }) {
 	const [isOpen, setIsOpen] = useState(false);
 	const [celebrationTick, setCelebrationTick] = useState(0);
 
-	const addItem = useCallback((product: Product, qty = 1) => {
-		setItems((prev) => {
-			const existing = prev.find((line) => line.slug === product.slug);
-			if (existing) {
-				return prev.map((line) =>
-					line.slug === product.slug
-						? { ...line, qty: Math.min(MAX_QTY, line.qty + qty) }
-						: line
+	const addItem = useCallback(
+		(product: Product, qty = 1, isBulk = false) => {
+			const cap = isBulk ? MAX_KITS : MAX_QTY;
+			setItems((prev) => {
+				const existing = prev.find(
+					(line) => line.slug === product.slug && line.isBulk === isBulk
 				);
-			}
-			return [...prev, { slug: product.slug, qty: Math.min(MAX_QTY, qty) }];
-		});
-		setCelebrationTick((tick) => tick + 1);
-	}, []);
+				if (existing) {
+					return prev.map((line) =>
+						line.slug === product.slug && line.isBulk === isBulk
+							? { ...line, qty: Math.min(cap, line.qty + qty) }
+							: line
+					);
+				}
+				return [
+					...prev,
+					{ slug: product.slug, qty: Math.min(cap, qty), isBulk },
+				];
+			});
+			setCelebrationTick((tick) => tick + 1);
+		},
+		[]
+	);
 
-	const updateQty = useCallback((slug: string, delta: number) => {
+	const updateQty = useCallback(
+		(slug: string, delta: number, isBulk = false) => {
+			const cap = isBulk ? MAX_KITS : MAX_QTY;
+			setItems((prev) =>
+				prev
+					.map((line) =>
+						line.slug === slug && line.isBulk === isBulk
+							? { ...line, qty: Math.min(cap, line.qty + delta) }
+							: line
+					)
+					.filter((line) => line.qty > 0)
+			);
+		},
+		[]
+	);
+
+	const removeItem = useCallback((slug: string, isBulk = false) => {
 		setItems((prev) =>
-			prev
-				.map((line) =>
-					line.slug === slug
-						? { ...line, qty: Math.min(MAX_QTY, line.qty + delta) }
-						: line
-				)
-				.filter((line) => line.qty > 0)
+			prev.filter((line) => !(line.slug === slug && line.isBulk === isBulk))
 		);
 	}, []);
 
-	const removeItem = useCallback((slug: string) => {
-		setItems((prev) => prev.filter((line) => line.slug !== slug));
-	}, []);
-
 	const totalCount = useMemo(
-		() => items.reduce((sum, line) => sum + line.qty, 0),
+		() =>
+			items.reduce(
+				(sum, line) => sum + (line.isBulk ? line.qty * 10 : line.qty),
+				0
+			),
 		[items]
 	);
 

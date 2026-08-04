@@ -179,7 +179,7 @@ export function Footer() {
 					<h3 className='text-xs font-bold uppercase tracking-[0.2em] text-navy-dark'>
 						FDA &amp; Regulatory Notice
 					</h3>
-					<div className='mt-4 space-y-4 text-sm leading-relaxed text-navy-dark/60'>
+					<div className='mt-4 space-y-4 text-xs leading-relaxed text-navy-dark/60'>
 						{FDA_NOTICE_PARAGRAPHS.map((paragraph) => (
 							<p key={paragraph}>{paragraph}</p>
 						))}

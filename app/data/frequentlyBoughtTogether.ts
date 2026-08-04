@@ -3,7 +3,7 @@
 // of this list automatically scales — no per-product configuration needed.
 export const FREQUENTLY_BOUGHT_SLUGS = [
 	'3-rt',
-	'2-rt',
+	'2-tr',
 	'bpc-157',
 	'ghk-cu',
 	'tesamorelin',

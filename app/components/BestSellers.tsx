@@ -7,7 +7,7 @@ import { products, type Product } from '../data/products';
 import { EyeIcon } from './icons';
 import { QuickViewModal } from './QuickViewModal';
 
-const BEST_SELLER_SLUGS = ['3-rt', '2-rt', 'tesamorelin', 'ghk-cu', 'bpc-157'];
+const BEST_SELLER_SLUGS = ['3-rt', '2-tr', 'tesamorelin', 'ghk-cu', 'bpc-157'];
 
 const bestSellers = BEST_SELLER_SLUGS.map((slug) =>
 	products.find((product) => product.slug === slug),
@@ -17,7 +17,7 @@ export function BestSellers() {
 	const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
 	return (
-		<section className='py-8 bg-linear-to-b from-navy to-navy-dark'>
+		<section className='py-14 bg-linear-to-b from-navy to-navy-dark'>
 			<div className='mx-auto max-w-7xl px-6'>
 				<div className='mx-auto mb-8 max-w-3xl text-center'>
 					<h2 className='text-4xl font-bold font-sora leading-tight text-offwhite tracking-wide'>
@@ -76,7 +76,7 @@ export function BestSellers() {
 				<div className='mt-10 flex justify-center'>
 					<Link
 						href='/catalog'
-						className='rounded-2xl bg-amber px-10 py-4 text-md font-bold uppercase tracking-widest text-white shadow-xl transition-colors hover:bg-amber-dark'
+						className='rounded-2xl bg-amber px-10 py-4 text-md font-bold uppercase tracking-widest text-white shadow-xl transition-colors hover:bg-amber-dark border border-amber'
 					>
 						View all compounds
 					</Link>
