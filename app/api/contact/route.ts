@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
+import { getSupabaseAdmin } from '../../lib/supabaseAdmin';
 
 const FROM_ADDRESS = 'Nuda Compounds <contact@nudacompounds.com>';
 const TO_ADDRESS = process.env.CONTACT_EMAIL || 'hello@nudacompounds.com';
@@ -36,6 +37,19 @@ export async function POST(request: Request) {
 			{ error: 'Please provide a valid email address.' },
 			{ status: 400 },
 		);
+	}
+
+	try {
+		const supabase = getSupabaseAdmin();
+		const { error: dbError } = await supabase
+			.from('contact_submissions')
+			.insert({ name, email, subject, message });
+
+		if (dbError) {
+			console.error('Supabase insert error:', dbError);
+		}
+	} catch (err) {
+		console.error('Supabase insert failed:', err);
 	}
 
 	const resend = new Resend(apiKey);
