@@ -16,10 +16,11 @@ export function Contact() {
 
 	async function handleSubmit(event: FormEvent<HTMLFormElement>) {
 		event.preventDefault();
+		const form = event.currentTarget;
 		setError(null);
 		setSubmitting(true);
 
-		const formData = new FormData(event.currentTarget);
+		const formData = new FormData(form);
 		const payload = {
 			name: formData.get('name'),
 			email: formData.get('email'),
@@ -42,6 +43,7 @@ export function Contact() {
 			}
 
 			setSubmitted(true);
+			form.reset();
 		} catch (err) {
 			setError(
 				err instanceof Error
@@ -113,93 +115,92 @@ export function Contact() {
 				</div>
 
 				<div className='mt-12'>
-						{submitted ? (
-							<div className='flex h-full flex-col items-center justify-center rounded-2xl border border-black/5 bg-white px-8 py-16 text-center'>
-								<h3 className='text-xl font-bold text-navy'>Message sent</h3>
-								<p className='mt-2 max-w-sm text-sm leading-relaxed text-charcoal/75'>
-									Thanks for reaching out — a member of our team will reply to
-									your email within one business day.
-								</p>
-							</div>
-						) : (
-							<form onSubmit={handleSubmit} className='space-y-6'>
-								<div>
-									<label
-										htmlFor='contact-name'
-										className='text-xs font-bold uppercase tracking-[0.2em] text-navy'
-									>
-										Name
-									</label>
-									<input
-										id='contact-name'
-										name='name'
-										type='text'
-										required
-										className='mt-2 w-full rounded-xl border border-black/20 bg-white px-4 py-3 text-navy placeholder:text-warmgray focus:border-amber focus:outline-none focus:ring-2 focus:ring-amber/30 '
-									/>
-								</div>
-
-								<div>
-									<label
-										htmlFor='contact-email'
-										className='text-xs font-bold uppercase tracking-[0.2em] text-navy'
-									>
-										Email
-									</label>
-									<input
-										id='contact-email'
-										name='email'
-										type='email'
-										required
-										className='mt-2 w-full rounded-xl border border-black/20 bg-white px-4 py-3 text-navy placeholder:text-warmgray focus:border-amber focus:outline-none focus:ring-2 focus:ring-amber/30'
-									/>
-								</div>
-
-								<div>
-									<label
-										htmlFor='contact-subject'
-										className='text-xs font-bold uppercase tracking-[0.2em] text-navy'
-									>
-										Subject
-									</label>
-									<input
-										id='contact-subject'
-										name='subject'
-										type='text'
-										required
-										className='mt-2 w-full rounded-xl border border-black/20 bg-white px-4 py-3 text-navy placeholder:text-warmgray focus:border-amber focus:outline-none focus:ring-2 focus:ring-amber/30'
-									/>
-								</div>
-
-								<div>
-									<label
-										htmlFor='contact-message'
-										className='text-xs font-bold uppercase tracking-[0.2em] text-navy'
-									>
-										Message
-									</label>
-									<textarea
-										id='contact-message'
-										name='message'
-										rows={6}
-										required
-										className='mt-2 w-full resize-y rounded-xl border border-black/20 bg-white px-4 py-3 text-navy placeholder:text-warmgray focus:border-amber focus:outline-none focus:ring-2 focus:ring-amber/30'
-									/>
-								</div>
-
-								{error && (
-									<p className='text-sm font-medium text-red-600'>{error}</p>
-								)}
-
-								<button
-									type='submit'
-									disabled={submitting}
-									className='cursor-pointer rounded-xl bg-navy px-6 py-3 text-sm font-bold text-offwhite transition-colors hover:bg-navy-dark disabled:cursor-not-allowed disabled:opacity-60'
+					{submitted && (
+						<div className='mb-8 rounded-2xl border border-amber/50 bg-white px-8 py-6 text-center shadow-lg'>
+							<h3 className='text-xl font-bold text-navy'>Message sent</h3>
+							<p className='mt-2 text-md leading-relaxed text-charcoal/75'>
+								Thanks for reaching out — a member of our team will reply to
+								your email within one business day.
+							</p>
+						</div>
+					)}
+					<form onSubmit={handleSubmit} className='space-y-6'>
+							<div>
+								<label
+									htmlFor='contact-name'
+									className='text-xs font-bold uppercase tracking-[0.2em] text-navy'
 								>
-									{submitting ? 'Sending…' : 'Send message'}
-								</button>
-							</form>
-						)}
+									Name
+								</label>
+								<input
+									id='contact-name'
+									name='name'
+									type='text'
+									required
+									className='mt-2 w-full rounded-xl border border-black/20 bg-white px-4 py-3 text-navy placeholder:text-warmgray focus:border-amber focus:outline-none focus:ring-2 focus:ring-amber/30 '
+								/>
+							</div>
+
+							<div>
+								<label
+									htmlFor='contact-email'
+									className='text-xs font-bold uppercase tracking-[0.2em] text-navy'
+								>
+									Email
+								</label>
+								<input
+									id='contact-email'
+									name='email'
+									type='email'
+									required
+									className='mt-2 w-full rounded-xl border border-black/20 bg-white px-4 py-3 text-navy placeholder:text-warmgray focus:border-amber focus:outline-none focus:ring-2 focus:ring-amber/30'
+								/>
+							</div>
+
+							<div>
+								<label
+									htmlFor='contact-subject'
+									className='text-xs font-bold uppercase tracking-[0.2em] text-navy'
+								>
+									Subject
+								</label>
+								<input
+									id='contact-subject'
+									name='subject'
+									type='text'
+									required
+									className='mt-2 w-full rounded-xl border border-black/20 bg-white px-4 py-3 text-navy placeholder:text-warmgray focus:border-amber focus:outline-none focus:ring-2 focus:ring-amber/30'
+								/>
+							</div>
+
+							<div>
+								<label
+									htmlFor='contact-message'
+									className='text-xs font-bold uppercase tracking-[0.2em] text-navy'
+								>
+									Message
+								</label>
+								<textarea
+									id='contact-message'
+									name='message'
+									rows={6}
+									required
+									className='mt-2 w-full resize-y rounded-xl border border-black/20 bg-white px-4 py-3 text-navy placeholder:text-warmgray focus:border-amber focus:outline-none focus:ring-2 focus:ring-amber/30'
+								/>
+							</div>
+
+							{error && (
+								<p className='text-sm font-medium text-red-600'>{error}</p>
+							)}
+
+							<button
+								type='submit'
+								disabled={submitting}
+								className='cursor-pointer rounded-xl bg-navy px-6 py-3 text-sm font-bold text-offwhite transition-colors hover:bg-navy-dark disabled:cursor-not-allowed disabled:opacity-60'
+							>
+								{submitting ? 'Sending…' : 'Send message'}
+							</button>
+					</form>
 				</div>
 			</div>
 		</section>
