@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import { getSupabaseAdmin } from '../../lib/supabaseAdmin';
 
-const FROM_ADDRESS = 'Nuda Compounds <contact@nudacompounds.com>';
+const FROM_ADDRESS = 'Nuda Compounds <hello@nudacompounds.com>';
 const TO_ADDRESS = process.env.CONTACT_EMAIL || 'hello@nudacompounds.com';
 
 export async function POST(request: Request) {

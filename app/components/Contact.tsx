@@ -5,9 +5,8 @@ import type { FormEvent } from 'react';
 import { ClockIcon, MailIcon, PhoneIcon } from './icons';
 
 const CONTACT_EMAIL = 'hello@nudacompounds.com';
-// Placeholder contact details — swap in the real phone/orders inbox when available.
+// Placeholder — swap in the real phone number when available.
 const CONTACT_PHONE = '(555) 123-4567';
-const ORDERS_EMAIL = 'orders@nudacompounds.com';
 
 export function Contact() {
 	const [submitted, setSubmitted] = useState(false);
@@ -63,7 +62,7 @@ export function Contact() {
 						Contact Information
 					</span>
 
-					<div className='mt-6 grid grid-cols-2 gap-8 sm:grid-cols-4'>
+					<div className='mt-6 grid grid-cols-1 gap-8 sm:grid-cols-3'>
 						<div className='flex flex-col items-center text-center'>
 							<PhoneIcon className='h-5 w-5 text-amber' />
 							<div className='mt-2 text-xs font-bold uppercase tracking-wide text-navy-dark/50'>
@@ -89,26 +88,13 @@ export function Contact() {
 						<div className='flex flex-col items-center text-center'>
 							<MailIcon className='h-5 w-5 text-amber' />
 							<div className='mt-2 text-xs font-bold uppercase tracking-wide text-navy-dark/50'>
-								Support
+								Email
 							</div>
 							<a
 								href={`mailto:${CONTACT_EMAIL}`}
 								className='mt-1 inline-block break-all font-semibold text-navy-dark transition-colors hover:text-amber'
 							>
 								{CONTACT_EMAIL}
-							</a>
-						</div>
-
-						<div className='flex flex-col items-center text-center'>
-							<MailIcon className='h-5 w-5 text-amber' />
-							<div className='mt-2 text-xs font-bold uppercase tracking-wide text-navy-dark/50'>
-								Orders
-							</div>
-							<a
-								href={`mailto:${ORDERS_EMAIL}`}
-								className='mt-1 inline-block break-all font-semibold text-navy-dark transition-colors hover:text-amber'
-							>
-								{ORDERS_EMAIL}
 							</a>
 						</div>
 					</div>
