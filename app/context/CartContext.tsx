@@ -4,6 +4,7 @@ import {
 	createContext,
 	useCallback,
 	useContext,
+	useEffect,
 	useMemo,
 	useState,
 	type ReactNode,
@@ -12,8 +13,19 @@ import type { Product } from '../data/products';
 
 const MAX_QTY = 10;
 const MAX_KITS = 10;
+const CART_STORAGE_KEY = 'nuda_cart';
 
 type CartLine = { slug: string; qty: number; isBulk: boolean };
+
+function isCartLine(value: unknown): value is CartLine {
+	if (!value || typeof value !== 'object') return false;
+	const line = value as Record<string, unknown>;
+	return (
+		typeof line.slug === 'string' &&
+		typeof line.qty === 'number' &&
+		typeof line.isBulk === 'boolean'
+	);
+}
 
 type CartContextValue = {
 	items: CartLine[];
@@ -34,6 +46,32 @@ export function CartProvider({ children }: { children: ReactNode }) {
 	const [items, setItems] = useState<CartLine[]>([]);
 	const [isOpen, setIsOpen] = useState(false);
 	const [celebrationTick, setCelebrationTick] = useState(0);
+	const [hasHydrated, setHasHydrated] = useState(false);
+
+	useEffect(() => {
+		try {
+			const stored = window.localStorage.getItem(CART_STORAGE_KEY);
+			if (stored) {
+				const parsed = JSON.parse(stored);
+				if (Array.isArray(parsed) && parsed.every(isCartLine)) {
+					// eslint-disable-next-line react-hooks/set-state-in-effect -- syncing initial state from localStorage, an external system, on mount
+					setItems(parsed);
+				}
+			}
+		} catch {
+			// Corrupt or inaccessible storage — start with an empty cart.
+		}
+		setHasHydrated(true);
+	}, []);
+
+	useEffect(() => {
+		if (!hasHydrated) return;
+		try {
+			window.localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(items));
+		} catch {
+			// Storage full or unavailable (e.g. private browsing) — fail silently.
+		}
+	}, [items, hasHydrated]);
 
 	const addItem = useCallback(
 		(product: Product, qty = 1, isBulk = false) => {
