@@ -30,10 +30,13 @@ export function BestSellers() {
 
 				<div className='grid grid-cols-2 gap-6 sm:grid-cols-5'>
 					{bestSellers.map((product) => (
-						<button
+						<Link
 							key={product.slug}
-							type='button'
-							onClick={() => setSelectedProduct(product)}
+							href={`/products/${product.slug}`}
+							onClick={(event) => {
+								event.preventDefault();
+								setSelectedProduct(product);
+							}}
 							aria-label={`Quick view ${product.name}`}
 							className='group relative flex cursor-pointer flex-col overflow-hidden rounded-2xl border border-amber bg-white text-left transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl shadow-xl'
 						>
@@ -59,7 +62,7 @@ export function BestSellers() {
 									${product.price.toFixed(2)}
 								</p>
 							</div>
-						</button>
+						</Link>
 					))}
 				</div>
 
