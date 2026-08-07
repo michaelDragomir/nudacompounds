@@ -18,7 +18,12 @@ export function GoogleAnalyticsPageview() {
 		if (typeof window.gtag !== 'function') return;
 		const query = searchParams.toString();
 		const pagePath = query ? `${pathname}?${query}` : pathname;
-		window.gtag('config', GA_MEASUREMENT_ID, { page_path: pagePath });
+		window.gtag('event', 'page_view', {
+			page_path: pagePath,
+			page_title: document.title,
+			page_location: window.location.href,
+			send_to: GA_MEASUREMENT_ID,
+		});
 	}, [pathname, searchParams]);
 
 	return null;
