@@ -182,7 +182,7 @@ export function Contact() {
 						<button
 							type='submit'
 							disabled={submitting}
-							className='cursor-pointer rounded-xl bg-navy px-6 py-3 text-sm font-bold text-offwhite transition-colors hover:bg-navy-dark disabled:cursor-not-allowed disabled:opacity-60'
+							className='mx-auto block w-full cursor-pointer rounded-xl bg-navy px-6 py-3 text-md font-bold text-offwhite transition-colors hover:bg-navy-dark disabled:cursor-not-allowed disabled:opacity-60 sm:w-1/3'
 						>
 							{submitting ? 'Sending…' : 'Send message'}
 						</button>
