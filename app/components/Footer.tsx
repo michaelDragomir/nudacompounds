@@ -131,11 +131,7 @@ export function Footer() {
 								</a>
 							</li>
 							<li>{CONTACT_PHONE}</li>
-							<li>
-								Mon–Sat 9:00 AM – 5:00 PM MST
-								<br />
-								Closed Sunday
-							</li>
+							<li>Mon–Sat 9:00 AM – 5:00 PM MST</li>
 						</ul>
 					</div>
 				</div>

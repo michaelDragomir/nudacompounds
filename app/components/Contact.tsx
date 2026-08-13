@@ -56,7 +56,7 @@ export function Contact() {
 
 	return (
 		<section id='contact' className='bg-offwhite py-24'>
-			<div className='mx-auto max-w-3xl px-6'>
+			<div className='mx-auto max-w-240 px-6'>
 				<div className='rounded-2xl border border-amber bg-white p-8 shadow-xl'>
 					<span className='block text-center text-sm font-bold uppercase tracking-[0.2em] text-navy-dark'>
 						Contact Information
@@ -80,8 +80,6 @@ export function Contact() {
 							</div>
 							<div className='mt-1 font-semibold text-navy-dark'>
 								Mon–Sat 9:00 AM – 5:00 PM MST
-								<br />
-								Closed Sunday
 							</div>
 						</div>
 
@@ -92,9 +90,11 @@ export function Contact() {
 							</div>
 							<a
 								href={`mailto:${CONTACT_EMAIL}`}
-								className='mt-1 inline-block break-all font-semibold text-navy-dark transition-colors hover:text-amber'
+								className='mt-1 inline-block font-semibold text-navy-dark transition-colors hover:text-amber'
 							>
-								{CONTACT_EMAIL}
+								hello@
+								<wbr />
+								nudacompounds.com
 							</a>
 						</div>
 					</div>
@@ -111,81 +111,81 @@ export function Contact() {
 						</div>
 					)}
 					<form onSubmit={handleSubmit} className='space-y-6'>
-							<div>
-								<label
-									htmlFor='contact-name'
-									className='text-xs font-bold uppercase tracking-[0.2em] text-navy'
-								>
-									Name
-								</label>
-								<input
-									id='contact-name'
-									name='name'
-									type='text'
-									required
-									className='mt-2 w-full rounded-xl border border-black/20 bg-white px-4 py-3 text-navy placeholder:text-warmgray focus:border-amber focus:outline-none focus:ring-2 focus:ring-amber/30 '
-								/>
-							</div>
-
-							<div>
-								<label
-									htmlFor='contact-email'
-									className='text-xs font-bold uppercase tracking-[0.2em] text-navy'
-								>
-									Email
-								</label>
-								<input
-									id='contact-email'
-									name='email'
-									type='email'
-									required
-									className='mt-2 w-full rounded-xl border border-black/20 bg-white px-4 py-3 text-navy placeholder:text-warmgray focus:border-amber focus:outline-none focus:ring-2 focus:ring-amber/30'
-								/>
-							</div>
-
-							<div>
-								<label
-									htmlFor='contact-subject'
-									className='text-xs font-bold uppercase tracking-[0.2em] text-navy'
-								>
-									Subject
-								</label>
-								<input
-									id='contact-subject'
-									name='subject'
-									type='text'
-									required
-									className='mt-2 w-full rounded-xl border border-black/20 bg-white px-4 py-3 text-navy placeholder:text-warmgray focus:border-amber focus:outline-none focus:ring-2 focus:ring-amber/30'
-								/>
-							</div>
-
-							<div>
-								<label
-									htmlFor='contact-message'
-									className='text-xs font-bold uppercase tracking-[0.2em] text-navy'
-								>
-									Message
-								</label>
-								<textarea
-									id='contact-message'
-									name='message'
-									rows={6}
-									required
-									className='mt-2 w-full resize-y rounded-xl border border-black/20 bg-white px-4 py-3 text-navy placeholder:text-warmgray focus:border-amber focus:outline-none focus:ring-2 focus:ring-amber/30'
-								/>
-							</div>
-
-							{error && (
-								<p className='text-sm font-medium text-red-600'>{error}</p>
-							)}
-
-							<button
-								type='submit'
-								disabled={submitting}
-								className='cursor-pointer rounded-xl bg-navy px-6 py-3 text-sm font-bold text-offwhite transition-colors hover:bg-navy-dark disabled:cursor-not-allowed disabled:opacity-60'
+						<div>
+							<label
+								htmlFor='contact-name'
+								className='text-xs font-bold uppercase tracking-[0.2em] text-navy'
 							>
-								{submitting ? 'Sending…' : 'Send message'}
-							</button>
+								Name
+							</label>
+							<input
+								id='contact-name'
+								name='name'
+								type='text'
+								required
+								className='mt-2 w-full rounded-xl border border-black/20 bg-white px-4 py-3 text-navy placeholder:text-warmgray focus:border-amber focus:outline-none focus:ring-2 focus:ring-amber/30 '
+							/>
+						</div>
+
+						<div>
+							<label
+								htmlFor='contact-email'
+								className='text-xs font-bold uppercase tracking-[0.2em] text-navy'
+							>
+								Email
+							</label>
+							<input
+								id='contact-email'
+								name='email'
+								type='email'
+								required
+								className='mt-2 w-full rounded-xl border border-black/20 bg-white px-4 py-3 text-navy placeholder:text-warmgray focus:border-amber focus:outline-none focus:ring-2 focus:ring-amber/30'
+							/>
+						</div>
+
+						<div>
+							<label
+								htmlFor='contact-subject'
+								className='text-xs font-bold uppercase tracking-[0.2em] text-navy'
+							>
+								Subject
+							</label>
+							<input
+								id='contact-subject'
+								name='subject'
+								type='text'
+								required
+								className='mt-2 w-full rounded-xl border border-black/20 bg-white px-4 py-3 text-navy placeholder:text-warmgray focus:border-amber focus:outline-none focus:ring-2 focus:ring-amber/30'
+							/>
+						</div>
+
+						<div>
+							<label
+								htmlFor='contact-message'
+								className='text-xs font-bold uppercase tracking-[0.2em] text-navy'
+							>
+								Message
+							</label>
+							<textarea
+								id='contact-message'
+								name='message'
+								rows={6}
+								required
+								className='mt-2 w-full resize-y rounded-xl border border-black/20 bg-white px-4 py-3 text-navy placeholder:text-warmgray focus:border-amber focus:outline-none focus:ring-2 focus:ring-amber/30'
+							/>
+						</div>
+
+						{error && (
+							<p className='text-sm font-medium text-red-600'>{error}</p>
+						)}
+
+						<button
+							type='submit'
+							disabled={submitting}
+							className='cursor-pointer rounded-xl bg-navy px-6 py-3 text-sm font-bold text-offwhite transition-colors hover:bg-navy-dark disabled:cursor-not-allowed disabled:opacity-60'
+						>
+							{submitting ? 'Sending…' : 'Send message'}
+						</button>
 					</form>
 				</div>
 			</div>
