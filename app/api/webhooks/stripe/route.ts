@@ -78,6 +78,20 @@ export async function POST(request: Request) {
 
 		const supabase = getSupabaseAdmin();
 
+		// Idempotency guard: if this session was already fully processed (a
+		// prior delivery of this same event, or a Stripe retry), skip
+		// straight to done. Without this, a retried webhook would re-send
+		// both notification emails every time.
+		const { data: existingOrder } = await supabase
+			.from('orders')
+			.select('id, status')
+			.eq('stripe_session_id', session.id)
+			.maybeSingle();
+
+		if (existingOrder && existingOrder.status === 'paid') {
+			return NextResponse.json({ received: true, alreadyProcessed: true });
+		}
+
 		const shippingAddress = formatShippingAddress(
 			session.collected_information?.shipping_details,
 		);
