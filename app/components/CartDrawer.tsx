@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { useState } from 'react';
 import { useCart } from '../context/CartContext';
 import { products } from '../data/products';
 import { CartIcon, LockIcon, TrashIcon, XIcon } from './icons';
@@ -18,6 +19,38 @@ export function CartDrawer() {
 		addItem,
 		totalCount,
 	} = useCart();
+
+	const [checkingOut, setCheckingOut] = useState(false);
+	const [checkoutError, setCheckoutError] = useState<string | null>(null);
+
+	async function handleCheckout() {
+		setCheckoutError(null);
+		setCheckingOut(true);
+		try {
+			const response = await fetch('/api/checkout', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ items }),
+			});
+
+			const data = await response.json().catch(() => null);
+
+			if (!response.ok || !data?.url) {
+				throw new Error(
+					data?.error || 'Unable to start checkout. Please try again.',
+				);
+			}
+
+			window.location.href = data.url;
+		} catch (err) {
+			setCheckoutError(
+				err instanceof Error
+					? err.message
+					: 'Unable to start checkout. Please try again.',
+			);
+			setCheckingOut(false);
+		}
+	}
 
 	const lines = items
 		.map((line) => ({
@@ -231,13 +264,20 @@ export function CartDrawer() {
 						</span>
 					</div>
 
+					{checkoutError && (
+						<p className='mb-3 text-center text-sm font-medium text-red-400'>
+							{checkoutError}
+						</p>
+					)}
+
 					<button
 						type='button'
-						disabled
-						className='flex w-full items-center justify-center gap-2 rounded-xl bg-amber px-4 py-3.5 text-sm font-bold uppercase tracking-widest text-navy-dark/50 disabled:cursor-not-allowed'
+						disabled={lines.length === 0 || checkingOut}
+						onClick={handleCheckout}
+						className='flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-amber px-4 py-3.5 text-sm font-bold uppercase tracking-widest text-navy-dark transition-colors hover:bg-amber-dark disabled:cursor-not-allowed disabled:bg-amber/40 disabled:text-navy-dark/50'
 					>
 						<LockIcon className='h-4 w-4' />
-						Secure Checkout
+						{checkingOut ? 'Redirecting…' : 'Secure Checkout'}
 					</button>
 				</div>
 			</aside>
