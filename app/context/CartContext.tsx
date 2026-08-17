@@ -32,9 +32,11 @@ type CartContextValue = {
 	isOpen: boolean;
 	totalCount: number;
 	celebrationTick: number;
+	hasHydrated: boolean;
 	addItem: (product: Product, qty?: number, isBulk?: boolean) => void;
 	updateQty: (slug: string, delta: number, isBulk?: boolean) => void;
 	removeItem: (slug: string, isBulk?: boolean) => void;
+	clearCart: () => void;
 	openCart: () => void;
 	closeCart: () => void;
 	toggleCart: () => void;
@@ -119,6 +121,10 @@ export function CartProvider({ children }: { children: ReactNode }) {
 		);
 	}, []);
 
+	const clearCart = useCallback(() => {
+		setItems([]);
+	}, []);
+
 	const totalCount = useMemo(
 		() =>
 			items.reduce(
@@ -134,14 +140,26 @@ export function CartProvider({ children }: { children: ReactNode }) {
 			isOpen,
 			totalCount,
 			celebrationTick,
+			hasHydrated,
 			addItem,
 			updateQty,
 			removeItem,
+			clearCart,
 			openCart: () => setIsOpen(true),
 			closeCart: () => setIsOpen(false),
 			toggleCart: () => setIsOpen((open) => !open),
 		}),
-		[items, isOpen, totalCount, celebrationTick, addItem, updateQty, removeItem]
+		[
+			items,
+			isOpen,
+			totalCount,
+			celebrationTick,
+			hasHydrated,
+			addItem,
+			updateQty,
+			removeItem,
+			clearCart,
+		]
 	);
 
 	return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

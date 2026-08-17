@@ -39,6 +39,8 @@ export type Database = {
 					status: 'pending' | 'paid' | 'failed' | 'refunded';
 					customer_email: string;
 					customer_name: string | null;
+					customer_address: string | null;
+					customer_phone: string | null;
 					subtotal: number;
 					total: number;
 					currency: string;
@@ -53,6 +55,10 @@ export type Database = {
 					status?: 'pending' | 'paid' | 'failed' | 'refunded';
 					customer_email: string;
 					customer_name?: string | null;
+					// Required at the application layer — Checkout always
+					// collects it, so the webhook must always supply it.
+					customer_address: string;
+					customer_phone?: string | null;
 					subtotal: number;
 					total: number;
 					currency?: string;
@@ -67,6 +73,8 @@ export type Database = {
 					status?: 'pending' | 'paid' | 'failed' | 'refunded';
 					customer_email?: string;
 					customer_name?: string | null;
+					customer_address?: string | null;
+					customer_phone?: string | null;
 					subtotal?: number;
 					total?: number;
 					currency?: string;
