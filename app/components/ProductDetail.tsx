@@ -42,6 +42,7 @@ export function ProductDetail({ product }: { product: Product }) {
 	const bulkSavingsPercent = Math.round(
 		(1 - product.bulkPrice10 / (product.price * MAX_QTY)) * 100,
 	);
+	const bulkPricePerVial = product.bulkPrice10 / 10;
 
 	return (
 		<>
@@ -155,8 +156,13 @@ export function ProductDetail({ product }: { product: Product }) {
 									onClick={() => addItem(product, 1, true)}
 									className='group mt-3 flex w-full cursor-pointer overflow-hidden rounded-2xl border border-navy/70 shadow-lg transition-colors hover:border-navy-dark disabled:cursor-not-allowed disabled:opacity-40'
 								>
-									<span className='flex-1 py-2.25 text-center text-sm font-bold uppercase tracking-wide text-navy/70 transition-colors group-hover:bg-navy-dark group-hover:text-white'>
-										Buy Kit of 10
+									<span className='flex flex-1 flex-col items-center justify-center gap-0.5 py-2 text-center transition-colors group-hover:bg-navy-dark'>
+										<span className='text-sm font-bold uppercase tracking-wide text-navy/70 transition-colors group-hover:text-white'>
+											Buy Kit of 10
+										</span>
+										<span className='text-xs font-semibold text-navy/70 transition-colors group-hover:text-white/70'>
+											${bulkPricePerVial.toFixed(2)} / vial
+										</span>
 									</span>
 									<span className='flex items-center justify-center border-l border-navy/70 bg-navy-dark px-5 text-sm font-bold uppercase tracking-wide text-white transition-colors group-hover:border-navy-dark'>
 										Save {bulkSavingsPercent}%
