@@ -1,4 +1,3 @@
-// Update SITE_URL to the real production domain before deploying.
 export const SITE_URL = 'https://nudacompounds.com';
 export const SITE_NAME = 'Nuda Compounds';
 export const SITE_DESCRIPTION =
