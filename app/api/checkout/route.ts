@@ -122,7 +122,7 @@ export async function POST(request: Request) {
 			custom_text: {
 				terms_of_service_acceptance: {
 					message:
-						'I am 21+ and confirm these compounds are for in-vitro laboratory research only — not for human or veterinary use.',
+						'I am 21+ and confirm these compounds are for in-vitro laboratory research only — not for human or veterinary use. See our [Research Use Only](https://nudacompounds.com/research-use-only) page.',
 				},
 			},
 			success_url: `${origin}/order/confirmed?session_id={CHECKOUT_SESSION_ID}`,
