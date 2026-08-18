@@ -104,6 +104,10 @@ export async function POST(request: Request) {
 	try {
 		const session = await stripe.checkout.sessions.create({
 			mode: 'payment',
+			// Without this, Stripe falls back to auto-detecting locale from the
+			// buyer's browser and shows "US$35.00" instead of "$35.00" whenever
+			// it can't confirm the locale maps unambiguously to USD.
+			locale: 'en',
 			line_items: lineItems,
 			payment_method_types: ['card', 'cashapp'],
 			shipping_address_collection: {
