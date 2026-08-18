@@ -2,13 +2,29 @@ import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { products } from '../../data/products';
 import { SITE_URL } from '../../lib/site';
+import { getClientIp, rateLimit } from '../../lib/rateLimit';
 
 const MAX_QTY = 10;
 const MAX_KITS = 10;
+const RATE_LIMIT = 10;
+const RATE_WINDOW_MS = 60_000;
 
 type CartLineInput = { slug?: unknown; qty?: unknown; isBulk?: unknown };
 
 export async function POST(request: Request) {
+	const ip = getClientIp(request);
+	const { allowed, retryAfterSeconds } = rateLimit(
+		`checkout:${ip}`,
+		RATE_LIMIT,
+		RATE_WINDOW_MS,
+	);
+	if (!allowed) {
+		return NextResponse.json(
+			{ error: 'Too many requests. Please try again shortly.' },
+			{ status: 429, headers: { 'Retry-After': String(retryAfterSeconds) } },
+		);
+	}
+
 	const apiKey = process.env.STRIPE_SECRET_KEY;
 	if (!apiKey) {
 		console.error('STRIPE_SECRET_KEY is not set');
@@ -39,6 +55,13 @@ export async function POST(request: Request) {
 		if (!product) {
 			return NextResponse.json(
 				{ error: `Unknown product in cart: ${String(line.slug)}` },
+				{ status: 400 },
+			);
+		}
+
+		if (!product.inStock) {
+			return NextResponse.json(
+				{ error: `${product.name} is currently out of stock.` },
 				{ status: 400 },
 			);
 		}

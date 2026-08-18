@@ -1,11 +1,28 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import { getSupabaseAdmin } from '../../lib/supabaseAdmin';
+import { getClientIp, rateLimit } from '../../lib/rateLimit';
 
 const FROM_ADDRESS = 'Nuda Compounds <hello@nudacompounds.com>';
 const TO_ADDRESS = process.env.CONTACT_EMAIL || 'hello@nudacompounds.com';
 
+const RATE_LIMIT = 5;
+const RATE_WINDOW_MS = 60_000;
+
 export async function POST(request: Request) {
+	const ip = getClientIp(request);
+	const { allowed, retryAfterSeconds } = rateLimit(
+		`contact:${ip}`,
+		RATE_LIMIT,
+		RATE_WINDOW_MS,
+	);
+	if (!allowed) {
+		return NextResponse.json(
+			{ error: 'Too many requests. Please try again shortly.' },
+			{ status: 429, headers: { 'Retry-After': String(retryAfterSeconds) } },
+		);
+	}
+
 	const apiKey = process.env.RESEND_API_KEY;
 	if (!apiKey) {
 		console.error('RESEND_API_KEY is not set');

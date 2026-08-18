@@ -14,12 +14,19 @@ export function Catalog() {
 							className='group relative flex flex-col overflow-hidden rounded-2xl border border-black/5 bg-white transition-all duration-300 shadow-md hover:-translate-y-1 hover:border-amber/50 hover:shadow-xl'
 						>
 							<div className='relative flex aspect-square items-center justify-center overflow-hidden bg-linear-to-b from-navy-dark/5 to-navy-dark/10'>
+								{!product.inStock && (
+									<span className='absolute right-3 top-3 z-10 rounded-full bg-navy-dark/90 px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-white'>
+										Out of Stock
+									</span>
+								)}
 								<Image
 									src={product.image}
 									alt={`${product.name} vial`}
 									width={300}
 									height={300}
-									className='h-full w-auto object-contain p-6 drop-shadow-sm transition-transform duration-300 group-hover:scale-110'
+									className={`h-full w-auto object-contain p-6 drop-shadow-sm transition-transform duration-300 group-hover:scale-110 ${
+										product.inStock ? '' : 'opacity-50'
+									}`}
 								/>
 							</div>
 

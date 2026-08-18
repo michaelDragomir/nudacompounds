@@ -79,24 +79,32 @@ export function CartProvider({ children }: { children: ReactNode }) {
 	const addItem = useCallback(
 		(product: Product, qty = 1, isBulk = false) => {
 			const cap = isBulk ? MAX_KITS : MAX_QTY;
+			// The cap can silently reduce how much is actually added (e.g.
+			// requesting 5 more when 8 of 10 are already in the cart only adds
+			// 2) — track the amount actually applied, not the requested qty,
+			// so add_to_cart in GA4 doesn't overstate the cart/revenue impact.
+			let appliedQty = 0;
 			setItems((prev) => {
 				const existing = prev.find(
 					(line) => line.slug === product.slug && line.isBulk === isBulk
 				);
 				if (existing) {
+					const newQty = Math.min(cap, existing.qty + qty);
+					appliedQty = newQty - existing.qty;
 					return prev.map((line) =>
 						line.slug === product.slug && line.isBulk === isBulk
-							? { ...line, qty: Math.min(cap, line.qty + qty) }
+							? { ...line, qty: newQty }
 							: line
 					);
 				}
-				return [
-					...prev,
-					{ slug: product.slug, qty: Math.min(cap, qty), isBulk },
-				];
+				const newQty = Math.min(cap, qty);
+				appliedQty = newQty;
+				return [...prev, { slug: product.slug, qty: newQty, isBulk }];
 			});
 			setCelebrationTick((tick) => tick + 1);
-			trackAddToCart(product, qty, isBulk);
+			if (appliedQty > 0) {
+				trackAddToCart(product, appliedQty, isBulk);
+			}
 		},
 		[]
 	);

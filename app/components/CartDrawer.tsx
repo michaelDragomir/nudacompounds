@@ -27,7 +27,6 @@ export function CartDrawer() {
 	async function handleCheckout() {
 		setCheckoutError(null);
 		setCheckingOut(true);
-		trackBeginCheckout(lines, subtotal);
 		try {
 			const response = await fetch('/api/checkout', {
 				method: 'POST',
@@ -42,6 +41,11 @@ export function CartDrawer() {
 					data?.error || 'Unable to start checkout. Please try again.',
 				);
 			}
+
+			// Only fire once the session was actually created — firing
+			// unconditionally on click would re-report begin_checkout on every
+			// retry after a failed attempt, inflating the funnel.
+			trackBeginCheckout(lines, subtotal);
 
 			// eslint-disable-next-line react-hooks/immutability -- navigation from an event handler, not render
 			window.location.href = data.url;
@@ -77,7 +81,7 @@ export function CartDrawer() {
 	);
 
 	const suggestion = products.find(
-		(p) => !items.some((line) => line.slug === p.slug),
+		(p) => p.inStock && !items.some((line) => line.slug === p.slug),
 	);
 
 	return (
