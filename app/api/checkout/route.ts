@@ -116,6 +116,15 @@ export async function POST(request: Request) {
 			phone_number_collection: {
 				enabled: true,
 			},
+			consent_collection: {
+				terms_of_service: 'required',
+			},
+			custom_text: {
+				terms_of_service_acceptance: {
+					message:
+						'I am 21+ and confirm these compounds are for in-vitro laboratory research only — not for human or veterinary use.',
+				},
+			},
 			success_url: `${origin}/order/confirmed?session_id={CHECKOUT_SESSION_ID}`,
 			cancel_url: `${origin}/catalog`,
 		});
