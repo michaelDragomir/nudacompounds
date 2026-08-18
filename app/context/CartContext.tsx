@@ -10,6 +10,7 @@ import {
 	type ReactNode,
 } from 'react';
 import type { Product } from '../data/products';
+import { trackAddToCart } from '../lib/gtagEvents';
 
 const MAX_QTY = 10;
 const MAX_KITS = 10;
@@ -95,6 +96,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
 				];
 			});
 			setCelebrationTick((tick) => tick + 1);
+			trackAddToCart(product, qty, isBulk);
 		},
 		[]
 	);

@@ -1,9 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useCart } from '../context/CartContext';
 import type { Product } from '../data/products';
+import { trackViewItem } from '../lib/gtagEvents';
 import { FreeShippingTimer } from './FreeShippingTimer';
 import { FrequentlyBoughtTogether } from './FrequentlyBoughtTogether';
 import {
@@ -29,6 +30,10 @@ const TRUST_ITEMS = [
 export function ProductDetail({ product }: { product: Product }) {
 	const { addItem } = useCart();
 	const [qty, setQty] = useState(MIN_QTY);
+
+	useEffect(() => {
+		trackViewItem(product);
+	}, [product]);
 
 	function changeQty(delta: number) {
 		setQty((prev) => Math.min(MAX_QTY, Math.max(MIN_QTY, prev + delta)));

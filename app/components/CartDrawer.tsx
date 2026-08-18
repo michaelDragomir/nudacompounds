@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { useCart } from '../context/CartContext';
 import { products } from '../data/products';
+import { trackBeginCheckout } from '../lib/gtagEvents';
 import { CartIcon, LockIcon, TrashIcon, XIcon } from './icons';
 import { SectionLink } from './SectionLink';
 
@@ -26,6 +27,7 @@ export function CartDrawer() {
 	async function handleCheckout() {
 		setCheckoutError(null);
 		setCheckingOut(true);
+		trackBeginCheckout(lines, subtotal);
 		try {
 			const response = await fetch('/api/checkout', {
 				method: 'POST',
@@ -41,6 +43,7 @@ export function CartDrawer() {
 				);
 			}
 
+			// eslint-disable-next-line react-hooks/immutability -- navigation from an event handler, not render
 			window.location.href = data.url;
 		} catch (err) {
 			setCheckoutError(

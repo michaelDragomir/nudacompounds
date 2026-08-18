@@ -20,8 +20,10 @@ type OrderSummary = {
 };
 
 type ItemSummary = {
+	product_slug: string;
 	product_name: string;
 	quantity: number;
+	unit_price: number;
 	line_total: number;
 	is_bulk: boolean;
 };
@@ -48,7 +50,7 @@ export default async function OrderConfirmedPage({
 			order = orderRow;
 			const { data: itemRows } = await supabase
 				.from('order_items')
-				.select('product_name, quantity, line_total, is_bulk')
+				.select('product_slug, product_name, quantity, unit_price, line_total, is_bulk')
 				.eq('order_id', orderRow.id);
 			items = itemRows || [];
 		}
@@ -57,7 +59,7 @@ export default async function OrderConfirmedPage({
 	return (
 		<div className='bg-offwhite py-24'>
 			<div className='mx-auto max-w-2xl px-6'>
-				<OrderConfirmedEffects orderFound={Boolean(order)} />
+				<OrderConfirmedEffects order={order} items={items} />
 
 				{!sessionId ? (
 					<div className='rounded-2xl border border-amber/50 bg-white p-10 text-center shadow-xl'>
@@ -104,7 +106,7 @@ export default async function OrderConfirmedPage({
 								Thank you for your order!
 							</h1>
 							<p className='mt-3 text-charcoal/75'>
-								A confirmation has been sent to{' '}
+								A confirmation email has been sent to{' '}
 								<span className='font-semibold text-navy'>
 									{order.customer_email}
 								</span>
