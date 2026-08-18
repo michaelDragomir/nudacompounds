@@ -59,6 +59,13 @@ export async function POST(request: Request) {
 			);
 		}
 
+		if (!product.inStock) {
+			return NextResponse.json(
+				{ error: `${product.name} is currently out of stock.` },
+				{ status: 400 },
+			);
+		}
+
 		const isBulk = line.isBulk === true;
 		const cap = isBulk ? MAX_KITS : MAX_QTY;
 		const rawQty = Number(line.qty);

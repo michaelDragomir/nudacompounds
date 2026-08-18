@@ -129,7 +129,7 @@ export function ProductDetail({ product }: { product: Product }) {
 										</span>
 										<button
 											type='button'
-											disabled={qty >= MAX_QTY}
+											disabled={!product.inStock || qty >= MAX_QTY}
 											onClick={() => changeQty(1)}
 											aria-label='Increase quantity'
 											className='flex h-9 w-9 items-center justify-center text-lg transition-colors hover:text-navy disabled:cursor-not-allowed disabled:opacity-40 cursor-pointer'
@@ -140,18 +140,20 @@ export function ProductDetail({ product }: { product: Product }) {
 
 									<button
 										type='button'
+										disabled={!product.inStock}
 										onClick={() => addItem(product, qty)}
-										className='flex flex-1 items-center justify-center gap-2 rounded-2xl bg-amber px-6 py-2.25 text-sm font-bold uppercase tracking-wide text-white [text-shadow:0_1px_2px_rgba(0,0,0,0.35)] transition-colors hover:bg-amber-dark cursor-pointer shadow-md border border-amber'
+										className='flex flex-1 items-center justify-center gap-2 rounded-2xl bg-amber px-6 py-2.25 text-sm font-bold uppercase tracking-wide text-white [text-shadow:0_1px_2px_rgba(0,0,0,0.35)] transition-colors hover:bg-amber-dark cursor-pointer shadow-md border border-amber disabled:cursor-not-allowed disabled:bg-amber/40 disabled:hover:bg-amber/40'
 									>
 										<CartIcon className='h-4 w-4' />
-										Add to Cart
+										{product.inStock ? 'Add to Cart' : 'Out of Stock'}
 									</button>
 								</div>
 
 								<button
 									type='button'
+									disabled={!product.inStock}
 									onClick={() => addItem(product, 1, true)}
-									className='group mt-3 flex w-full cursor-pointer overflow-hidden rounded-2xl border border-navy/70 shadow-lg transition-colors hover:border-navy-dark'
+									className='group mt-3 flex w-full cursor-pointer overflow-hidden rounded-2xl border border-navy/70 shadow-lg transition-colors hover:border-navy-dark disabled:cursor-not-allowed disabled:opacity-40'
 								>
 									<span className='flex-1 py-2.25 text-center text-sm font-bold uppercase tracking-wide text-navy/70 transition-colors group-hover:bg-navy-dark group-hover:text-white'>
 										Buy Kit of 10
