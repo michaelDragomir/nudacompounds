@@ -64,6 +64,16 @@ export async function POST(request: Request) {
 		return NextResponse.json({ error: 'Invalid signature.' }, { status: 400 });
 	}
 
+	if (event.type === 'charge.refunded') {
+		return handleChargeRefunded(event.data.object as Stripe.Charge);
+	}
+
+	if (event.type === 'checkout.session.async_payment_failed') {
+		return handleAsyncPaymentFailed(
+			event.data.object as Stripe.Checkout.Session,
+		);
+	}
+
 	if (event.type !== 'checkout.session.completed') {
 		return NextResponse.json({ received: true });
 	}
@@ -173,6 +183,191 @@ export async function POST(request: Request) {
 			{ error: 'Webhook processing failed.' },
 			{ status: 500 },
 		);
+	}
+}
+
+async function handleChargeRefunded(charge: Stripe.Charge) {
+	const paymentIntentId =
+		typeof charge.payment_intent === 'string'
+			? charge.payment_intent
+			: charge.payment_intent?.id;
+
+	if (!paymentIntentId) {
+		console.error(
+			`Charge ${charge.id} refunded with no associated payment intent — cannot match to an order.`,
+		);
+		return NextResponse.json({ received: true });
+	}
+
+	try {
+		const supabase = getSupabaseAdmin();
+
+		const { data: order, error: findError } = await supabase
+			.from('orders')
+			.select('id, order_number, status, customer_email, total')
+			.eq('stripe_payment_intent_id', paymentIntentId)
+			.maybeSingle();
+
+		if (findError) throw findError;
+
+		if (!order) {
+			console.error(
+				`Refund received for payment intent ${paymentIntentId} but no matching order was found.`,
+			);
+			return NextResponse.json({ received: true });
+		}
+
+		// Idempotency guard, same reasoning as the checkout-completed path —
+		// a retried delivery of this same event shouldn't re-send the email.
+		if (order.status === 'refunded') {
+			return NextResponse.json({ received: true, alreadyProcessed: true });
+		}
+
+		const { error: updateError } = await supabase
+			.from('orders')
+			.update({ status: 'refunded', updated_at: new Date().toISOString() })
+			.eq('id', order.id);
+		if (updateError) throw updateError;
+
+		const isFullRefund = charge.amount_refunded >= charge.amount;
+		await sendRefundEmail(order, charge.amount_refunded, isFullRefund);
+
+		return NextResponse.json({ received: true });
+	} catch (err) {
+		console.error('Stripe refund webhook processing failed:', err);
+		return NextResponse.json(
+			{ error: 'Webhook processing failed.' },
+			{ status: 500 },
+		);
+	}
+}
+
+// Fires when a delayed/async payment method (e.g. Cash App Pay) ultimately
+// fails after the customer already left the checkout flow believing they'd
+// paid. Without this, the order simply never appears anywhere — the customer
+// isn't charged, but no one at Nuda is alerted that a sale fell through.
+async function handleAsyncPaymentFailed(session: Stripe.Checkout.Session) {
+	try {
+		const supabase = getSupabaseAdmin();
+
+		const { data: existingOrder } = await supabase
+			.from('orders')
+			.select('id, status')
+			.eq('stripe_session_id', session.id)
+			.maybeSingle();
+
+		if (existingOrder && existingOrder.status === 'failed') {
+			return NextResponse.json({ received: true, alreadyProcessed: true });
+		}
+
+		const { data: order, error: orderError } = await supabase
+			.from('orders')
+			.upsert(
+				{
+					stripe_session_id: session.id,
+					stripe_payment_intent_id:
+						typeof session.payment_intent === 'string'
+							? session.payment_intent
+							: null,
+					status: 'failed',
+					customer_email:
+						session.customer_details?.email || 'unknown@nudacompounds.com',
+					customer_name: session.customer_details?.name || null,
+					customer_address:
+						formatShippingAddress(
+							session.collected_information?.shipping_details,
+						) || 'Not provided',
+					customer_phone: session.customer_details?.phone || null,
+					subtotal: session.amount_subtotal ?? session.amount_total ?? 0,
+					total: session.amount_total ?? 0,
+					currency: session.currency || 'usd',
+					updated_at: new Date().toISOString(),
+				},
+				{ onConflict: 'stripe_session_id' },
+			)
+			.select()
+			.single();
+
+		if (orderError || !order) {
+			throw orderError || new Error('Order upsert returned no row.');
+		}
+
+		await sendAsyncPaymentFailedEmail(order);
+
+		return NextResponse.json({ received: true });
+	} catch (err) {
+		console.error('Stripe async-payment-failed webhook processing failed:', err);
+		return NextResponse.json(
+			{ error: 'Webhook processing failed.' },
+			{ status: 500 },
+		);
+	}
+}
+
+async function sendAsyncPaymentFailedEmail(order: {
+	order_number: string;
+	customer_email: string;
+	total: number;
+}) {
+	const apiKey = process.env.RESEND_API_KEY;
+	if (!apiKey) {
+		console.error(
+			'RESEND_API_KEY is not set — skipping payment-failed notification email.',
+		);
+		return;
+	}
+
+	const resend = new Resend(apiKey);
+
+	try {
+		await resend.emails.send({
+			from: FROM_ADDRESS,
+			to: MERCHANT_EMAIL,
+			subject: `Payment failed for ${order.order_number} — $${formatCents(order.total)}`,
+			text: [
+				`A delayed payment method (e.g. Cash App Pay) ultimately failed for order ${order.order_number}.`,
+				'',
+				`Customer: ${order.customer_email}`,
+				`Amount: $${formatCents(order.total)}`,
+				'',
+				'No charge went through — the customer has not paid. Stripe notifies the customer of this directly; no action is needed unless they reach out.',
+			].join('\n'),
+		});
+	} catch (err) {
+		console.error('Payment-failed notification email failed:', err);
+	}
+}
+
+async function sendRefundEmail(
+	order: { order_number: string; customer_email: string; total: number },
+	amountRefundedCents: number,
+	isFullRefund: boolean,
+) {
+	const apiKey = process.env.RESEND_API_KEY;
+	if (!apiKey) {
+		console.error(
+			'RESEND_API_KEY is not set — skipping refund notification email.',
+		);
+		return;
+	}
+
+	const resend = new Resend(apiKey);
+
+	try {
+		await resend.emails.send({
+			from: FROM_ADDRESS,
+			to: MERCHANT_EMAIL,
+			subject: `Order ${order.order_number} refunded — $${formatCents(amountRefundedCents)}`,
+			text: [
+				`Order ${order.order_number} has been ${isFullRefund ? 'fully' : 'partially'} refunded.`,
+				'',
+				`Customer: ${order.customer_email}`,
+				`Order total: $${formatCents(order.total)}`,
+				`Refunded: $${formatCents(amountRefundedCents)}`,
+			].join('\n'),
+		});
+	} catch (err) {
+		console.error('Refund notification email failed:', err);
 	}
 }
 
