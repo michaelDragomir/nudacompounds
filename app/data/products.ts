@@ -9,6 +9,7 @@ export type Product = {
 	bulkPrice10: number;
 	image: string;
 	inStock: boolean;
+	kitEligible: boolean;
 	coa: {
 		batch: string;
 		form: string;
@@ -30,6 +31,7 @@ export const products: Product[] = [
 		bulkPrice10: 190,
 		image: '/images/3rt.png',
 		inStock: false,
+		kitEligible: true,
 		coa: {
 			batch: 'AUR-908157',
 			form: 'Lyophilized Powder',
@@ -38,8 +40,8 @@ export const products: Product[] = [
 		},
 	},
 	{
-		slug: '2-tr',
-		name: 'GLP-2 TR',
+		slug: '2-trz',
+		name: 'GLP-2 TRZ',
 		category: 'Metabolic Research',
 		description:
 			'A synthetic dual-receptor agonist peptide (GIP/GLP-1) referenced in published in-vitro receptor-binding literature. Supplied lyophilized as a laboratory reference compound.',
@@ -49,6 +51,7 @@ export const products: Product[] = [
 		bulkPrice10: 150,
 		image: '/images/2rt.png',
 		inStock: true,
+		kitEligible: true,
 		coa: {
 			batch: 'AUR-914402',
 			form: 'Lyophilized Powder',
@@ -68,6 +71,7 @@ export const products: Product[] = [
 		bulkPrice10: 230,
 		image: '/images/bpc.png',
 		inStock: true,
+		kitEligible: false,
 		coa: {
 			batch: 'AUR-902210',
 			form: 'Lyophilized Powder',
@@ -87,6 +91,7 @@ export const products: Product[] = [
 		bulkPrice10: 280,
 		image: '/images/ghk.png',
 		inStock: true,
+		kitEligible: false,
 		coa: {
 			batch: 'AUR-920071',
 			form: 'Lyophilized Powder',
@@ -106,6 +111,7 @@ export const products: Product[] = [
 		bulkPrice10: 400,
 		image: '/images/tesamorelin.png',
 		inStock: true,
+		kitEligible: false,
 		coa: {
 			batch: 'AUR-931588',
 			form: 'Lyophilized Powder',
@@ -125,6 +131,7 @@ export const products: Product[] = [
 		bulkPrice10: 520,
 		image: '/images/mots.png',
 		inStock: true,
+		kitEligible: false,
 		coa: {
 			batch: 'AUR-984127',
 			form: 'Lyophilized Powder',
@@ -144,6 +151,7 @@ export const products: Product[] = [
 		bulkPrice10: 1200,
 		image: '/images/nad.png',
 		inStock: true,
+		kitEligible: false,
 		coa: {
 			batch: 'AUR-990284',
 			form: 'Lyophilized Powder',
@@ -163,6 +171,7 @@ export const products: Product[] = [
 		bulkPrice10: 85,
 		image: '/images/bacWater.png',
 		inStock: true,
+		kitEligible: false,
 		coa: {
 			batch: 'AUR-899142',
 			form: 'Sterile Liquid',

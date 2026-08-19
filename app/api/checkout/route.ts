@@ -67,6 +67,14 @@ export async function POST(request: Request) {
 		}
 
 		const isBulk = line.isBulk === true;
+
+		if (isBulk && !product.kitEligible) {
+			return NextResponse.json(
+				{ error: `${product.name} is not available as a kit of 10.` },
+				{ status: 400 },
+			);
+		}
+
 		const cap = isBulk ? MAX_KITS : MAX_QTY;
 		const rawQty = Number(line.qty);
 		const qty = Math.min(cap, Math.max(1, Math.floor(rawQty)));
