@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { useCart } from '../context/CartContext';
 import type { Product } from '../data/products';
 import { trackViewItem } from '../lib/gtagEvents';
+import { renderWithBold } from '../lib/renderWithBold';
 import { FreeShippingTimer } from './FreeShippingTimer';
 import { FrequentlyBoughtTogether } from './FrequentlyBoughtTogether';
 import { ProductTrustGrid } from './ProductTrustGrid';
@@ -21,15 +22,6 @@ import { SectionLink } from './SectionLink';
 
 const MIN_QTY = 1;
 const MAX_QTY = 10;
-
-// Minimal inline markup: **text** renders as bold. Lets product copy mark up
-// specific phrases without needing structured/rich-text fields per product.
-function renderWithBold(text: string) {
-	const parts = text.split(/\*\*(.+?)\*\*/g);
-	return parts.map((part, index) =>
-		index % 2 === 1 ? <strong key={index}>{part}</strong> : part,
-	);
-}
 
 const TRUST_ITEMS = [
 	{ icon: ShieldIcon, label: 'cGMP-Aligned Facilities' },

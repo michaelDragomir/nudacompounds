@@ -94,7 +94,7 @@ export function Header() {
 			</div>
 
 			{mobileMenuOpen && (
-				<div className='fixed inset-x-0 top-16 z-60 h-[45vh] overflow-y-auto rounded-b-2xl bg-navy-dark shadow-2xl md:hidden'>
+				<div className='fixed inset-x-0 top-[57px] z-60 h-[45vh] overflow-y-auto rounded-b-2xl bg-navy-dark shadow-2xl md:hidden'>
 					<button
 						type='button'
 						onClick={() => setMobileMenuOpen(false)}
