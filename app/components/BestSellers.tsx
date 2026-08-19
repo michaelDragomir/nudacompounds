@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { products, type Product } from '../data/products';
 import { QuickViewModal } from './QuickViewModal';
 
-const BEST_SELLER_SLUGS = ['3-rt', '2-tr', 'tesamorelin', 'ghk-cu', 'bpc-157'];
+const BEST_SELLER_SLUGS = ['3-rt', '2-trz', 'tesamorelin', 'ghk-cu', 'bpc-157'];
 
 const bestSellers = BEST_SELLER_SLUGS.map((slug) =>
 	products.find((product) => product.slug === slug),
@@ -17,7 +17,7 @@ export function BestSellers() {
 
 	return (
 		<section className='py-14 bg-linear-to-b from-navy to-navy-dark'>
-			<div className='mx-auto max-w-7xl px-6'>
+			<div className='mx-auto max-w-6xl px-6'>
 				<div className='mx-auto mb-8 max-w-3xl text-center'>
 					<h2 className='text-4xl font-bold font-sora leading-tight text-offwhite tracking-wide'>
 						Our Best Selling Compounds
