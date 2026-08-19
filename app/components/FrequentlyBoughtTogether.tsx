@@ -8,7 +8,7 @@ import { products, type Product } from '../data/products';
 import { FREQUENTLY_BOUGHT_SLUGS } from '../data/frequentlyBoughtTogether';
 import { ArrowRightIcon, CartIcon } from './icons';
 
-const VISIBLE_COUNT = 3;
+const VISIBLE_COUNT = 4;
 
 export function FrequentlyBoughtTogether({
 	currentSlug,
@@ -43,14 +43,14 @@ export function FrequentlyBoughtTogether({
 	}
 
 	return (
-		<section className='bg-offwhite pb-14'>
-			<div className='mx-auto max-w-6xl px-14 sm:px-18'>
+		<section className='bg-offwhite py-6'>
+			<div className='mx-auto max-w-6xl px-14 sm:px-18 lg:px-6'>
 				<div className='flex items-end justify-between gap-4'>
 					<div>
 						<h2 className='font-sora text-2xl font-extrabold leading-tight text-navy sm:text-3xl'>
 							Frequently Bought Together
 						</h2>
-						<p className='mt-2 text-md text-warmgray'>
+						<p className='mt-2 text-md text-charcoal'>
 							Commonly paired to support consistent, reliable experimentation.
 						</p>
 					</div>
@@ -79,7 +79,7 @@ export function FrequentlyBoughtTogether({
 					)}
 				</div>
 
-				<div className='mt-6 grid grid-cols-1 gap-2 sm:grid-cols-3'>
+				<div className='mt-6 grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-4'>
 					{visibleItems.map((product) => (
 						<div
 							key={product.slug}

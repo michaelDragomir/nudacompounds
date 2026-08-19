@@ -7,6 +7,7 @@ import type { Product } from '../data/products';
 import { trackViewItem } from '../lib/gtagEvents';
 import { FreeShippingTimer } from './FreeShippingTimer';
 import { FrequentlyBoughtTogether } from './FrequentlyBoughtTogether';
+import { ProductTrustGrid } from './ProductTrustGrid';
 import {
 	ArrowRightIcon,
 	CartIcon,
@@ -56,7 +57,7 @@ export function ProductDetail({ product }: { product: Product }) {
 	return (
 		<>
 			<div className='bg-offwhite pt-16'>
-				<div className='mx-auto max-w-6xl px-6'>
+				<div className='mx-auto max-w-6xl px-6 pb-8'>
 					<SectionLink
 						href='/products'
 						className='inline-flex items-center gap-2 text-sm font-bold text-navy hover:text-amber-dark transition-colors'
@@ -271,6 +272,7 @@ export function ProductDetail({ product }: { product: Product }) {
 					</div>
 				</div>
 			</div>
+			<ProductTrustGrid />
 			<FrequentlyBoughtTogether currentSlug={product.slug} />
 		</>
 	);
