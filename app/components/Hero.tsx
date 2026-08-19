@@ -70,7 +70,7 @@ export function Hero() {
 								View Our Testing Standards
 							</SectionLink> */}
 							<SectionLink
-								href='/catalog'
+								href='/products'
 								className='whitespace-nowrap rounded-2xl bg-amber px-10 py-3 text-xs font-bold uppercase tracking-widest text-white transition-colors hover:bg-amber-dark sm:px-14 sm:text-sm shadow-xl'
 							>
 								View research compounds

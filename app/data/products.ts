@@ -3,6 +3,9 @@ export type Product = {
 	name: string;
 	category: string;
 	description: string;
+	// Optional trailing text rendered in bold after `description` — for a
+	// disclaimer or caveat that should stand out from the rest of the copy.
+	descriptionEmphasis?: string;
 	purity: string;
 	size: string;
 	price: number;
@@ -24,7 +27,7 @@ export const products: Product[] = [
 		name: 'GLP-3 RT',
 		category: 'Metabolic Research',
 		description:
-			'A synthetic tri-receptor agonist peptide (GIP/GLP-1/glucagon) referenced in published in-vitro receptor-binding literature. Supplied lyophilized as a laboratory reference compound.',
+			'GLP-3 RT Retatrutide is a synthetic peptide research material used in laboratory investigation of GLP-1, GIP, and glucagon receptor signaling. Its distinctive triple-receptor profile makes it a compelling research candidate for studying receptor interactions, downstream signaling pathways, and metabolic signaling mechanisms.',
 		purity: '≥99%',
 		size: '10mg vial',
 		price: 40,
@@ -44,11 +47,11 @@ export const products: Product[] = [
 		name: 'GLP-2 TRZ',
 		category: 'Metabolic Research',
 		description:
-			'A synthetic dual-receptor agonist peptide (GIP/GLP-1) referenced in published in-vitro receptor-binding literature. Supplied lyophilized as a laboratory reference compound.',
+			'AGLP-2 TRZ Tirzepatide is a synthetic peptide research material used in laboratory investigation of GLP-1 and GIP receptor signaling. Its distinctive dual-receptor profile makes it a compelling research candidate for studying receptor interactions, downstream signaling pathways, and metabolic signaling mechanisms.',
 		purity: '≥99%',
 		size: '10mg vial',
 		price: 30,
-		bulkPrice10: 150,
+		bulkPrice10: 180,
 		image: '/images/2rt.png',
 		inStock: true,
 		kitEligible: true,
@@ -64,7 +67,7 @@ export const products: Product[] = [
 		name: 'BPC-157',
 		category: 'Recovery Research',
 		description:
-			'A synthetic pentadecapeptide derived from a partial sequence of body protective compound (BPC), commonly referenced in gastrointestinal and tissue-repair research literature.',
+			'BPC-157 is a widely studied synthetic peptide research material with a distinctive profile across cellular signaling and tissue-response research. Its versatility makes it a compelling candidate for investigating cellular migration, angiogenic signaling, tissue remodeling, and related biological mechanisms.',
 		purity: '≥99%',
 		size: '10mg vial',
 		price: 30,
@@ -84,7 +87,7 @@ export const products: Product[] = [
 		name: 'GHK-Cu',
 		category: 'Recovery Research',
 		description:
-			'A naturally occurring copper-binding tripeptide studied in published literature for its role in tissue remodeling and dermal research models. Supplied lyophilized for laboratory use.',
+			'GHK-Cu is a widely studied copper-binding tripeptide valued for its unique combination of peptide signaling and copper-binding activity. Its distinctive research profile has generated significant interest in experimental models of **skin and hair biology**, extracellular matrix signaling, cellular remodeling, and copper-dependent biological pathways, making GHK-Cu a versatile subject for advanced peptide research.',
 		purity: '≥99%',
 		size: '50mg vial',
 		price: 35,
@@ -104,10 +107,10 @@ export const products: Product[] = [
 		name: 'Tesamorelin',
 		category: 'Metabolic Research',
 		description:
-			'A synthetic growth-hormone-releasing hormone (GHRH) analog referenced in published endocrine research literature. Supplied lyophilized as a laboratory reference compound.',
+			'Tesamorelin is a synthetic peptide research material recognized for its distinctive activity within growth hormone–releasing hormone (GHRH) receptor signaling. Its targeted research profile makes it a compelling subject for investigating GH-axis signaling, endocrine pathway dynamics, and downstream metabolic signaling mechanisms across controlled experimental models.',
 		purity: '≥99%',
 		size: '10mg vial',
-		price: 150,
+		price: 40,
 		bulkPrice10: 400,
 		image: '/images/tesamorelin.png',
 		inStock: true,
@@ -124,7 +127,7 @@ export const products: Product[] = [
 		name: 'MOTS-c',
 		category: 'Metabolic Research',
 		description:
-			'A mitochondrial-derived peptide referenced in published metabolic and cellular-energy research literature. Supplied lyophilized as a laboratory reference compound.',
+			'MOTS-c is a mitochondrial-derived peptide research material recognized for its growing scientific interest in cellular energy and metabolic signaling. Its distinctive research profile makes it a compelling subject for investigating mitochondrial communication, cellular stress-response pathways, energy homeostasis, and metabolic adaptation across controlled experimental models.',
 		purity: '≥99%',
 		size: '10mg vial',
 		price: 40,
@@ -144,7 +147,7 @@ export const products: Product[] = [
 		name: 'NAD+',
 		category: 'Metabolic Research',
 		description:
-			'Nicotinamide adenine dinucleotide, a coenzyme studied in published cellular-energy and longevity research literature. Supplied lyophilized as a laboratory reference compound.',
+			'NAD+ (Nicotinamide Adenine Dinucleotide) is a foundational cellular cofactor and a prominent subject of research into energy metabolism, mitochondrial biology, and cellular resilience. Its central role in redox reactions and NAD+-dependent signaling makes it a versatile research material for exploring metabolic regulation, cellular stress responses, and pathways associated with cellular aging',
 		purity: '≥99%',
 		size: '500mg vial',
 		price: 50,

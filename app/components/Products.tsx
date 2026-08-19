@@ -2,9 +2,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { products } from '../data/products';
 
-export function Catalog() {
+export function Products() {
 	return (
-		<section id='catalog' className='bg-navy-offwhite py-16'>
+		<section id='products' className='bg-navy-offwhite py-16'>
 			<div className='mx-auto max-w-6xl px-6'>
 				<div className='grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4'>
 					{products.map((product) => (

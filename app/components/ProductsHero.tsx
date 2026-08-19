@@ -4,7 +4,7 @@ const PROMISE_PILLS = [
 	{ label: '2-5 Day Delivery', detail: 'with tracking' },
 ];
 
-export function CatalogHero() {
+export function ProductsHero() {
 	return (
 		<section className='relative overflow-hidden bg-navy pb-16 pt-28 text-center bg-linear-to-b from-navy to-navy-dark'>
 			<div
@@ -16,7 +16,7 @@ export function CatalogHero() {
 				<div className='mb-4 flex items-center justify-center gap-3'>
 					<span className='h-px w-8 bg-amber' />
 					<span className='text-xs font-bold uppercase tracking-[0.3em] text-amber'>
-						Research Catalog
+						Research Products
 					</span>
 					<span className='h-px w-8 bg-amber' />
 				</div>

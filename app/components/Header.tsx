@@ -10,7 +10,7 @@ import { ConfettiBurst } from './ConfettiBurst';
 import { SectionLink } from './SectionLink';
 
 const NAV_LINKS = [
-	{ href: '/catalog', label: 'Catalog' },
+	{ href: '/products', label: 'Products' },
 	{ href: '/#standards', label: 'COAs' },
 	{ href: '/faq', label: 'FAQs' },
 	{ href: '/contact', label: 'Contact' },

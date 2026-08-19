@@ -221,7 +221,7 @@ const SECTIONS: LegalSection[] = [
 		title: 'Changes',
 		body: (
 			<p>
-				We may update this page from time to time as our catalog, testing
+				We may update this page from time to time as our product line, testing
 				methods, or documentation evolve. The version posted on this page
 				always governs.
 			</p>

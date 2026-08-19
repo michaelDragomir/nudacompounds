@@ -111,7 +111,7 @@ export function PromoStrip() {
 						</div>
 
 						<Link
-							href='/catalog'
+							href='/products'
 							className='shrink-0 rounded-2xl bg-amber px-10 py-4 text-sm font-bold uppercase tracking-widest text-offwhite shadow-2xl transition-transform hover:-translate-y-0.5 hover:bg-amber-dark border border-amber'
 						>
 							Shop the Deal

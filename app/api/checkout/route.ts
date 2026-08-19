@@ -38,7 +38,10 @@ export async function POST(request: Request) {
 	try {
 		body = await request.json();
 	} catch {
-		return NextResponse.json({ error: 'Invalid request body.' }, { status: 400 });
+		return NextResponse.json(
+			{ error: 'Invalid request body.' },
+			{ status: 400 },
+		);
 	}
 
 	const rawItems = Array.isArray(body.items) ? body.items : [];
@@ -134,7 +137,7 @@ export async function POST(request: Request) {
 				},
 			},
 			success_url: `${origin}/order/confirmed?session_id={CHECKOUT_SESSION_ID}`,
-			cancel_url: `${origin}/catalog`,
+			cancel_url: `${origin}/products`,
 		});
 
 		if (!session.url) {

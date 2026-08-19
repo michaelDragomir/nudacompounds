@@ -21,6 +21,15 @@ import { SectionLink } from './SectionLink';
 const MIN_QTY = 1;
 const MAX_QTY = 10;
 
+// Minimal inline markup: **text** renders as bold. Lets product copy mark up
+// specific phrases without needing structured/rich-text fields per product.
+function renderWithBold(text: string) {
+	const parts = text.split(/\*\*(.+?)\*\*/g);
+	return parts.map((part, index) =>
+		index % 2 === 1 ? <strong key={index}>{part}</strong> : part,
+	);
+}
+
 const TRUST_ITEMS = [
 	{ icon: ShieldIcon, label: 'cGMP-Aligned Facilities' },
 	{ icon: CheckBadgeIcon, label: 'Third-Party Verified' },
@@ -49,11 +58,11 @@ export function ProductDetail({ product }: { product: Product }) {
 			<div className='bg-offwhite pt-16'>
 				<div className='mx-auto max-w-6xl px-6'>
 					<SectionLink
-						href='/catalog'
+						href='/products'
 						className='inline-flex items-center gap-2 text-sm font-bold text-navy hover:text-amber-dark transition-colors'
 					>
 						<ArrowRightIcon className='h-4 w-4 rotate-180' />
-						Back to Catalog
+						Back to Products
 					</SectionLink>
 
 					<div className='mt-8 grid grid-cols-1 gap-12 lg:grid-cols-2'>
@@ -177,10 +186,18 @@ export function ProductDetail({ product }: { product: Product }) {
 									Research Overview
 								</p>
 								<p className='mt-2 text-sm leading-relaxed text-charcoal'>
-									{product.description}
+									{renderWithBold(product.description)}
+									{product.descriptionEmphasis && (
+										<>
+											{' '}
+											<strong className='font-bold'>
+												{product.descriptionEmphasis}
+											</strong>
+										</>
+									)}
 								</p>
-								<p className='mt-3 text-xs font-semibold text-amber-dark'>
-									For in-vitro research use only &mdash; not for human or
+								<p className='mt-3 text-sm font-semibold text-amber-dark'>
+									For laboratory research only &mdash; not for human or
 									veterinary use.
 								</p>
 							</div>

@@ -1,14 +1,14 @@
 import type { Metadata } from 'next';
-import { Catalog } from '../components/Catalog';
-import { CatalogHero } from '../components/CatalogHero';
+import { Products } from '../components/Products';
+import { ProductsHero } from '../components/ProductsHero';
 import { SITE_URL } from '../lib/site';
 
 export const metadata: Metadata = {
-	title: 'Catalog',
+	title: 'Products',
 	description:
-		'Browse the full Nuda Compounds research catalog. Every vial ships with a published Certificate of Analysis and batch-level documentation.',
+		'Browse the full Nuda Compounds product line. Every vial ships with a published Certificate of Analysis and batch-level documentation.',
 	alternates: {
-		canonical: '/catalog',
+		canonical: '/products',
 	},
 };
 
@@ -20,21 +20,21 @@ const breadcrumbJsonLd = {
 		{
 			'@type': 'ListItem',
 			position: 2,
-			name: 'Catalog',
-			item: `${SITE_URL}/catalog`,
+			name: 'Products',
+			item: `${SITE_URL}/products`,
 		},
 	],
 };
 
-export default function CatalogPage() {
+export default function ProductsPage() {
 	return (
 		<>
 			<script
 				type='application/ld+json'
 				dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
 			/>
-			<CatalogHero />
-			<Catalog />
+			<ProductsHero />
+			<Products />
 		</>
 	);
 }

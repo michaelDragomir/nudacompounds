@@ -111,7 +111,7 @@ export function PromoCard() {
 					</div>
 
 					<Link
-						href='/catalog'
+						href='/products'
 						className='relative mt-8 rounded-2xl bg-amber px-10 py-4 text-sm font-bold uppercase tracking-widest text-offwhite shadow-xl transition-colors hover:bg-amber-dark'
 					>
 						Shop the Deal

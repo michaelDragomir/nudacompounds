@@ -157,7 +157,7 @@ export default async function OrderConfirmedPage({
 
 						<div className='mt-8 text-center'>
 							<Link
-								href='/catalog'
+								href='/products'
 								className='inline-block rounded-2xl bg-amber px-8 py-3 text-sm font-bold uppercase tracking-widest text-white transition-colors hover:bg-amber-dark'
 							>
 								Continue shopping
