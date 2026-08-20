@@ -43,23 +43,46 @@ export function CoaList() {
 									</div>
 
 									<div className='flex shrink-0 items-center gap-3'>
-										<a
-											href={item.coaUrl}
-											target='_blank'
-											rel='noopener noreferrer'
-											className='flex items-center gap-1.5 rounded-full border border-navy/20 px-4 py-2 text-xs font-bold uppercase tracking-wide text-navy transition-colors hover:border-amber hover:text-amber-dark'
-										>
-											<EyeIcon className='h-4 w-4' />
-											View
-										</a>
-										<a
-											href={item.coaUrl}
-											download
-											className='flex items-center gap-1.5 rounded-full bg-amber px-4 py-2 text-xs font-bold uppercase tracking-wide text-white transition-colors hover:bg-amber-dark'
-										>
-											<DownloadIcon className='h-4 w-4' />
-											Download
-										</a>
+										{item.coaAvailable ? (
+											<>
+												<a
+													href={item.coaUrl}
+													target='_blank'
+													rel='noopener noreferrer'
+													className='flex items-center gap-1.5 rounded-full border border-navy/20 px-4 py-2 text-xs font-bold uppercase tracking-wide text-navy transition-colors hover:border-amber hover:text-amber-dark'
+												>
+													<EyeIcon className='h-4 w-4' />
+													View
+												</a>
+												<a
+													href={item.coaUrl}
+													download
+													className='flex items-center gap-1.5 rounded-full bg-amber px-4 py-2 text-xs font-bold uppercase tracking-wide text-white transition-colors hover:bg-amber-dark'
+												>
+													<DownloadIcon className='h-4 w-4' />
+													Download
+												</a>
+											</>
+										) : (
+											<>
+												<button
+													type='button'
+													disabled
+													className='flex items-center gap-1.5 rounded-full border border-navy/20 px-4 py-2 text-xs font-bold uppercase tracking-wide text-navy/40 disabled:cursor-not-allowed'
+												>
+													<EyeIcon className='h-4 w-4' />
+													View
+												</button>
+												<button
+													type='button'
+													disabled
+													className='flex items-center gap-1.5 rounded-full bg-amber/30 px-4 py-2 text-xs font-bold uppercase tracking-wide text-white/60 disabled:cursor-not-allowed'
+												>
+													<DownloadIcon className='h-4 w-4' />
+													Download
+												</button>
+											</>
+										)}
 									</div>
 								</div>
 							))}

@@ -16,5 +16,6 @@ export const coaListings = COA_LISTING_SLUGS.map((slug) => {
 		purity: product.purity,
 		batch: product.coa.batch,
 		coaUrl: product.coaUrl,
+		coaAvailable: product.coaAvailable,
 	};
 });

@@ -23,6 +23,10 @@ export type Product = {
 	// /public/coas). Every product currently points at the same placeholder
 	// file until real per-batch PDFs are uploaded.
 	coaUrl: string;
+	// Whether coaUrl is a real, product-specific PDF. Only one has been
+	// uploaded so far — the rest still point at the placeholder file above,
+	// so their View/Download buttons stay muted until real ones are added.
+	coaAvailable: boolean;
 };
 
 const PLACEHOLDER_COA_URL = '/coas/NUDA-1010.pdf';
@@ -39,15 +43,16 @@ export const products: Product[] = [
 		price: 40,
 		bulkPrice10: 190,
 		image: '/images/3rt.png',
-		inStock: false,
+		inStock: true,
 		kitEligible: true,
 		coa: {
-			batch: 'AUR-908157',
+			batch: 'NUDA-1010',
 			form: 'Lyophilized Powder',
 			endotoxins: 'PASS',
 			tested: '07/20/26',
 		},
 		coaUrl: PLACEHOLDER_COA_URL,
+		coaAvailable: true,
 	},
 	{
 		slug: '2-trz',
@@ -63,12 +68,13 @@ export const products: Product[] = [
 		inStock: true,
 		kitEligible: true,
 		coa: {
-			batch: 'AUR-914402',
+			batch: 'NUDA-1011',
 			form: 'Lyophilized Powder',
 			endotoxins: 'PASS',
 			tested: '07/18/26',
 		},
 		coaUrl: PLACEHOLDER_COA_URL,
+		coaAvailable: false,
 	},
 	{
 		slug: 'bpc-157',
@@ -84,12 +90,13 @@ export const products: Product[] = [
 		inStock: true,
 		kitEligible: false,
 		coa: {
-			batch: 'AUR-902210',
+			batch: 'NUDA-1012',
 			form: 'Lyophilized Powder',
 			endotoxins: 'PASS',
 			tested: '07/15/26',
 		},
 		coaUrl: PLACEHOLDER_COA_URL,
+		coaAvailable: false,
 	},
 	{
 		slug: 'ghk-cu',
@@ -105,12 +112,13 @@ export const products: Product[] = [
 		inStock: true,
 		kitEligible: false,
 		coa: {
-			batch: 'AUR-920071',
+			batch: 'NUDA-1013',
 			form: 'Lyophilized Powder',
 			endotoxins: 'PASS',
 			tested: '07/12/26',
 		},
 		coaUrl: PLACEHOLDER_COA_URL,
+		coaAvailable: false,
 	},
 	{
 		slug: 'tesamorelin',
@@ -126,12 +134,13 @@ export const products: Product[] = [
 		inStock: true,
 		kitEligible: false,
 		coa: {
-			batch: 'AUR-931588',
+			batch: 'NUDA-1014',
 			form: 'Lyophilized Powder',
 			endotoxins: 'PASS',
 			tested: '07/10/26',
 		},
 		coaUrl: PLACEHOLDER_COA_URL,
+		coaAvailable: false,
 	},
 	{
 		slug: 'mots-c',
@@ -147,12 +156,13 @@ export const products: Product[] = [
 		inStock: true,
 		kitEligible: false,
 		coa: {
-			batch: 'AUR-984127',
+			batch: 'NUDA-1015',
 			form: 'Lyophilized Powder',
 			endotoxins: 'PASS',
 			tested: '06/25/26',
 		},
 		coaUrl: PLACEHOLDER_COA_URL,
+		coaAvailable: false,
 	},
 	{
 		slug: 'nad-plus',
@@ -168,12 +178,13 @@ export const products: Product[] = [
 		inStock: true,
 		kitEligible: false,
 		coa: {
-			batch: 'AUR-990284',
+			batch: 'NUDA-1016',
 			form: 'Lyophilized Powder',
 			endotoxins: 'PASS',
 			tested: '06/22/26',
 		},
 		coaUrl: PLACEHOLDER_COA_URL,
+		coaAvailable: false,
 	},
 	{
 		slug: 'bac-water',
@@ -186,14 +197,15 @@ export const products: Product[] = [
 		price: 20,
 		bulkPrice10: 85,
 		image: '/images/bacWater.png',
-		inStock: true,
+		inStock: false,
 		kitEligible: false,
 		coa: {
-			batch: 'AUR-899142',
+			batch: 'NUDA-1017',
 			form: 'Sterile Liquid',
 			endotoxins: 'PASS',
 			tested: '07/08/26',
 		},
 		coaUrl: PLACEHOLDER_COA_URL,
+		coaAvailable: false,
 	},
 ];

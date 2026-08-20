@@ -9,7 +9,9 @@ import { SectionLink } from './SectionLink';
 const NAVIGATE_LINKS = [
 	{ href: '/', label: 'Home' },
 	{ href: '/products', label: 'Products' },
-	{ href: '/coas', label: 'COAs' },
+	// Muted until all Certificates of Analysis are uploaded (currently only
+	// one of eight products has a real PDF).
+	// { href: '/coas', label: 'COAs' },
 	{ href: '/faq', label: 'FAQs' },
 	{ href: '/contact', label: 'Contact' },
 ];

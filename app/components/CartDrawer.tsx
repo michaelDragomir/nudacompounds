@@ -89,7 +89,7 @@ export function CartDrawer() {
 			<div
 				onClick={closeCart}
 				aria-hidden='true'
-				className={`fixed inset-0 z-60 bg-linear-to-b from-navy to-navy-dark backdrop-blur-sm transition-opacity duration-300 ${
+				className={`fixed inset-0 z-60 bg-navy-dark/60 backdrop-blur-sm transition-opacity duration-300 ${
 					isOpen ? 'opacity-100' : 'pointer-events-none opacity-0'
 				}`}
 			/>
@@ -98,7 +98,7 @@ export function CartDrawer() {
 				role='dialog'
 				aria-modal='true'
 				aria-label='Shopping cart'
-				className={`fixed right-0 top-0 z-70 flex h-full w-full border-l border-amber/40 max-w-md flex-col bg-navy-dark text-offwhite shadow-2xl transition-transform duration-300 ease-out ${
+				className={`fixed right-0 top-0 z-70 flex h-full w-full border-l border-amber/30 max-w-md flex-col bg-navy-dark text-offwhite shadow-2xl transition-transform duration-300 ease-out ${
 					isOpen ? 'translate-x-0' : 'translate-x-full'
 				}`}
 			>

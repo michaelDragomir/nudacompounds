@@ -52,7 +52,7 @@ export function ProductDetail({ product }: { product: Product }) {
 				<div className='mx-auto max-w-6xl px-6 pb-8'>
 					<SectionLink
 						href='/products'
-						className='inline-flex items-center gap-2 text-sm font-bold text-navy hover:text-amber-dark transition-colors'
+						className='inline-flex items-center gap-2 text-sm font-bold text-navy hover:text-amber-dark transition-colors mt-3'
 					>
 						<ArrowRightIcon className='h-4 w-4 rotate-180' />
 						Back to Products
@@ -87,7 +87,7 @@ export function ProductDetail({ product }: { product: Product }) {
 							<p className='text-[11px] font-bold uppercase tracking-wide text-warmgray'>
 								{product.category}
 							</p>
-							<h1 className='mt-1 font-display text-3xl font-bold text-navy sm:text-4xl'>
+							<h1 className='mt-1 font-sora text-3xl text-navy sm:text-4xl'>
 								{product.name}
 							</h1>
 							<span className='mt-3 block h-1 w-12 rounded-full bg-amber' />
@@ -241,23 +241,46 @@ export function ProductDetail({ product }: { product: Product }) {
 									</dl>
 
 									<div className='mt-5 flex gap-3'>
-										<a
-											href={product.coaUrl}
-											target='_blank'
-											rel='noopener noreferrer'
-											className='flex flex-1 items-center justify-center gap-1.5 rounded-lg border border-navy/20 px-3 py-2 text-xs font-bold text-navy transition-colors hover:border-amber hover:text-amber-dark'
-										>
-											<EyeIcon className='h-4 w-4' />
-											View
-										</a>
-										<a
-											href={product.coaUrl}
-											download
-											className='flex flex-1 items-center justify-center gap-1.5 rounded-lg border border-navy/20 px-3 py-2 text-xs font-bold text-navy transition-colors hover:border-amber hover:text-amber-dark'
-										>
-											<DownloadIcon className='h-4 w-4' />
-											Download
-										</a>
+										{product.coaAvailable ? (
+											<>
+												<a
+													href={product.coaUrl}
+													target='_blank'
+													rel='noopener noreferrer'
+													className='flex flex-1 items-center justify-center gap-1.5 rounded-lg border border-navy/20 px-3 py-2 text-xs font-bold text-navy transition-colors hover:border-amber hover:text-amber-dark'
+												>
+													<EyeIcon className='h-4 w-4' />
+													View
+												</a>
+												<a
+													href={product.coaUrl}
+													download
+													className='flex flex-1 items-center justify-center gap-1.5 rounded-lg border border-navy/20 px-3 py-2 text-xs font-bold text-navy transition-colors hover:border-amber hover:text-amber-dark'
+												>
+													<DownloadIcon className='h-4 w-4' />
+													Download
+												</a>
+											</>
+										) : (
+											<>
+												<button
+													type='button'
+													disabled
+													className='flex flex-1 items-center justify-center gap-1.5 rounded-lg border border-navy/20 px-3 py-2 text-xs font-bold text-navy/50 disabled:cursor-not-allowed'
+												>
+													<EyeIcon className='h-4 w-4' />
+													View
+												</button>
+												<button
+													type='button'
+													disabled
+													className='flex flex-1 items-center justify-center gap-1.5 rounded-lg border border-navy/20 px-3 py-2 text-xs font-bold text-navy/50 disabled:cursor-not-allowed'
+												>
+													<DownloadIcon className='h-4 w-4' />
+													Download
+												</button>
+											</>
+										)}
 									</div>
 								</div>
 							</div>
