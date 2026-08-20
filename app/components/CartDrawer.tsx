@@ -89,7 +89,7 @@ export function CartDrawer() {
 			<div
 				onClick={closeCart}
 				aria-hidden='true'
-				className={`fixed inset-0 z-60 bg-navy-dark/60 backdrop-blur-sm transition-opacity duration-300 ${
+				className={`fixed inset-0 z-60 bg-linear-to-b from-navy to-navy-dark backdrop-blur-sm transition-opacity duration-300 ${
 					isOpen ? 'opacity-100' : 'pointer-events-none opacity-0'
 				}`}
 			/>
@@ -98,7 +98,7 @@ export function CartDrawer() {
 				role='dialog'
 				aria-modal='true'
 				aria-label='Shopping cart'
-				className={`fixed right-0 top-0 z-70 flex h-full w-full max-w-md flex-col bg-navy-dark text-offwhite shadow-2xl transition-transform duration-300 ease-out ${
+				className={`fixed right-0 top-0 z-70 flex h-full w-full border-l border-amber/40 max-w-md flex-col bg-navy-dark text-offwhite shadow-2xl transition-transform duration-300 ease-out ${
 					isOpen ? 'translate-x-0' : 'translate-x-full'
 				}`}
 			>
@@ -139,10 +139,7 @@ export function CartDrawer() {
 					) : (
 						<ul className='space-y-5'>
 							{lines.map(({ product, qty, isBulk }) => (
-								<li
-									key={`${product.slug}-${isBulk}`}
-									className='flex gap-4'
-								>
+								<li key={`${product.slug}-${isBulk}`} className='flex gap-4'>
 									<div className='relative h-16 w-16 shrink-0 overflow-hidden rounded-lg bg-offwhite/5'>
 										<Image
 											src={product.image}
@@ -165,7 +162,7 @@ export function CartDrawer() {
 													</p>
 												)}
 											</div>
-											<span className='text-sm text-white/50'>
+											<span className='text-sm text-white/70'>
 												{isBulk ? `${qty * 10} vials` : product.size}
 											</span>
 										</div>
@@ -195,8 +192,7 @@ export function CartDrawer() {
 												<span className='font-bold text-amber-light'>
 													$
 													{(
-														(isBulk ? product.bulkPrice10 : product.price) *
-														qty
+														(isBulk ? product.bulkPrice10 : product.price) * qty
 													).toFixed(2)}
 												</span>
 												<button
@@ -286,6 +282,11 @@ export function CartDrawer() {
 						<LockIcon className='h-4 w-4' />
 						{checkingOut ? 'Redirecting…' : 'Secure Checkout'}
 					</button>
+
+					<p className='mt-3 flex items-center justify-center gap-1.5 text-center text-[11px] text-offwhite/40'>
+						<LockIcon className='h-3 w-3' />
+						Powered by Stripe &middot; Encrypted checkout
+					</p>
 				</div>
 			</aside>
 		</>
