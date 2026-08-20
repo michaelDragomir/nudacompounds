@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { FAQ } from '../components/FAQ';
+import { FaqHero } from '../components/FaqHero';
 import { FAQ_ITEMS } from '../data/faq';
 
 export const metadata: Metadata = {
@@ -31,6 +32,7 @@ export default function FAQPage() {
 				type='application/ld+json'
 				dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
 			/>
+			<FaqHero />
 			<FAQ />
 		</>
 	);

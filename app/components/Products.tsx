@@ -4,7 +4,7 @@ import { products } from '../data/products';
 
 export function Products() {
 	return (
-		<section id='products' className='bg-navy-offwhite py-16'>
+		<section id='products' className='bg-offwhite py-16'>
 			<div className='mx-auto max-w-6xl px-6'>
 				<div className='grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4'>
 					{products.map((product) => (
