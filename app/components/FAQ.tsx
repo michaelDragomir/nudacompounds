@@ -13,7 +13,7 @@ export function FAQ() {
 			className='relative overflow-hidden bg-navy pb-16 pt-28 bg-linear-to-b from-navy to-navy-dark'
 		>
 			<div
-				className='pointer-events-none absolute inset-0 animate-glow-pulse bg-[radial-gradient(circle_at_87%_0%,rgba(217,160,91,0.25),transparent_35%)]'
+				className='pointer-events-none absolute inset-0 animate-glow-pulse bg-[radial-gradient(circle_at_50%_0%,rgba(217,160,91,0.25),transparent_55%)]'
 				aria-hidden='true'
 			/>
 			<div className='mx-auto max-w-4xl px-6'>
