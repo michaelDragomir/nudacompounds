@@ -19,7 +19,13 @@ export type Product = {
 		endotoxins: string;
 		tested: string;
 	};
+	// Public path to this batch's Certificate of Analysis PDF (served from
+	// /public/coas). Every product currently points at the same placeholder
+	// file until real per-batch PDFs are uploaded.
+	coaUrl: string;
 };
+
+const PLACEHOLDER_COA_URL = '/coas/NUDA-1010.pdf';
 
 export const products: Product[] = [
 	{
@@ -41,6 +47,7 @@ export const products: Product[] = [
 			endotoxins: 'PASS',
 			tested: '07/20/26',
 		},
+		coaUrl: PLACEHOLDER_COA_URL,
 	},
 	{
 		slug: '2-trz',
@@ -61,6 +68,7 @@ export const products: Product[] = [
 			endotoxins: 'PASS',
 			tested: '07/18/26',
 		},
+		coaUrl: PLACEHOLDER_COA_URL,
 	},
 	{
 		slug: 'bpc-157',
@@ -81,6 +89,7 @@ export const products: Product[] = [
 			endotoxins: 'PASS',
 			tested: '07/15/26',
 		},
+		coaUrl: PLACEHOLDER_COA_URL,
 	},
 	{
 		slug: 'ghk-cu',
@@ -101,6 +110,7 @@ export const products: Product[] = [
 			endotoxins: 'PASS',
 			tested: '07/12/26',
 		},
+		coaUrl: PLACEHOLDER_COA_URL,
 	},
 	{
 		slug: 'tesamorelin',
@@ -121,6 +131,7 @@ export const products: Product[] = [
 			endotoxins: 'PASS',
 			tested: '07/10/26',
 		},
+		coaUrl: PLACEHOLDER_COA_URL,
 	},
 	{
 		slug: 'mots-c',
@@ -141,6 +152,7 @@ export const products: Product[] = [
 			endotoxins: 'PASS',
 			tested: '06/25/26',
 		},
+		coaUrl: PLACEHOLDER_COA_URL,
 	},
 	{
 		slug: 'nad-plus',
@@ -161,6 +173,7 @@ export const products: Product[] = [
 			endotoxins: 'PASS',
 			tested: '06/22/26',
 		},
+		coaUrl: PLACEHOLDER_COA_URL,
 	},
 	{
 		slug: 'bac-water',
@@ -181,5 +194,6 @@ export const products: Product[] = [
 			endotoxins: 'PASS',
 			tested: '07/08/26',
 		},
+		coaUrl: PLACEHOLDER_COA_URL,
 	},
 ];

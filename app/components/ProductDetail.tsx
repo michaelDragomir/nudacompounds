@@ -241,22 +241,23 @@ export function ProductDetail({ product }: { product: Product }) {
 									</dl>
 
 									<div className='mt-5 flex gap-3'>
-										<button
-											type='button'
-											disabled
-											className='flex flex-1 items-center justify-center gap-1.5 rounded-lg border border-navy/20 px-3 py-2 text-xs font-bold text-navy/50 disabled:cursor-not-allowed'
+										<a
+											href={product.coaUrl}
+											target='_blank'
+											rel='noopener noreferrer'
+											className='flex flex-1 items-center justify-center gap-1.5 rounded-lg border border-navy/20 px-3 py-2 text-xs font-bold text-navy transition-colors hover:border-amber hover:text-amber-dark'
 										>
 											<EyeIcon className='h-4 w-4' />
 											View
-										</button>
-										<button
-											type='button'
-											disabled
-											className='flex flex-1 items-center justify-center gap-1.5 rounded-lg border border-navy/20 px-3 py-2 text-xs font-bold text-navy/50 disabled:cursor-not-allowed'
+										</a>
+										<a
+											href={product.coaUrl}
+											download
+											className='flex flex-1 items-center justify-center gap-1.5 rounded-lg border border-navy/20 px-3 py-2 text-xs font-bold text-navy transition-colors hover:border-amber hover:text-amber-dark'
 										>
 											<DownloadIcon className='h-4 w-4' />
 											Download
-										</button>
+										</a>
 									</div>
 								</div>
 							</div>

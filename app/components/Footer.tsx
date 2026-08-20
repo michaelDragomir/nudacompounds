@@ -9,7 +9,7 @@ import { SectionLink } from './SectionLink';
 const NAVIGATE_LINKS = [
 	{ href: '/', label: 'Home' },
 	{ href: '/products', label: 'Products' },
-	{ href: '/#standards', label: 'COAs' },
+	{ href: '/coas', label: 'COAs' },
 	{ href: '/faq', label: 'FAQs' },
 	{ href: '/contact', label: 'Contact' },
 ];

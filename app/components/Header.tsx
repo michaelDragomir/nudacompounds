@@ -11,7 +11,7 @@ import { SectionLink } from './SectionLink';
 
 const NAV_LINKS = [
 	{ href: '/products', label: 'Products' },
-	{ href: '/#standards', label: 'COAs' },
+	{ href: '/coas', label: 'COAs' },
 	{ href: '/faq', label: 'FAQs' },
 	{ href: '/contact', label: 'Contact' },
 ];
