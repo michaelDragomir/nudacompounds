@@ -32,13 +32,7 @@ export function Hero() {
 				<div className='grid grid-cols-1 items-center gap-12 lg:grid-cols-2'>
 					<div className='text-center lg:text-left'>
 						<div className='animate-fade-up mb-7 inline-flex items-center gap-2 rounded-full border border-offwhite/30 bg-white px-4 py-1.5 backdrop-blur-md'>
-							<span className='relative flex h-2 w-2 shrink-0'>
-								<span className='absolute inline-flex h-full w-full animate-ping rounded-full bg-amber opacity-75' />
-								<span className='relative inline-flex h-2 w-2 rounded-full bg-amber' />
-							</span>
 							<span className='text-xs font-bold uppercase tracking-[0.2em] text-navy-dark'>
-								Lab Verified
-								<span className='mx-2.5 inline-block h-1 w-1 rounded-full bg-navy-dark align-middle' />
 								Research Grade Peptides
 							</span>
 						</div>
@@ -92,7 +86,7 @@ export function Hero() {
 				</div>
 
 				<div className='animate-fade-up [animation-delay:450ms] mt-8 border-t border-white/25 pt-8'>
-					<div className='grid grid-cols-2 gap-y-6 sm:grid-cols-4 sm:gap-0 sm:divide-x sm:divide-white/25'>
+					<div className='grid grid-cols-1 gap-y-6 sm:grid-cols-4 sm:gap-0 sm:divide-x sm:divide-white/25'>
 						{stats.map((item) => (
 							<div key={item.label} className='px-4 text-center'>
 								<div className='font-mono text-2xl font-bold text-amber'>

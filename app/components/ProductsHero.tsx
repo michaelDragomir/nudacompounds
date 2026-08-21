@@ -30,7 +30,7 @@ export function ProductsHero() {
 					Analysis. For research use only.
 				</p>
 
-				<div className='mt-8 flex items-center justify-center gap-4'>
+				<div className='mt-8 flex flex-wrap items-center justify-center gap-3'>
 					{PROMISE_PILLS.map(({ label, detail }) => (
 						<div
 							key={label}

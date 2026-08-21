@@ -41,7 +41,7 @@ export function Header() {
 				<span>USA-Based Sourcing &mdash; Research Use Only</span>
 			</div> */}
 
-			<div className='max-w-6xl mx-auto grid grid-cols-[1fr_auto_1fr] items-center px-6 py-2'>
+			<div className='relative z-50 max-w-6xl mx-auto grid grid-cols-[1fr_auto_1fr] items-center bg-offwhite px-6 py-2'>
 				<button
 					type='button'
 					onClick={() => setMobileMenuOpen(true)}
@@ -95,31 +95,35 @@ export function Header() {
 				</button>
 			</div>
 
-			{mobileMenuOpen && (
-				<div className='fixed inset-x-0 top-[57px] z-60 h-[45vh] overflow-y-auto rounded-b-2xl bg-navy-dark shadow-2xl md:hidden'>
-					<button
-						type='button'
-						onClick={() => setMobileMenuOpen(false)}
-						aria-label='Close menu'
-						className='absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full text-offwhite transition-colors hover:bg-white/10'
-					>
-						<XIcon className='h-5 w-5' />
-					</button>
+			<div
+				className={`fixed inset-x-0 top-[57px] z-40 h-[45vh] overflow-y-auto rounded-b-2xl bg-navy-dark shadow-2xl transition-transform duration-300 ease-out md:hidden ${
+					mobileMenuOpen
+						? 'translate-y-0'
+						: '-translate-y-[calc(100%+57px)]'
+				}`}
+			>
+				<button
+					type='button'
+					onClick={() => setMobileMenuOpen(false)}
+					aria-label='Close menu'
+					className='absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full text-offwhite transition-colors hover:bg-white/10'
+				>
+					<XIcon className='h-5 w-5' />
+				</button>
 
-					<nav className='flex h-full flex-col items-center justify-center gap-4 text-base font-bold uppercase tracking-widest text-offwhite'>
-						{NAV_LINKS.map((link) => (
-							<SectionLink
-								key={link.href}
-								href={link.href}
-								onClick={() => setMobileMenuOpen(false)}
-								className='transition-colors hover:text-amber'
-							>
-								{link.label}
-							</SectionLink>
-						))}
-					</nav>
-				</div>
-			)}
+				<nav className='flex h-full flex-col items-center justify-center gap-4 text-base font-bold uppercase tracking-widest text-offwhite'>
+					{NAV_LINKS.map((link) => (
+						<SectionLink
+							key={link.href}
+							href={link.href}
+							onClick={() => setMobileMenuOpen(false)}
+							className='transition-colors hover:text-amber'
+						>
+							{link.label}
+						</SectionLink>
+					))}
+				</nav>
+			</div>
 		</header>
 	);
 }

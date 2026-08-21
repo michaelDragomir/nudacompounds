@@ -68,8 +68,8 @@ export function Footer() {
 	return (
 		<footer className='mt-auto bg-offwhite border-t border-navy'>
 			<div className='mx-auto max-w-6xl px-6 py-16'>
-				<div className='grid grid-cols-2 gap-10 sm:grid-cols-4'>
-					<div className='col-span-2 sm:col-span-1'>
+				<div className='grid grid-cols-1 gap-10 text-center sm:grid-cols-4 sm:text-left'>
+					<div className='flex flex-col items-center sm:items-start'>
 						<Image
 							src='/images/nudaLogo.png'
 							alt='Nuda Compounds'
@@ -127,7 +127,7 @@ export function Footer() {
 							<li>
 								<a
 									href={`mailto:${CONTACT_EMAIL}`}
-									className='transition-colors hover:text-amber'
+									className='break-all transition-colors hover:text-amber'
 								>
 									{CONTACT_EMAIL}
 								</a>

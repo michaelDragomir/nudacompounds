@@ -117,21 +117,21 @@ body {
 	}
 }
 
-@keyframes marquee-ltr {
+@keyframes marquee-rtl {
 	from {
-		transform: translateX(-50%);
+		transform: translateX(0%);
 	}
 	to {
-		transform: translateX(0%);
+		transform: translateX(-50%);
 	}
 }
 
-.animate-marquee-ltr {
-	animation: marquee-ltr 45s linear infinite;
+.animate-marquee-rtl {
+	animation: marquee-rtl 45s linear infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
-	.animate-marquee-ltr {
+	.animate-marquee-rtl {
 		animation: none;
 	}
 }

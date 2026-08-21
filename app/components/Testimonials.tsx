@@ -91,7 +91,7 @@ export function Testimonials() {
 				style={{ WebkitMaskImage: EDGE_MASK, maskImage: EDGE_MASK }}
 			>
 				<div
-					className='flex w-max animate-marquee-ltr gap-6 px-6'
+					className='flex w-max animate-marquee-rtl gap-6 px-6'
 					style={{ animationPlayState: paused ? 'paused' : 'running' }}
 					onMouseEnter={() => setPaused(true)}
 					onMouseLeave={() => setPaused(false)}
