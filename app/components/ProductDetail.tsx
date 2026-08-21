@@ -58,7 +58,7 @@ export function ProductDetail({ product }: { product: Product }) {
 						Back to Products
 					</SectionLink>
 
-					<div className='mt-8 grid grid-cols-1 gap-12 lg:grid-cols-2'>
+					<div className='mt-8 grid grid-cols-1 gap-12 md:grid-cols-2'>
 						<div>
 							<div className='relative aspect-square overflow-hidden rounded-2xl border border-amber/50 bg-linear-to-b from-navy-dark/5 to-navy-dark/10 shadow-2xl'>
 								<Image
