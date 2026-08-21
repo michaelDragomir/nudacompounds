@@ -84,18 +84,18 @@ export function FrequentlyBoughtTogether({
 						<div
 							key={product.slug}
 							style={{ maxWidth: 'calc(100% - 85px)' }}
-							className='mx-auto flex w-full flex-col items-center rounded-xl border border-amber/50 bg-linear-to-b from-navy-dark/5 to-navy-dark/10 p-3 transition-colors hover:border-amber shadow-xl'
+							className='group mx-auto flex w-full flex-col items-center rounded-xl border border-amber/40 bg-linear-to-b from-navy-dark/5 to-navy-dark/10 p-3 shadow-xl transition-all duration-300 hover:-translate-y-1 hover:border-amber hover:shadow-2xl'
 						>
 							<Link
 								href={`/products/${product.slug}`}
-								className='relative flex h-[248px] w-[248px] shrink-0 items-center justify-center overflow-hidden rounded-lg'
+								className='relative flex h-62 w-62 shrink-0 items-center justify-center overflow-hidden rounded-lg'
 							>
 								<Image
 									src={product.image}
 									alt={product.name}
 									fill
 									sizes='248px'
-									className='object-contain p-4 drop-shadow-sm'
+									className='object-contain p-4 drop-shadow-sm transition-transform duration-300 group-hover:scale-110'
 								/>
 							</Link>
 

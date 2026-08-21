@@ -11,7 +11,7 @@ export function Products() {
 						<Link
 							key={product.slug}
 							href={`/products/${product.slug}`}
-							className='group relative flex flex-col overflow-hidden rounded-2xl border border-black/5 bg-white transition-all duration-300 shadow-md hover:-translate-y-1 hover:border-amber/50 hover:shadow-xl'
+							className='group relative flex flex-col overflow-hidden rounded-2xl border border-amber/30 bg-white transition-all duration-300 shadow-md hover:-translate-y-1 hover:border-amber/50 hover:shadow-xl'
 						>
 							<div className='relative flex aspect-square items-center justify-center overflow-hidden bg-linear-to-b from-navy-dark/5 to-navy-dark/10'>
 								{!product.inStock && (
