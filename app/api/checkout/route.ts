@@ -3,13 +3,19 @@ import Stripe from 'stripe';
 import { products } from '../../data/products';
 import { SITE_URL } from '../../lib/site';
 import { getClientIp, rateLimit } from '../../lib/rateLimit';
+import { FREE_GIFT_SLUG } from '../../lib/cart';
 
 const MAX_QTY = 10;
 const MAX_KITS = 10;
 const RATE_LIMIT = 10;
 const RATE_WINDOW_MS = 60_000;
 
-type CartLineInput = { slug?: unknown; qty?: unknown; isBulk?: unknown };
+type CartLineInput = {
+	slug?: unknown;
+	qty?: unknown;
+	isBulk?: unknown;
+	isFree?: unknown;
+};
 
 export async function POST(request: Request) {
 	const ip = getClientIp(request);
@@ -89,12 +95,22 @@ export async function POST(request: Request) {
 			);
 		}
 
+		// The free-gift flag is only ever honored for the one designated
+		// product, at qty 1 — a client sending isFree on anything else (or a
+		// larger qty) just gets charged normally instead of erroring out.
+		const isFreeGift =
+			line.isFree === true && slug === FREE_GIFT_SLUG && !isBulk;
+
 		// Price is always recomputed from our own catalog — never trust a
 		// client-supplied amount.
-		const unitPrice = isBulk ? product.bulkPrice10 : product.price;
+		const unitPrice = isFreeGift
+			? 0
+			: isBulk
+				? product.bulkPrice10
+				: product.price;
 
 		lineItems.push({
-			quantity: qty,
+			quantity: isFreeGift ? 1 : qty,
 			price_data: {
 				currency: 'usd',
 				unit_amount: Math.round(unitPrice * 100),

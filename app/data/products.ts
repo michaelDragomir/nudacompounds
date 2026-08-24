@@ -194,10 +194,10 @@ export const products: Product[] = [
 			'Bacteriostatic water used to reconstitute lyophilized peptides for laboratory handling. Sterile-filtered and supplied in a sealed vial.',
 		purity: 'USP Grade',
 		size: '10mL vial',
-		price: 20,
+		price: 9.99,
 		bulkPrice10: 85,
 		image: '/images/bacWater.png',
-		inStock: false,
+		inStock: true,
 		kitEligible: false,
 		coa: {
 			batch: 'NUDA-1017',

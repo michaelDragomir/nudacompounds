@@ -74,11 +74,15 @@ export function CartDrawer() {
 	const subtotal = lines.reduce(
 		(sum, line) =>
 			sum +
-			(line.isBulk
-				? line.product.bulkPrice10 * line.qty
-				: line.product.price * line.qty),
+			(line.isFree
+				? 0
+				: (line.isBulk ? line.product.bulkPrice10 : line.product.price) *
+					line.qty),
 		0,
 	);
+
+	const regularLines = lines.filter((line) => !line.isFree);
+	const freeGiftLine = lines.find((line) => line.isFree);
 
 	const suggestion = products.find(
 		(p) => p.inStock && !items.some((line) => line.slug === p.slug),
@@ -124,7 +128,7 @@ export function CartDrawer() {
 				</p>
 
 				<div className='flex-1 overflow-y-auto px-6 py-4'>
-					{lines.length === 0 ? (
+					{regularLines.length === 0 ? (
 						<div className='flex h-full flex-col items-center justify-center gap-3 text-center'>
 							<CartIcon className='h-10 w-10 text-offwhite/20' />
 							<p className='text-sm text-offwhite/60'>Your cart is empty.</p>
@@ -138,7 +142,7 @@ export function CartDrawer() {
 						</div>
 					) : (
 						<ul className='space-y-5'>
-							{lines.map(({ product, qty, isBulk }) => (
+							{regularLines.map(({ product, qty, isBulk }) => (
 								<li key={`${product.slug}-${isBulk}`} className='flex gap-4'>
 									<div className='relative h-16 w-16 shrink-0 overflow-hidden rounded-lg bg-offwhite/5'>
 										<Image
@@ -211,7 +215,54 @@ export function CartDrawer() {
 						</ul>
 					)}
 
-					{lines.length > 0 && suggestion && (
+					{freeGiftLine && (
+						<div className='mt-5 flex gap-4 border-t border-offwhite/10 pt-5'>
+							<div className='relative h-16 w-16 shrink-0 overflow-hidden rounded-lg bg-offwhite/5'>
+								<Image
+									src={freeGiftLine.product.image}
+									alt={freeGiftLine.product.name}
+									fill
+									sizes='64px'
+									className='object-contain p-1.5'
+								/>
+							</div>
+							<div className='flex-1'>
+								<div className='flex items-start justify-between gap-2'>
+									<div>
+										<p className='text-[11px] font-bold uppercase tracking-wide text-amber-light'>
+											{freeGiftLine.product.category}
+										</p>
+										<p className='font-bold text-white'>
+											{freeGiftLine.product.name}
+										</p>
+									</div>
+									<span className='text-sm text-white/70'>
+										{freeGiftLine.product.size}
+									</span>
+								</div>
+								<p className='text-[11px] font-bold uppercase tracking-wide text-offwhite/50'>
+									Included with order
+								</p>
+								<div className='mt-2 flex items-center justify-between'>
+									<button
+										type='button'
+										onClick={() => addItem(freeGiftLine.product, 1)}
+										className='text-xs font-bold uppercase tracking-wide text-amber-light hover:underline'
+									>
+										+ Add another
+									</button>
+									<span className='flex items-center gap-2'>
+										<span className='text-sm text-offwhite/40 line-through'>
+											${freeGiftLine.product.price.toFixed(2)}
+										</span>
+										<span className='font-bold text-amber-light'>Free</span>
+									</span>
+								</div>
+							</div>
+						</div>
+					)}
+
+					{regularLines.length > 0 && suggestion && (
 						<div className='mt-8 border-t border-offwhite/10 pt-6'>
 							<p className='text-[11px] font-bold uppercase tracking-wide text-offwhite/50'>
 								Complete your research set
@@ -275,7 +326,7 @@ export function CartDrawer() {
 
 					<button
 						type='button'
-						disabled={lines.length === 0 || checkingOut}
+						disabled={regularLines.length === 0 || checkingOut}
 						onClick={handleCheckout}
 						className='flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-amber px-4 py-3.5 text-sm font-bold uppercase tracking-widest text-navy-dark transition-colors hover:bg-amber-dark disabled:cursor-not-allowed disabled:bg-amber/40 disabled:text-navy-dark/50'
 					>

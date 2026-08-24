@@ -11,12 +11,34 @@ import {
 } from 'react';
 import type { Product } from '../data/products';
 import { trackAddToCart } from '../lib/gtagEvents';
+import { FREE_GIFT_SLUG } from '../lib/cart';
 
 const MAX_QTY = 10;
 const MAX_KITS = 10;
 const CART_STORAGE_KEY = 'nuda_cart';
 
-type CartLine = { slug: string; qty: number; isBulk: boolean };
+export { FREE_GIFT_SLUG };
+
+type CartLine = { slug: string; qty: number; isBulk: boolean; isFree?: boolean };
+
+// Enforces the free-gift invariant: exactly one free-gift line whenever the
+// cart has anything else in it, none otherwise. Called from every mutator
+// so the invariant holds within a single state update rather than via a
+// separate effect reacting to `items` (which would cause an extra render).
+function withFreeGift(lines: CartLine[]): CartLine[] {
+	const hasOtherItems = lines.some((line) => !line.isFree);
+	const hasFreeLine = lines.some((line) => line.isFree);
+	if (hasOtherItems && !hasFreeLine) {
+		return [
+			...lines,
+			{ slug: FREE_GIFT_SLUG, qty: 1, isBulk: false, isFree: true },
+		];
+	}
+	if (!hasOtherItems && hasFreeLine) {
+		return lines.filter((line) => !line.isFree);
+	}
+	return lines;
+}
 
 function isCartLine(value: unknown): value is CartLine {
 	if (!value || typeof value !== 'object') return false;
@@ -24,7 +46,8 @@ function isCartLine(value: unknown): value is CartLine {
 	return (
 		typeof line.slug === 'string' &&
 		typeof line.qty === 'number' &&
-		typeof line.isBulk === 'boolean'
+		typeof line.isBulk === 'boolean' &&
+		(line.isFree === undefined || typeof line.isFree === 'boolean')
 	);
 }
 
@@ -58,7 +81,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
 				const parsed = JSON.parse(stored);
 				if (Array.isArray(parsed) && parsed.every(isCartLine)) {
 					// eslint-disable-next-line react-hooks/set-state-in-effect -- syncing initial state from localStorage, an external system, on mount
-					setItems(parsed);
+					setItems(withFreeGift(parsed));
 				}
 			}
 		} catch {
@@ -85,21 +108,30 @@ export function CartProvider({ children }: { children: ReactNode }) {
 			// so add_to_cart in GA4 doesn't overstate the cart/revenue impact.
 			let appliedQty = 0;
 			setItems((prev) => {
+				// Never merge into the automatic free-gift line — a manually
+				// added unit is always a separate, normally-priced line, even
+				// for the same product.
 				const existing = prev.find(
-					(line) => line.slug === product.slug && line.isBulk === isBulk
+					(line) =>
+						line.slug === product.slug &&
+						line.isBulk === isBulk &&
+						!line.isFree
 				);
 				if (existing) {
 					const newQty = Math.min(cap, existing.qty + qty);
 					appliedQty = newQty - existing.qty;
-					return prev.map((line) =>
-						line.slug === product.slug && line.isBulk === isBulk
-							? { ...line, qty: newQty }
-							: line
+					return withFreeGift(
+						prev.map((line) =>
+							line === existing ? { ...line, qty: newQty } : line
+						)
 					);
 				}
 				const newQty = Math.min(cap, qty);
 				appliedQty = newQty;
-				return [...prev, { slug: product.slug, qty: newQty, isBulk }];
+				return withFreeGift([
+					...prev,
+					{ slug: product.slug, qty: newQty, isBulk },
+				]);
 			});
 			setCelebrationTick((tick) => tick + 1);
 			if (appliedQty > 0) {
@@ -113,13 +145,15 @@ export function CartProvider({ children }: { children: ReactNode }) {
 		(slug: string, delta: number, isBulk = false) => {
 			const cap = isBulk ? MAX_KITS : MAX_QTY;
 			setItems((prev) =>
-				prev
-					.map((line) =>
-						line.slug === slug && line.isBulk === isBulk
-							? { ...line, qty: Math.min(cap, line.qty + delta) }
-							: line
-					)
-					.filter((line) => line.qty > 0)
+				withFreeGift(
+					prev
+						.map((line) =>
+							line.slug === slug && line.isBulk === isBulk && !line.isFree
+								? { ...line, qty: Math.min(cap, line.qty + delta) }
+								: line
+						)
+						.filter((line) => line.qty > 0)
+				)
 			);
 		},
 		[]
@@ -127,7 +161,11 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
 	const removeItem = useCallback((slug: string, isBulk = false) => {
 		setItems((prev) =>
-			prev.filter((line) => !(line.slug === slug && line.isBulk === isBulk))
+			withFreeGift(
+				prev.filter(
+					(line) => !(line.slug === slug && line.isBulk === isBulk && !line.isFree)
+				)
+			)
 		);
 	}, []);
 
