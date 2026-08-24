@@ -19,9 +19,10 @@ export function CoaHero() {
 					Certificates of Analysis
 				</h1>
 
-				<p className='mx-auto mt-4 max-w-xl text-white/60'>
+				<p className='mx-auto mt-4 max-2w-xl text-white/60'>
 					Complete analytical documentation for every compound. View and
-					download batch-specific COAs for your records.
+					download batch-specific COAs for your records. Updated frequently to
+					reflect the latest tests.
 				</p>
 			</div>
 		</section>

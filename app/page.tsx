@@ -1,7 +1,7 @@
 import { Hero } from './components/Hero';
 // import { TrustStrip } from './components/TrustStrip';
 import { QualityStandard } from './components/QualityStandard';
-import { PromoStrip } from './components/PromoStrip';
+// import { PromoStrip } from './components/PromoStrip';
 import { BestSellers } from './components/BestSellers';
 // import { ViewCatalogStrip } from './components/ViewCatalogStrip';
 // import { NudaPromise } from './components/NudaPromise';
@@ -19,7 +19,7 @@ export default function Home() {
 			{/* <TrustStrip /> */}
 			{/* <Standards /> */}
 			<QualityStandard />
-			<PromoStrip />
+			{/* <PromoStrip /> */}
 			<BestSellers />
 			{/* <ViewCatalogStrip /> */}
 			{/* <Commitment /> */}

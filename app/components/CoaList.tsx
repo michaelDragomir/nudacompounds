@@ -64,24 +64,9 @@ export function CoaList() {
 												</a>
 											</>
 										) : (
-											<>
-												<button
-													type='button'
-													disabled
-													className='flex items-center gap-1.5 rounded-full border border-navy/20 px-4 py-2 text-xs font-bold uppercase tracking-wide text-navy/40 disabled:cursor-not-allowed'
-												>
-													<EyeIcon className='h-4 w-4' />
-													View
-												</button>
-												<button
-													type='button'
-													disabled
-													className='flex items-center gap-1.5 rounded-full bg-amber/30 px-4 py-2 text-xs font-bold uppercase tracking-wide text-white/60 disabled:cursor-not-allowed'
-												>
-													<DownloadIcon className='h-4 w-4' />
-													Download
-												</button>
-											</>
+											<span className='text-xs font-bold uppercase tracking-wide text-warmgray'>
+												Currently out for testing
+											</span>
 										)}
 									</div>
 								</div>
