@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { CheckoutElementsProvider } from '@stripe/react-stripe-js/checkout';
 import { useCart } from '../context/CartContext';
@@ -14,6 +14,24 @@ type CartLine = {
 	isBulk: boolean;
 	isFree?: boolean;
 };
+
+// Cart edits made after the Stripe session is created (e.g. via the cart
+// drawer, in another tab) never reach it — Stripe re-derives the session's
+// line items from `items` server-side each time, but only when we actually
+// create a new session. Debounced so a burst of quantity clicks results in
+// one new session, not one per click.
+const RECREATE_DEBOUNCE_MS = 600;
+
+function cartKey(items: CartLine[]) {
+	return [...items]
+		.sort((a, b) =>
+			`${a.slug}-${a.isBulk}-${a.isFree}`.localeCompare(
+				`${b.slug}-${b.isBulk}-${b.isFree}`,
+			),
+		)
+		.map((line) => `${line.slug}:${line.qty}:${line.isBulk}:${!!line.isFree}`)
+		.join('|');
+}
 
 async function fetchClientSecret(items: CartLine[]) {
 	const response = await fetch('/api/checkout', {
@@ -32,16 +50,16 @@ async function fetchClientSecret(items: CartLine[]) {
 
 function LoadingScreen() {
 	return (
-		<div className='flex min-h-[60vh] items-center justify-center bg-navy-dark'>
-			<p className='text-sm text-offwhite/60'>Loading checkout&hellip;</p>
+		<div className='flex min-h-[60vh] items-center justify-center bg-offwhite'>
+			<p className='text-sm text-charcoal/60'>Loading checkout&hellip;</p>
 		</div>
 	);
 }
 
-// Creates the Checkout Session exactly once for this page visit, capturing
-// the cart at the moment it mounts — the session isn't kept in sync with
-// further cart edits, matching how Stripe's custom-mode client secret can
-// only be set once per Elements provider.
+// Remounting with a new `key` tears down the old Elements provider and
+// creates a brand-new Checkout Session for the current cart — the only way
+// to change a custom-mode session's line items, since its client secret
+// can only be set once per provider instance.
 function CheckoutSession({ items }: { items: CartLine[] }) {
 	const [clientSecretPromise] = useState(() => fetchClientSecret(items));
 
@@ -63,6 +81,22 @@ export default function CheckoutPage() {
 	const { items, hasHydrated } = useCart();
 	const hasRegularItems = items.some((line) => !line.isFree);
 
+	const itemsRef = useRef(items);
+	useEffect(() => {
+		itemsRef.current = items;
+	}, [items]);
+
+	const liveKey = cartKey(items);
+	const [session, setSession] = useState({ key: liveKey, items });
+
+	useEffect(() => {
+		if (liveKey === session.key) return;
+		const timeout = setTimeout(() => {
+			setSession({ key: liveKey, items: itemsRef.current });
+		}, RECREATE_DEBOUNCE_MS);
+		return () => clearTimeout(timeout);
+	}, [liveKey, session.key]);
+
 	useEffect(() => {
 		if (hasHydrated && !hasRegularItems) {
 			router.replace('/products');
@@ -73,5 +107,5 @@ export default function CheckoutPage() {
 		return <LoadingScreen />;
 	}
 
-	return <CheckoutSession items={items} />;
+	return <CheckoutSession key={session.key} items={session.items} />;
 }

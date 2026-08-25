@@ -7,7 +7,11 @@ import { FREE_GIFT_SLUG } from '../../lib/cart';
 
 const MAX_QTY = 10;
 const MAX_KITS = 10;
-const RATE_LIMIT = 10;
+// The checkout page recreates a session on every debounced cart edit while
+// the customer is on /checkout (see app/checkout/page.tsx), not just once
+// per checkout attempt — a shopper adjusting quantities a few times can
+// legitimately fire several requests within a minute.
+const RATE_LIMIT = 30;
 const RATE_WINDOW_MS = 60_000;
 
 type CartLineInput = {

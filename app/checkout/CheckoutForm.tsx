@@ -308,7 +308,7 @@ export function CheckoutForm() {
 
 					<button
 						type='submit'
-						disabled={!checkout.canConfirm || submitting}
+						disabled={!checkout.canConfirm || !consent || submitting}
 						className='flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-amber px-4 py-4 text-sm font-bold uppercase tracking-widest text-navy-dark transition-colors hover:bg-amber-dark disabled:cursor-not-allowed disabled:bg-amber/40 disabled:text-navy-dark/50'
 					>
 						<LockIcon className='h-4 w-4' />
