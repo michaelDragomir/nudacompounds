@@ -10,7 +10,6 @@ import {
 	useCheckoutElements,
 } from '@stripe/react-stripe-js/checkout';
 import { LockIcon } from '../components/icons';
-import { SITE_URL } from '../lib/site';
 
 const ELEMENT_LABELS: Record<string, string> = {
 	payment: 'Payment details',
@@ -82,8 +81,10 @@ export function CheckoutForm() {
 				return;
 			}
 
+			// returnUrl isn't passed here — the session already has one set at
+			// creation time (see app/api/checkout/route.ts), and Stripe rejects
+			// confirm() if both are provided.
 			const confirmResult = await checkout.confirm({
-				returnUrl: `${SITE_URL}/order/confirmed?session_id={CHECKOUT_SESSION_ID}`,
 				...(phone.trim() ? { phoneNumber: phone.trim() } : {}),
 			});
 

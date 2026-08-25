@@ -129,6 +129,7 @@ export async function POST(request: Request) {
 		});
 	}
 
+	const origin = request.headers.get('origin') || SITE_URL;
 	const stripe = new Stripe(apiKey);
 
 	try {
@@ -171,7 +172,7 @@ export async function POST(request: Request) {
 			phone_number_collection: {
 				enabled: true,
 			},
-			return_url: `${SITE_URL}/order/confirmed?session_id={CHECKOUT_SESSION_ID}`,
+			return_url: `${origin}/order/confirmed?session_id={CHECKOUT_SESSION_ID}`,
 		});
 
 		if (!session.client_secret) {
