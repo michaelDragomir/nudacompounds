@@ -125,12 +125,12 @@ export async function POST(request: Request) {
 		});
 	}
 
-	const origin = request.headers.get('origin') || SITE_URL;
 	const stripe = new Stripe(apiKey);
 
 	try {
 		const session = await stripe.checkout.sessions.create({
 			mode: 'payment',
+			ui_mode: 'elements',
 			// Without this, Stripe falls back to auto-detecting locale from the
 			// buyer's browser and shows "US$35.00" instead of "$35.00" whenever
 			// it can't confirm the locale maps unambiguously to USD.
@@ -140,27 +140,41 @@ export async function POST(request: Request) {
 			shipping_address_collection: {
 				allowed_countries: ['US'],
 			},
+			shipping_options: [
+				{
+					shipping_rate_data: {
+						type: 'fixed_amount',
+						fixed_amount: { amount: 0, currency: 'usd' },
+						display_name: 'Standard Shipping',
+						delivery_estimate: {
+							minimum: { unit: 'business_day', value: 2 },
+							maximum: { unit: 'business_day', value: 5 },
+						},
+					},
+				},
+				{
+					shipping_rate_data: {
+						type: 'fixed_amount',
+						fixed_amount: { amount: 1499, currency: 'usd' },
+						display_name: 'Priority Shipping',
+						delivery_estimate: {
+							minimum: { unit: 'business_day', value: 2 },
+							maximum: { unit: 'business_day', value: 3 },
+						},
+					},
+				},
+			],
 			phone_number_collection: {
 				enabled: true,
 			},
-			consent_collection: {
-				terms_of_service: 'required',
-			},
-			custom_text: {
-				terms_of_service_acceptance: {
-					message:
-						'I am 21+ and confirm these compounds are for in-vitro laboratory research only — not for human or veterinary use. See our [Research Use Only](https://nudacompounds.com/research-use-only) page.',
-				},
-			},
-			success_url: `${origin}/order/confirmed?session_id={CHECKOUT_SESSION_ID}`,
-			cancel_url: `${origin}/products`,
+			return_url: `${SITE_URL}/order/confirmed?session_id={CHECKOUT_SESSION_ID}`,
 		});
 
-		if (!session.url) {
-			throw new Error('Stripe did not return a session URL.');
+		if (!session.client_secret) {
+			throw new Error('Stripe did not return a client secret.');
 		}
 
-		return NextResponse.json({ url: session.url });
+		return NextResponse.json({ clientSecret: session.client_secret });
 	} catch (err) {
 		console.error('Stripe checkout session creation failed:', err);
 		return NextResponse.json(
