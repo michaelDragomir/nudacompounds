@@ -136,7 +136,7 @@ export async function POST(request: Request) {
 			// it can't confirm the locale maps unambiguously to USD.
 			locale: 'en',
 			line_items: lineItems,
-			payment_method_types: ['card', 'cashapp'],
+			payment_method_types: ['card'],
 			shipping_address_collection: {
 				allowed_countries: ['US'],
 			},
