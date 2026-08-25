@@ -12,6 +12,16 @@ import {
 import { LockIcon } from '../components/icons';
 import { SITE_URL } from '../lib/site';
 
+const ELEMENT_LABELS: Record<string, string> = {
+	payment: 'Payment details',
+	contactDetails: 'Contact email',
+	shippingAddress: 'Shipping address',
+	billingAddress: 'Billing address',
+	taxId: 'Tax ID',
+	terms: 'Terms of service',
+	linkAuthentication: 'Contact email',
+};
+
 export function CheckoutForm() {
 	const router = useRouter();
 	const result = useCheckoutElements();
@@ -50,25 +60,49 @@ export function CheckoutForm() {
 		setError(null);
 		setSubmitting(true);
 
-		const validation = await checkout.validateElements();
-		if (validation.type === 'error') {
-			setError(validation.error.message);
+		// Wrapped so any unexpected failure (network hiccup, a Stripe API
+		// error) always resets `submitting` and shows something to the
+		// customer — without this, an uncaught rejection here left the button
+		// stuck on "Processing…" forever with no feedback.
+		try {
+			const validation = await checkout.validateElements();
+			if (validation.type === 'error') {
+				const missing = validation.error.validation_errors ?? [];
+				const missingLabels = [
+					...new Set(
+						missing.map((v) => ELEMENT_LABELS[v.element] ?? v.element),
+					),
+				];
+				setError(
+					missingLabels.length > 0
+						? `Please complete: ${missingLabels.join(', ')}.`
+						: validation.error.message ||
+								'Please double-check the form and try again.',
+				);
+				return;
+			}
+
+			const confirmResult = await checkout.confirm({
+				returnUrl: `${SITE_URL}/order/confirmed?session_id={CHECKOUT_SESSION_ID}`,
+				...(phone.trim() ? { phoneNumber: phone.trim() } : {}),
+			});
+
+			if (confirmResult.type === 'error') {
+				setError(confirmResult.error.message);
+				return;
+			}
+
+			router.push(`/order/confirmed?session_id=${checkout.id}`);
+		} catch (err) {
+			console.error('Checkout confirmation failed:', err);
+			setError(
+				err instanceof Error
+					? err.message
+					: 'Something went wrong while processing your payment. Please try again.',
+			);
+		} finally {
 			setSubmitting(false);
-			return;
 		}
-
-		const confirmResult = await checkout.confirm({
-			returnUrl: `${SITE_URL}/order/confirmed?session_id={CHECKOUT_SESSION_ID}`,
-			...(phone.trim() ? { phoneNumber: phone.trim() } : {}),
-		});
-
-		if (confirmResult.type === 'error') {
-			setError(confirmResult.error.message);
-			setSubmitting(false);
-			return;
-		}
-
-		router.push(`/order/confirmed?session_id=${checkout.id}`);
 	}
 
 	return (
@@ -106,7 +140,7 @@ export function CheckoutForm() {
 									key={item.id}
 									className='flex items-center justify-between py-3 text-sm tracking-wider'
 								>
-									<span className='text-navy'>
+									<span className='text-navy font-semibold'>
 										{item.name}
 										{item.quantity > 1 ? ` × ${item.quantity}` : ''}
 									</span>
@@ -178,8 +212,7 @@ export function CheckoutForm() {
 													{option.deliveryEstimate?.minimum &&
 														option.deliveryEstimate?.maximum && (
 															<span className='text-xs text-charcoal/40'>
-																est.{' '}
-																{option.deliveryEstimate.minimum.value}–
+																est. {option.deliveryEstimate.minimum.value}–
 																{option.deliveryEstimate.maximum.value} days
 															</span>
 														)}
@@ -257,6 +290,9 @@ export function CheckoutForm() {
 							<BillingAddressElement
 								options={{ contacts: [], display: { name: 'split' } }}
 							/>
+							<p className='mt-1.5 text-xs text-charcoal/50'>
+								We currently ship within the United States only.
+							</p>
 						</div>
 					</div>
 
@@ -308,7 +344,7 @@ export function CheckoutForm() {
 
 					<button
 						type='submit'
-						disabled={!checkout.canConfirm || !consent || submitting}
+						disabled={!consent || submitting}
 						className='flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-amber px-4 py-4 text-sm font-bold uppercase tracking-widest text-navy-dark transition-colors hover:bg-amber-dark disabled:cursor-not-allowed disabled:bg-amber/40 disabled:text-navy-dark/50'
 					>
 						<LockIcon className='h-4 w-4' />
