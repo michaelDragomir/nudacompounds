@@ -23,7 +23,7 @@ const LEGAL_LINKS = [
 ];
 
 const CONTACT_EMAIL = 'hello@nudacompounds.com';
-const CONTACT_PHONE = '(555) 123-4567';
+const CONTACT_PHONE = '(801) 953-7091';
 
 const FDA_NOTICE_PARAGRAPHS = [
 	'The statements on this website have not been evaluated by the U.S. Food and Drug Administration.',

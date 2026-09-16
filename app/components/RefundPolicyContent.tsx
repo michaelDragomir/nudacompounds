@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { LegalDocument, type LegalSection } from './LegalDocument';
 
 const SUPPORT_EMAIL = 'hello@nudacompounds.com';
-const SUPPORT_PHONE = '(555) 123-4567';
+const SUPPORT_PHONE = '(801) 953-7091';
 
 const CLAIM_STEPS = [
 	{
@@ -37,16 +37,16 @@ const SECTIONS: LegalSection[] = [
 					returns, cancellations, or refunds once an order has been placed and
 					shipped, regardless of delivery status. This protects the
 					quality-assurance chain and ensures every compound that reaches you
-					meets our identity and purity standards. The exceptions to this
-					policy — verified shipping damage, fulfillment errors, and COA
-					discrepancies — are covered in detail below.
+					meets our identity and purity standards. The exceptions to this policy
+					— verified shipping damage, fulfillment errors, and COA discrepancies
+					— are covered in detail below.
 				</p>
 				<p>
 					<span className='font-bold text-white'>Order cancellations:</span>{' '}
 					orders may be cancelled for a full refund only within{' '}
-					<span className='font-bold text-white'>one (1) hour</span> of the
-					time the order is placed. After this one-hour window, the order is
-					locked and cannot be cancelled. To request a cancellation, email{' '}
+					<span className='font-bold text-white'>one (1) hour</span> of the time
+					the order is placed. After this one-hour window, the order is locked
+					and cannot be cancelled. To request a cancellation, email{' '}
 					<a
 						href={`mailto:${SUPPORT_EMAIL}`}
 						className='font-semibold text-amber hover:text-amber-dark transition-colors'
@@ -67,16 +67,18 @@ const SECTIONS: LegalSection[] = [
 			<>
 				<p>
 					Once a shipment is marked{' '}
-					<span className='font-semibold text-white'>&quot;Delivered&quot;</span>{' '}
+					<span className='font-semibold text-white'>
+						&quot;Delivered&quot;
+					</span>{' '}
 					by the carrier, responsibility for the package transfers to the
 					customer.
 				</p>
 				<p>
-					Nuda Compounds is not responsible for packages that are lost or
-					stolen after a confirmed delivery scan, including theft from
-					porches, mailrooms, front desks, lockers, or other delivery
-					locations. Refunds, credits, or replacements are not issued for
-					packages confirmed as delivered by the carrier.
+					Nuda Compounds is not responsible for packages that are lost or stolen
+					after a confirmed delivery scan, including theft from porches,
+					mailrooms, front desks, lockers, or other delivery locations. Refunds,
+					credits, or replacements are not issued for packages confirmed as
+					delivered by the carrier.
 				</p>
 			</>
 		),
@@ -88,12 +90,12 @@ const SECTIONS: LegalSection[] = [
 		body: (
 			<>
 				<p>
-					Standard orders within the contiguous United States are backed by
-					the Nuda Promise — our 5-business-day delivery guarantee, measured
-					from the moment the carrier accepts the package (not from when the
-					order is placed). If a qualifying order isn&apos;t delivered within
-					that window due to our fulfillment process, you&apos;re eligible for
-					one replacement shipment per original order.
+					Standard orders within the contiguous United States are backed by the
+					Nuda Promise — our 5-business-day delivery guarantee, measured from
+					the moment the carrier accepts the package (not from when the order is
+					placed). If a qualifying order isn&apos;t delivered within that window
+					due to our fulfillment process, you&apos;re eligible for one
+					replacement shipment per original order.
 				</p>
 				<p>
 					This guarantee carries conditions and exclusions — including carrier
@@ -170,8 +172,8 @@ const SECTIONS: LegalSection[] = [
 				</p>
 				<ul className='list-disc space-y-2 pl-5 marker:text-amber'>
 					<li>
-						A full unboxing video, recorded from the moment the package is
-						first opened
+						A full unboxing video, recorded from the moment the package is first
+						opened
 					</li>
 					<li>Photos of the external packaging</li>
 					<li>Photos of the package contents</li>
@@ -191,10 +193,10 @@ const SECTIONS: LegalSection[] = [
 		body: (
 			<>
 				<p>
-					Upon confirmation of an eligible shipping or fulfillment error
-					caused by Nuda Compounds, we will issue a replacement of the
-					affected items, or — at our discretion — store credit or a refund of
-					the affected items including applicable shipping.
+					Upon confirmation of an eligible shipping or fulfillment error caused
+					by Nuda Compounds, we will issue a replacement of the affected items,
+					or — at our discretion — store credit or a refund of the affected
+					items including applicable shipping.
 				</p>
 				<p>
 					Cash refunds, store credits, or alternative compensation are not
@@ -219,10 +221,10 @@ const SECTIONS: LegalSection[] = [
 				<p>
 					If you believe a product does not meet the specifications stated on
 					its COA, you may submit a formal dispute by providing independent
-					third-party analytical data conducted by an accredited laboratory.
-					We will review the submitted data and respond within 10 business
-					days. If a legitimate discrepancy is confirmed, we will issue a
-					replacement or full credit at our discretion.
+					third-party analytical data conducted by an accredited laboratory. We
+					will review the submitted data and respond within 10 business days. If
+					a legitimate discrepancy is confirmed, we will issue a replacement or
+					full credit at our discretion.
 				</p>
 			</>
 		),
@@ -244,7 +246,10 @@ const SECTIONS: LegalSection[] = [
 						Orders shipped to an incorrect, incomplete, or outdated address
 						provided by the customer at checkout
 					</li>
-					<li>Delays caused by shipping carriers beyond Nuda Compounds&apos; control</li>
+					<li>
+						Delays caused by shipping carriers beyond Nuda Compounds&apos;
+						control
+					</li>
 					<li>
 						Products seized by customs or regulatory authorities in
 						jurisdictions where the buyer is responsible for compliance
@@ -253,14 +258,14 @@ const SECTIONS: LegalSection[] = [
 				</ul>
 				<p>
 					It is the customer&apos;s sole responsibility to provide a complete
-					and accurate shipping address at checkout — including street
-					number, unit or apartment, city, state, and ZIP. Orders are shipped
-					exactly as entered. Nuda Compounds is not responsible for packages
-					that are delayed, misdelivered, returned to sender, lost, or stolen
-					as a result of an address error provided by the customer. If a
-					package is returned to us by the carrier due to an address error,
-					the customer is responsible for the cost of re-shipment. If you spot
-					a mistake after ordering, email{' '}
+					and accurate shipping address at checkout — including street number,
+					unit or apartment, city, state, and ZIP. Orders are shipped exactly as
+					entered. Nuda Compounds is not responsible for packages that are
+					delayed, misdelivered, returned to sender, lost, or stolen as a result
+					of an address error provided by the customer. If a package is returned
+					to us by the carrier due to an address error, the customer is
+					responsible for the cost of re-shipment. If you spot a mistake after
+					ordering, email{' '}
 					<a
 						href={`mailto:${SUPPORT_EMAIL}`}
 						className='font-semibold text-amber hover:text-amber-dark transition-colors'
@@ -280,11 +285,11 @@ const SECTIONS: LegalSection[] = [
 		body: (
 			<>
 				<p>
-					If you pay with cryptocurrency and send more than the required
-					amount, the overpayment will be converted to store credit and
-					applied to your account. Due to the irreversible nature of crypto
-					transactions and exchange-rate volatility, we are unable to process
-					crypto refunds to external wallets.
+					If you pay with cryptocurrency and send more than the required amount,
+					the overpayment will be converted to store credit and applied to your
+					account. Due to the irreversible nature of crypto transactions and
+					exchange-rate volatility, we are unable to process crypto refunds to
+					external wallets.
 				</p>
 				<p>Store credits from crypto overpayments:</p>
 				<ul className='list-disc space-y-2 pl-5 marker:text-amber'>
@@ -294,8 +299,7 @@ const SECTIONS: LegalSection[] = [
 					</li>
 					<li>Never expire and can be used on any future purchase</li>
 					<li>
-						Are applied to your account within 24 hours of payment
-						confirmation
+						Are applied to your account within 24 hours of payment confirmation
 					</li>
 				</ul>
 				<p>
@@ -320,9 +324,8 @@ const SECTIONS: LegalSection[] = [
 			<p>
 				Where a refund is not applicable but Nuda Compounds determines a
 				resolution is warranted, we may issue store credit at our sole
-				discretion. Store credits do not expire and may be applied to any
-				future order. Store credits are non-transferable and hold no cash
-				value.
+				discretion. Store credits do not expire and may be applied to any future
+				order. Store credits are non-transferable and hold no cash value.
 			</p>
 		),
 	},
@@ -334,10 +337,10 @@ const SECTIONS: LegalSection[] = [
 			<p>
 				Chargebacks filed for delivered, refused, or stolen packages will be
 				disputed using carrier confirmation, delivery records, and the
-				customer&apos;s agreement to these terms. If you believe there&apos;s
-				an issue with your order, please contact us first (email support or
-				call/text {SUPPORT_PHONE}) — we resolve verified problems quickly, and
-				a direct claim is always faster than a chargeback.
+				customer&apos;s agreement to these terms. If you believe there&apos;s an
+				issue with your order, please contact us first (email support or
+				call/text {SUPPORT_PHONE}) — we resolve verified problems quickly, and a
+				direct claim is always faster than a chargeback.
 			</p>
 		),
 	},
@@ -348,9 +351,9 @@ const SECTIONS: LegalSection[] = [
 		body: (
 			<p>
 				We&apos;re committed to accurate fulfillment and timely shipment of
-				every order. The policies above exist to keep resolutions fair,
-				prevent abuse, and protect every customer we serve. By placing an
-				order with Nuda Compounds, you acknowledge and agree to these terms.
+				every order. The policies above exist to keep resolutions fair, prevent
+				abuse, and protect every customer we serve. By placing an order with
+				Nuda Compounds, you acknowledge and agree to these terms.
 			</p>
 		),
 	},
@@ -360,9 +363,9 @@ const SECTIONS: LegalSection[] = [
 		title: 'Changes to This Policy',
 		body: (
 			<p>
-				We reserve the right to update or revise this Refund & Returns Policy
-				at any time. Updates will be posted on this page with a revised
-				&quot;Last updated&quot; date.
+				We reserve the right to update or revise this Refund & Returns Policy at
+				any time. Updates will be posted on this page with a revised &quot;Last
+				updated&quot; date.
 			</p>
 		),
 	},
@@ -399,9 +402,8 @@ export function RefundPolicyContent() {
 					research-grade nature of our products and the strict handling
 					requirements needed to preserve compound integrity,{' '}
 					<span className='font-bold text-white'>all sales are final</span> —
-					but we know issues can occasionally arise in transit, and the
-					policy below explains exactly how we handle them, quickly and
-					fairly.
+					but we know issues can occasionally arise in transit, and the policy
+					below explains exactly how we handle them, quickly and fairly.
 				</>
 			}
 			sections={SECTIONS}

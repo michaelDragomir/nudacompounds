@@ -6,7 +6,7 @@ import { ClockIcon, MailIcon, PhoneIcon } from './icons';
 
 const CONTACT_EMAIL = 'hello@nudacompounds.com';
 // Placeholder — swap in the real phone number when available.
-const CONTACT_PHONE = '(555) 123-4567';
+const CONTACT_PHONE = '(801) 953-7091';
 
 export function Contact() {
 	const [submitted, setSubmitted] = useState(false);
