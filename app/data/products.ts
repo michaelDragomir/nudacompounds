@@ -29,8 +29,6 @@ export type Product = {
 	coaAvailable: boolean;
 };
 
-const PLACEHOLDER_COA_URL = '/coas/NUDA-1010.pdf';
-
 export const products: Product[] = [
 	{
 		slug: '3-rt',
@@ -51,7 +49,7 @@ export const products: Product[] = [
 			endotoxins: 'PASS',
 			tested: '07/20/26',
 		},
-		coaUrl: PLACEHOLDER_COA_URL,
+		coaUrl: '/coas/NUDA-1010.pdf',
 		coaAvailable: true,
 	},
 	{
@@ -73,8 +71,8 @@ export const products: Product[] = [
 			endotoxins: 'PASS',
 			tested: '07/18/26',
 		},
-		coaUrl: PLACEHOLDER_COA_URL,
-		coaAvailable: false,
+		coaUrl: '/coas/NUDA-1011.pdf',
+		coaAvailable: true,
 	},
 	{
 		slug: 'bpc-157',
@@ -95,8 +93,8 @@ export const products: Product[] = [
 			endotoxins: 'PASS',
 			tested: '07/15/26',
 		},
-		coaUrl: PLACEHOLDER_COA_URL,
-		coaAvailable: false,
+		coaUrl: '/coas/NUDA-1013.pdf',
+		coaAvailable: true,
 	},
 	{
 		slug: 'ghk-cu',
@@ -117,8 +115,8 @@ export const products: Product[] = [
 			endotoxins: 'PASS',
 			tested: '07/12/26',
 		},
-		coaUrl: PLACEHOLDER_COA_URL,
-		coaAvailable: false,
+		coaUrl: '/coas/NUDA-1012.pdf',
+		coaAvailable: true,
 	},
 	{
 		slug: 'tesamorelin',
@@ -139,7 +137,7 @@ export const products: Product[] = [
 			endotoxins: 'PASS',
 			tested: '07/10/26',
 		},
-		coaUrl: PLACEHOLDER_COA_URL,
+		coaUrl: '/coas/NUDA-1010.pdf', //replace
 		coaAvailable: false,
 	},
 	{
@@ -161,8 +159,8 @@ export const products: Product[] = [
 			endotoxins: 'PASS',
 			tested: '06/25/26',
 		},
-		coaUrl: PLACEHOLDER_COA_URL,
-		coaAvailable: false,
+		coaUrl: '/coas/NUDA-1014.pdf',
+		coaAvailable: true,
 	},
 	{
 		slug: 'nad-plus',
@@ -183,8 +181,8 @@ export const products: Product[] = [
 			endotoxins: 'PASS',
 			tested: '06/22/26',
 		},
-		coaUrl: PLACEHOLDER_COA_URL,
-		coaAvailable: false,
+		coaUrl: '/coas/NUDA-1015.pdf',
+		coaAvailable: true,
 	},
 	{
 		slug: 'bac-water',
@@ -205,7 +203,7 @@ export const products: Product[] = [
 			endotoxins: 'PASS',
 			tested: '07/08/26',
 		},
-		coaUrl: PLACEHOLDER_COA_URL,
+		coaUrl: 'N/A',
 		coaAvailable: false,
 	},
 ];
