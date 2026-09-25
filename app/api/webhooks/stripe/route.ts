@@ -2,9 +2,19 @@ import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { Resend } from 'resend';
 import { getSupabaseAdmin } from '../../../lib/supabaseAdmin';
+import { FREE_SHIPPING_THRESHOLD } from '../../../lib/cart';
 
 const FROM_ADDRESS = 'Nuda Compounds <hello@nudacompounds.com>';
 const MERCHANT_EMAIL = process.env.CONTACT_EMAIL || 'hello@nudacompounds.com';
+
+// Site palette (see app/globals.css) — kept as literal hex/hsl-equivalent
+// values here since email clients can't read CSS custom properties.
+const COLOR_NAVY = '#2f4a78';
+const COLOR_NAVY_DARK = '#131f38';
+const COLOR_AMBER = '#d9a05b';
+const COLOR_AMBER_DARK = '#c48a3d';
+const COLOR_OFFWHITE = '#faf9f6';
+const COLOR_CHARCOAL = '#2e2e2e';
 
 function formatCents(cents: number) {
 	return (cents / 100).toFixed(2);
@@ -296,7 +306,10 @@ async function handleAsyncPaymentFailed(session: Stripe.Checkout.Session) {
 
 		return NextResponse.json({ received: true });
 	} catch (err) {
-		console.error('Stripe async-payment-failed webhook processing failed:', err);
+		console.error(
+			'Stripe async-payment-failed webhook processing failed:',
+			err,
+		);
 		return NextResponse.json(
 			{ error: 'Webhook processing failed.' },
 			{ status: 500 },
@@ -376,14 +389,138 @@ type OrderRow = {
 	customer_email: string;
 	customer_address: string | null;
 	customer_phone: string | null;
+	subtotal: number;
 	total: number;
 };
 
 type ItemRow = {
 	product_name: string;
 	quantity: number;
+	unit_price: number;
 	line_total: number;
 };
+
+// A line is the free BAC Water gift if its unit price was zeroed out
+// server-side — see the isFreeGift check in /api/checkout/route.ts.
+function isFreeLine(item: ItemRow) {
+	return item.unit_price === 0;
+}
+
+function buildItemLine(item: ItemRow) {
+	if (isFreeLine(item)) {
+		return `${item.quantity} ${item.product_name} — Included with order`;
+	}
+	return `${item.quantity} ${item.product_name} — $${formatCents(item.line_total)}`;
+}
+
+function buildOrderEmailHtml({
+	introHtml,
+	order,
+	items,
+	includeContact,
+}: {
+	introHtml: string;
+	order: OrderRow;
+	items: ItemRow[];
+	includeContact: boolean;
+}) {
+	const shipping = order.total - order.subtotal;
+	const itemRowsHtml = items
+		.map(
+			(item) => `
+				<tr>
+					<td style="padding:10px 0;border-bottom:1px solid #e5e2da;color:${COLOR_NAVY};font-size:14px;">
+						${item.quantity} ${item.product_name}
+					</td>
+					<td style="padding:10px 0;border-bottom:1px solid #e5e2da;color:${isFreeLine(item) ? COLOR_AMBER_DARK : COLOR_NAVY};font-weight:700;font-size:14px;text-align:right;white-space:nowrap;">
+						${isFreeLine(item) ? 'Included with order' : `$${formatCents(item.line_total)}`}
+					</td>
+				</tr>`,
+		)
+		.join('');
+
+	const contactRowsHtml = includeContact
+		? `
+				<tr>
+					<td style="padding:6px 0;color:${COLOR_CHARCOAL};font-size:14px;"><strong>Customer</strong></td>
+					<td style="padding:6px 0;color:${COLOR_CHARCOAL};font-size:14px;text-align:right;">${order.customer_email}</td>
+				</tr>
+				${
+					order.customer_phone
+						? `<tr>
+					<td style="padding:6px 0;color:${COLOR_CHARCOAL};font-size:14px;"><strong>Phone</strong></td>
+					<td style="padding:6px 0;color:${COLOR_CHARCOAL};font-size:14px;text-align:right;">${order.customer_phone}</td>
+				</tr>`
+						: ''
+				}`
+		: '';
+
+	return `
+<!DOCTYPE html>
+<html>
+	<body style="margin:0;padding:0;background-color:${COLOR_OFFWHITE};font-family:Helvetica,Arial,sans-serif;">
+		<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:${COLOR_OFFWHITE};padding:32px 16px;">
+			<tr>
+				<td align="center">
+					<table role="presentation" width="100%" style="max-width:520px;background-color:#ffffff;border-radius:16px;border:1px solid rgba(217,160,91,0.4);overflow:hidden;">
+						<tr>
+							<td style="background-color:${COLOR_NAVY_DARK};padding:24px 32px;">
+								<span style="color:${COLOR_AMBER};font-size:12px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;">Nuda Compounds</span>
+							</td>
+						</tr>
+						<tr>
+							<td style="padding:32px;">
+								${introHtml}
+
+								<table role="presentation" width="100%" style="margin-top:16px;">
+									<tr>
+										<td style="padding:6px 0;color:${COLOR_CHARCOAL};font-size:14px;"><strong>Order</strong></td>
+										<td style="padding:6px 0;color:${COLOR_NAVY};font-size:14px;font-weight:700;text-align:right;">${order.order_number}</td>
+									</tr>
+									${contactRowsHtml}
+								</table>
+
+								<hr style="border:none;border-top:1px solid #e5e2da;margin:20px 0;" />
+
+								<p style="margin:0 0 8px;color:${COLOR_CHARCOAL};font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;">Items</p>
+								<table role="presentation" width="100%" style="border-collapse:collapse;">
+									${itemRowsHtml}
+								</table>
+
+								<table role="presentation" width="100%" style="margin-top:12px;">
+									<tr>
+										<td style="padding:4px 0;color:${COLOR_CHARCOAL};font-size:13px;">Subtotal</td>
+										<td style="padding:4px 0;color:${COLOR_CHARCOAL};font-size:13px;text-align:right;">$${formatCents(order.subtotal)}</td>
+									</tr>
+									<tr>
+										<td style="padding:4px 0;color:${COLOR_CHARCOAL};font-size:13px;">Shipping</td>
+										<td style="padding:4px 0;color:${COLOR_CHARCOAL};font-size:13px;text-align:right;">${shipping === 0 ? 'Free' : `$${formatCents(shipping)}`}</td>
+									</tr>
+								</table>
+								<p style="margin:4px 0 0;color:${COLOR_CHARCOAL};font-size:11px;opacity:0.6;">Free shipping on orders over $${FREE_SHIPPING_THRESHOLD}.</p>
+
+								<hr style="border:none;border-top:1px solid #e5e2da;margin:16px 0;" />
+
+								<table role="presentation" width="100%">
+									<tr>
+										<td style="padding:2px 0;color:${COLOR_NAVY};font-size:16px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">Total</td>
+										<td style="padding:2px 0;color:${COLOR_AMBER_DARK};font-size:20px;font-weight:700;text-align:right;">$${formatCents(order.total)}</td>
+									</tr>
+								</table>
+
+								<hr style="border:none;border-top:1px solid #e5e2da;margin:20px 0;" />
+
+								<p style="margin:0 0 10px;color:${COLOR_CHARCOAL};font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;">Shipping to:</p>
+								<p style="margin:0;color:${COLOR_CHARCOAL};font-size:14px;">${order.customer_address || 'Not provided'}</p>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>`;
+}
 
 async function sendOrderEmails(order: OrderRow, items: ItemRow[]) {
 	const apiKey = process.env.RESEND_API_KEY;
@@ -395,14 +532,10 @@ async function sendOrderEmails(order: OrderRow, items: ItemRow[]) {
 	}
 
 	const resend = new Resend(apiKey);
-	const itemLines = items
-		.map(
-			(item) =>
-				`- ${item.product_name} x${item.quantity} — $${formatCents(item.line_total)}`,
-		)
-		.join('\n');
-
-	const shippingLine = `Shipping to: ${order.customer_address || 'Not provided'}`;
+	const itemLines = items.map(buildItemLine).join('\n');
+	const shipping = order.total - order.subtotal;
+	const shippingLine = `Shipping: ${shipping === 0 ? 'Free' : `$${formatCents(shipping)}`} (free over $${FREE_SHIPPING_THRESHOLD})`;
+	const addressLine = `Shipping to: ${order.customer_address || 'Not provided'}`;
 	const phoneLine = order.customer_phone
 		? `Phone: ${order.customer_phone}`
 		: null;
@@ -412,17 +545,27 @@ async function sendOrderEmails(order: OrderRow, items: ItemRow[]) {
 			from: FROM_ADDRESS,
 			to: MERCHANT_EMAIL,
 			subject: `New order ${order.order_number} — $${formatCents(order.total)}`,
+			html: buildOrderEmailHtml({
+				introHtml: `<h1 style="margin:0;color:${COLOR_NAVY};font-size:22px;">New order placed</h1>`,
+				order,
+				items,
+				includeContact: true,
+			}),
 			text: [
 				'New order placed.',
 				'',
 				`Order: ${order.order_number}`,
 				`Customer: ${order.customer_email}`,
 				phoneLine,
-				shippingLine,
-				`Total: $${formatCents(order.total)}`,
 				'',
 				'Items:',
 				itemLines,
+				'',
+				`Subtotal: $${formatCents(order.subtotal)}`,
+				shippingLine,
+				`Total: $${formatCents(order.total)}`,
+				'',
+				addressLine,
 			]
 				.filter((line) => line !== null)
 				.join('\n'),
@@ -431,17 +574,29 @@ async function sendOrderEmails(order: OrderRow, items: ItemRow[]) {
 		await resend.emails.send({
 			from: FROM_ADDRESS,
 			to: order.customer_email,
-			subject: `Your Nuda Compounds order ${order.order_number}`,
+			subject: `Your Nuda Compounds Order Confirmation`,
+			html: buildOrderEmailHtml({
+				introHtml: `
+					<p style="margin:0 0 4px;color:${COLOR_AMBER_DARK};font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;">Order Confirmed</p>
+					<h1 style="margin:0;color:${COLOR_NAVY};font-size:22px;">Thank you for your order!</h1>`,
+				order,
+				items,
+				includeContact: false,
+			}),
 			text: [
-				'Thanks for your order!',
+				'Thank you for ordering from Nuda Compounds!',
 				'',
 				`Order: ${order.order_number}`,
-				`Total: $${formatCents(order.total)}`,
-				shippingLine,
-				phoneLine,
 				'',
 				'Items:',
 				itemLines,
+				'',
+				`Subtotal: $${formatCents(order.subtotal)}`,
+				shippingLine,
+				`Total: $${formatCents(order.total)}`,
+				'',
+				addressLine,
+				phoneLine,
 				'',
 			]
 				.filter((line) => line !== null)

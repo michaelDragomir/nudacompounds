@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { getSupabaseAdmin } from '../../lib/supabaseAdmin';
+import { FREE_SHIPPING_THRESHOLD } from '../../lib/cart';
 import { OrderConfirmedEffects } from '../../components/OrderConfirmedEffects';
 
 export const metadata: Metadata = {
@@ -16,6 +17,7 @@ type OrderSummary = {
 	id: string;
 	order_number: string;
 	customer_email: string;
+	subtotal: number;
 	total: number;
 };
 
@@ -42,7 +44,7 @@ export default async function OrderConfirmedPage({
 		const supabase = getSupabaseAdmin();
 		const { data: orderRow } = await supabase
 			.from('orders')
-			.select('id, order_number, customer_email, total')
+			.select('id, order_number, customer_email, subtotal, total')
 			.eq('stripe_session_id', sessionId)
 			.maybeSingle();
 
@@ -125,26 +127,44 @@ export default async function OrderConfirmedPage({
 						</div>
 
 						<ul className='mt-6 divide-y divide-black/5'>
-							{items.map((item, index) => (
-								<li
-									key={index}
-									className='flex items-center justify-between py-3 text-sm'
-								>
-									<div>
-										<p className='font-semibold text-navy'>
-											{item.product_name}
-										</p>
-										<p className='text-charcoal/60'>
-											Qty {item.quantity}
-											{item.is_bulk ? ' (kit)' : ''}
-										</p>
-									</div>
-									<span className='font-bold text-navy'>
-										${formatCents(item.line_total)}
-									</span>
-								</li>
-							))}
+							{items.map((item, index) => {
+								const isFree = item.unit_price === 0;
+								return (
+									<li
+										key={index}
+										className='flex items-center justify-between py-3 text-sm'
+									>
+										<div>
+											<p className='font-semibold text-navy'>
+												{item.product_name}
+											</p>
+											<p className='text-charcoal/60'>
+												{isFree
+													? 'Included with order'
+													: `Qty ${item.quantity}${item.is_bulk ? ' (kit)' : ''}`}
+											</p>
+										</div>
+										<span className='font-bold text-navy'>
+											{isFree ? 'Free' : `$${formatCents(item.line_total)}`}
+										</span>
+									</li>
+								);
+							})}
 						</ul>
+
+						<div className='mt-4 flex items-center justify-between border-t border-black/10 pt-4 text-sm'>
+							<span className='font-bold uppercase tracking-wide text-navy'>
+								Shipping
+							</span>
+							<span className='font-bold text-navy'>
+								{order.total - order.subtotal === 0
+									? 'Free'
+									: `$${formatCents(order.total - order.subtotal)}`}
+							</span>
+						</div>
+						<p className='mt-1 text-xs text-charcoal/50'>
+							Free shipping on orders over ${FREE_SHIPPING_THRESHOLD}.
+						</p>
 
 						<div className='mt-4 flex items-center justify-between border-t border-black/10 pt-4'>
 							<span className='text-sm font-bold uppercase tracking-wide text-navy'>
