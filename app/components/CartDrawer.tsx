@@ -4,6 +4,11 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useCart } from '../context/CartContext';
 import { products } from '../data/products';
+import {
+	bacWaterSizeLabel,
+	FREE_GIFT_SLUG,
+	FREE_SHIPPING_THRESHOLD,
+} from '../lib/cart';
 import { trackBeginCheckout } from '../lib/gtagEvents';
 import { CartIcon, LockIcon, TrashIcon, XIcon } from './icons';
 import { SectionLink } from './SectionLink';
@@ -53,6 +58,19 @@ export function CartDrawer() {
 
 	const regularLines = lines.filter((line) => !line.isFree);
 	const freeGiftLine = lines.find((line) => line.isFree);
+
+	const qualifiesForFreeShipping = subtotal >= FREE_SHIPPING_THRESHOLD;
+	const remainingForFreeShipping = FREE_SHIPPING_THRESHOLD - subtotal;
+
+	// BAC Water's size is driven by the total vial count across the whole
+	// order (every product, not just BAC Water itself) — every 3 vials
+	// ordered ships with one 10mL BAC Water vial instead of a 3mL one (see
+	// bacWaterSizeLabel). Kit-of-10 lines count as 10 vials each.
+	const totalOrderVials = regularLines.reduce(
+		(sum, line) => sum + (line.isBulk ? line.qty * 10 : line.qty),
+		0,
+	);
+	const bacWaterSize = bacWaterSizeLabel(totalOrderVials);
 
 	const suggestion = products.find(
 		(p) => p.inStock && !items.some((line) => line.slug === p.slug),
@@ -137,7 +155,11 @@ export function CartDrawer() {
 												)}
 											</div>
 											<span className='text-sm text-white/70'>
-												{isBulk ? `${qty * 10} vials` : product.size}
+												{isBulk
+													? `${qty * 10} vials`
+													: product.slug === FREE_GIFT_SLUG
+														? bacWaterSize
+														: product.size}
 											</span>
 										</div>
 										<div className='mt-2 flex items-center justify-between'>
@@ -206,9 +228,7 @@ export function CartDrawer() {
 											{freeGiftLine.product.name}
 										</p>
 									</div>
-									<span className='text-sm text-white/70'>
-										{freeGiftLine.product.size}
-									</span>
+									<span className='text-sm text-white/70'>{bacWaterSize}</span>
 								</div>
 								<p className='text-[11px] font-bold uppercase tracking-wide text-offwhite/50'>
 									Included with order
@@ -268,6 +288,24 @@ export function CartDrawer() {
 				</div>
 
 				<div className='border-t border-offwhite/10 px-6 py-5'>
+					{regularLines.length > 0 && (
+						<p className='mb-4 text-center text-xs text-offwhite/60'>
+							{qualifiesForFreeShipping ? (
+								<span className='font-bold text-amber-light'>
+									You&apos;ve unlocked free shipping!
+								</span>
+							) : (
+								<>
+									Add{' '}
+									<span className='font-bold text-amber-light'>
+										${remainingForFreeShipping.toFixed(2)}
+									</span>{' '}
+									more for free shipping
+								</>
+							)}
+						</p>
+					)}
+
 					<div className='mb-4 flex flex-wrap items-center justify-center gap-2'>
 						{TRUST_BADGES.map((label) => (
 							<span

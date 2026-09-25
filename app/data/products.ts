@@ -214,7 +214,7 @@ export const products: Product[] = [
 		description:
 			'Bacteriostatic water used to reconstitute lyophilized peptides for laboratory handling. Sterile-filtered and supplied in a sealed vial.',
 		purity: 'USP Grade',
-		size: '10mL vial',
+		size: '3mL vial',
 		price: 9.99,
 		bulkPrice10: 85,
 		image: '/images/bacWater.png',

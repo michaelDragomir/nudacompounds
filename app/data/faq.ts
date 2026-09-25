@@ -1,4 +1,10 @@
+import { FREE_SHIPPING_THRESHOLD, STANDARD_SHIPPING_COST } from '../lib/cart';
+
 export const FAQ_ITEMS = [
+	{
+		question: 'How much does shipping cost?',
+		answer: `Orders of $${FREE_SHIPPING_THRESHOLD} or more ship free. Orders under $${FREE_SHIPPING_THRESHOLD} ship for a flat $${STANDARD_SHIPPING_COST.toFixed(2)}. A complimentary vial of BAC Water is included with every order regardless of order size.`,
+	},
 	{
 		question: 'What is a Certificate of Analysis (COA)?',
 		answer:

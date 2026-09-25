@@ -1,5 +1,7 @@
+import { FREE_SHIPPING_THRESHOLD } from '../lib/cart';
+
 const PROMISE_PILLS = [
-	{ label: 'Free Shipping', detail: 'Every US Order' },
+	{ label: 'Free Shipping', detail: `Orders $${FREE_SHIPPING_THRESHOLD}+` },
 	{ label: 'Free BAC Water', detail: 'Included Always' },
 	{ label: '2-5 Day Delivery', detail: 'with tracking' },
 ];

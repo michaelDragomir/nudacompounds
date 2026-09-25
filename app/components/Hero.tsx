@@ -1,9 +1,13 @@
 import { CheckIcon } from './icons';
 import { SectionLink } from './SectionLink';
 import { BottleCarousel } from './BottleCarousel';
+import { FREE_SHIPPING_THRESHOLD } from '../lib/cart';
 
 const stats = [
-	{ stat: 'Free Shipping', label: 'on orders over $200' },
+	{
+		stat: 'Free Shipping',
+		label: `on orders over $${FREE_SHIPPING_THRESHOLD}`,
+	},
 	{ stat: '99%+', label: 'purity' },
 	{ stat: 'COA', label: 'Published for Every Batch' },
 	{ stat: '2-5 Day', label: 'Shipping' },

@@ -46,7 +46,7 @@ export function FreeShippingTimer() {
 		<div className='mt-2 flex items-center gap-2 text-sm'>
 			<TruckIcon className='h-4 w-4 shrink-0 text-amber-dark' />
 			<span className='font-bold uppercase tracking-wide text-amber-dark'>
-				Shipped Free Today
+				Ships Today
 			</span>
 			<span className='font-mono text-sm font-semibold tabular-nums text-navy'>
 				{formatCountdown(remaining)}

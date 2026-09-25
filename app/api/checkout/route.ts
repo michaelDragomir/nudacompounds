@@ -3,7 +3,11 @@ import Stripe from 'stripe';
 import { products } from '../../data/products';
 import { SITE_URL } from '../../lib/site';
 import { getClientIp, rateLimit } from '../../lib/rateLimit';
-import { FREE_GIFT_SLUG } from '../../lib/cart';
+import {
+	FREE_GIFT_SLUG,
+	FREE_SHIPPING_THRESHOLD,
+	STANDARD_SHIPPING_COST,
+} from '../../lib/cart';
 
 const MAX_QTY = 10;
 const MAX_KITS = 10;
@@ -60,6 +64,7 @@ export async function POST(request: Request) {
 	}
 
 	const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = [];
+	let subtotal = 0;
 
 	for (const line of rawItems) {
 		const slug = typeof line.slug === 'string' ? line.slug : null;
@@ -113,6 +118,8 @@ export async function POST(request: Request) {
 				? product.bulkPrice10
 				: product.price;
 
+		subtotal += unitPrice * (isFreeGift ? 1 : qty);
+
 		lineItems.push({
 			quantity: isFreeGift ? 1 : qty,
 			price_data: {
@@ -149,7 +156,13 @@ export async function POST(request: Request) {
 				{
 					shipping_rate_data: {
 						type: 'fixed_amount',
-						fixed_amount: { amount: 0, currency: 'usd' },
+						fixed_amount: {
+							amount:
+								subtotal >= FREE_SHIPPING_THRESHOLD
+									? 0
+									: Math.round(STANDARD_SHIPPING_COST * 100),
+							currency: 'usd',
+						},
 						display_name: 'Standard Shipping',
 						delivery_estimate: {
 							minimum: { unit: 'business_day', value: 2 },

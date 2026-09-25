@@ -1,9 +1,11 @@
+import { FREE_SHIPPING_THRESHOLD, STANDARD_SHIPPING_COST } from '../lib/cart';
+
 const PROMISE_ITEMS = [
 	{
-		badge: 'Always Included',
+		badge: `Orders $${FREE_SHIPPING_THRESHOLD}+`,
 		title: 'Free Shipping',
-		value: '$9.99 value',
-		body: 'Every US order. No minimum, no codes. Ships discreetly.',
+		value: `$${STANDARD_SHIPPING_COST.toFixed(2)} value`,
+		body: `Free on orders $${FREE_SHIPPING_THRESHOLD}+. Orders under $${FREE_SHIPPING_THRESHOLD} ship for a flat $${STANDARD_SHIPPING_COST.toFixed(2)}. Ships discreetly.`,
 	},
 	{
 		badge: 'Every Order',
@@ -30,7 +32,10 @@ export function NudaPromise() {
 					<div className='mt-4 flex flex-wrap items-center justify-center gap-3 text-sm text-charcoal/70'>
 						<span>Research Peptides Delivered Same Day Locally</span>
 						<span className='hidden h-4 w-px bg-amber/60 sm:block' />
-						<span>Free Shipping + Free BAC Water on Every Order</span>
+						<span>
+							Free BAC Water on Every Order · Free Shipping on Orders $
+							{FREE_SHIPPING_THRESHOLD}+
+						</span>
 					</div>
 				</div>
 

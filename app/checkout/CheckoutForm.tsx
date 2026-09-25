@@ -10,6 +10,7 @@ import {
 	useCheckoutElements,
 } from '@stripe/react-stripe-js/checkout';
 import { LockIcon } from '../components/icons';
+import { FREE_SHIPPING_THRESHOLD, STANDARD_SHIPPING_COST } from '../lib/cart';
 
 const ELEMENT_LABELS: Record<string, string> = {
 	payment: 'Payment details',
@@ -171,14 +172,11 @@ export function CheckoutForm() {
 									</span>
 								</span>
 								<span className='flex items-center gap-2'>
-									{checkout.shipping &&
-										checkout.shipping.shippingOption.minorUnitsAmount === 0 && (
+									{checkout.shipping?.shippingOption.minorUnitsAmount === 0 &&
+										checkout.shipping.shippingOption.displayName ===
+											'Standard Shipping' && (
 											<span className='text-charcoal/30 line-through'>
-												{
-													checkout.shippingOptions.find(
-														(o) => o.minorUnitsAmount > 0,
-													)?.amount
-												}
+												${STANDARD_SHIPPING_COST.toFixed(2)}
 											</span>
 										)}
 									<span className='font-bold text-amber-dark'>
@@ -188,6 +186,11 @@ export function CheckoutForm() {
 									</span>
 								</span>
 							</button>
+							<p className='mt-2 text-xs text-charcoal/50'>
+								Free standard shipping on orders ${FREE_SHIPPING_THRESHOLD}+.
+								Orders under ${FREE_SHIPPING_THRESHOLD} ship for a flat $
+								{STANDARD_SHIPPING_COST.toFixed(2)}.
+							</p>
 
 							{shippingOpen && (
 								<div className='mt-3 space-y-2'>

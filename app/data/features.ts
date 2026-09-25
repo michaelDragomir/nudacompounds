@@ -6,6 +6,7 @@ import {
 	TagIcon,
 	TruckIcon,
 } from '../components/icons';
+import { FREE_SHIPPING_THRESHOLD, STANDARD_SHIPPING_COST } from '../lib/cart';
 
 export const features = [
 	{
@@ -30,8 +31,8 @@ export const features = [
 	},
 	{
 		icon: TruckIcon,
-		title: 'Free Same-Day Shipping',
-		body: 'On every order placed before 4 PM MST.',
+		title: `Free Shipping on $${FREE_SHIPPING_THRESHOLD}+`,
+		body: `Orders under $${FREE_SHIPPING_THRESHOLD} ship for a flat $${STANDARD_SHIPPING_COST.toFixed(2)}. Same-day dispatch before 4 PM MST.`,
 	},
 	{
 		icon: BoxIcon,
