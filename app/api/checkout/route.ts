@@ -182,9 +182,10 @@ export async function POST(request: Request) {
 					},
 				},
 			],
-			phone_number_collection: {
-				enabled: true,
-			},
+			// Phone is collected via our own optional plain input in
+			// CheckoutForm and passed straight to checkout.confirm() when
+			// filled in — Stripe's own phone_number_collection would make it
+			// a hard requirement at confirm time, contradicting that.
 			return_url: `${origin}/order/confirmed?session_id={CHECKOUT_SESSION_ID}`,
 		});
 
