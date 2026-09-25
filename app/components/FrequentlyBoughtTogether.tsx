@@ -45,18 +45,16 @@ export function FrequentlyBoughtTogether({
 	return (
 		<section className='bg-offwhite py-6'>
 			<div className='mx-auto max-w-6xl px-14 sm:px-18 lg:px-6'>
-				<div className='flex items-end justify-between gap-4'>
-					<div>
-						<h2 className='font-sora text-2xl font-extrabold leading-tight text-navy sm:text-3xl'>
-							Frequently Bought Together
-						</h2>
-						<p className='mt-2 text-md text-charcoal'>
-							Commonly paired to support consistent, reliable experimentation.
-						</p>
-					</div>
+				<div className='relative text-center'>
+					<h2 className='font-sora text-2xl font-extrabold leading-tight text-navy sm:text-3xl'>
+						Frequently Bought Together
+					</h2>
+					<p className='mt-2 text-md text-charcoal'>
+						Commonly paired to support consistent, reliable experimentation.
+					</p>
 
 					{canCycle && (
-						<div className='flex shrink-0 items-center gap-2'>
+						<div className='mt-4 flex items-center justify-center gap-2 sm:absolute sm:right-0 sm:top-0 sm:mt-0'>
 							<button
 								type='button'
 								onClick={goPrev}

@@ -1,8 +1,14 @@
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
 import { products } from '../data/products';
+import { useCart } from '../context/CartContext';
+import { CartIcon } from './icons';
 
 export function Products() {
+	const { addItem } = useCart();
+
 	return (
 		<section id='products' className='bg-offwhite py-16'>
 			<div className='mx-auto max-w-6xl px-6'>
@@ -48,6 +54,21 @@ export function Products() {
 										</span>
 									</div>
 								</div>
+
+								<button
+									type='button'
+									disabled={!product.inStock}
+									onClick={(event) => {
+										event.preventDefault();
+										event.stopPropagation();
+										addItem(product, 1, false);
+									}}
+									aria-label={`Add ${product.name} to cart`}
+									className='mt-3 flex w-full items-center justify-center gap-1.5 rounded-lg bg-amber px-3 py-1.5 text-[11px] font-bold uppercase tracking-wide text-white transition-colors hover:bg-amber-dark disabled:cursor-not-allowed disabled:bg-black/10 disabled:text-warmgray'
+								>
+									<CartIcon className='h-3 w-3' />
+									Add to Cart
+								</button>
 							</div>
 						</Link>
 					))}
